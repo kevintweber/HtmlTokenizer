@@ -1,0 +1,32 @@
+{
+    "name": "kevintweber/html-tokenizer",
+    "type": "library",
+    "description": "Will tokenize HTML5",
+    "keywords": [
+        "kevintweber",
+        "html-tokenizer"
+    ],
+    "homepage": "https://github.com/kevintweber/html-tokenizer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Weber",
+            "email": "kevintweber@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.5.9",
+        "symfony/options-resolver": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "kevintweber\\html-tokenizer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "kevintweber\\html-tokenizer\\": "tests"
+        }
+    }
+}
