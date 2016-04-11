@@ -25,7 +25,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/kevintw
 ## Running Tests
 
 ``` bash
-$ phpunit test
+$ phpunit
 ```
 
 
