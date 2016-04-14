@@ -11,12 +11,19 @@ interface Token
     const ELEMENT   = 'element';
     const TEXT      = 'text';
 
+    /**
+     * Will return the type of token.
+     *
+     * @return string
+     */
     public function getType();
-    public function getValue();
-    public function getAttributes();
 
-    public function getChildren();
-    public function hasChildren();
+    /**
+     * Will return the parent token or null if none.
+     *
+     * @return Token|null
+     */
+    public function getParent();
 
     public function isAttribute();
     public function isCDATA();
@@ -24,4 +31,11 @@ interface Token
     public function isDocType();
     public function isElement();
     public function isText();
+
+    /**
+     * Will convert this token to an array structure.
+     *
+     * @return array
+     */
+    public function toArray();
 }

@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "kevintweber\\html-tokenizer\\": "src"
+            "Kevintweber\\HtmlTokenizer\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "kevintweber\\html-tokenizer\\": "tests"
+            "Kevintweber\\HtmlTokenizer\\Tests\\": "tests"
         }
     }
 }

@@ -4,81 +4,62 @@ namespace Kevintweber\HtmlTokenizer\Tokens;
 
 abstract class AbstractToken implements Token
 {
-    /** @var array[Token] */
-    private $attributes;
+    /** @var null|Token */
+    private $parent;
 
-    /** @var array[Token] */
-    private $children;
+    /** @var boolean */
+    private $throwOnError;
 
     /** @var string */
     private $type;
 
-    /** @var null|string */
-    private $value;
-
     /**
      * Constructor
      */
-    public function __construct($type)
+    public function __construct($type, Token $parent = null, $throwOnError = false)
     {
         if (!$this->isValidType($type)) {
             throw new \InvalidArgumentException('Invalid type: ' . $type);
         }
 
-        $this->attributes = array();
-        $this->children = array();
+        $this->parent = $parent;
+        $this->throwOnError = (boolean) $throwOnError;
         $this->type = $type;
-        $this->value = null;
     }
 
+    abstract public static function isMatch($html);
+    abstract public function parse($html);
+
+    /**
+     * Getter for 'parent'.
+     *
+     * @return Token
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Getter for 'throwOnError'.
+     *
+     * @return boolean
+     */
+    protected function getThrowOnError()
+    {
+        return $this->throwOnError;
+    }
+
+    /**
+     * Getter for 'type'.
+     *
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function setValue($value)
-    {
-        if (!is_string($value)) {
-            throw new \InvalidArgumentException('Value must be a string.');
-        }
-
-        $this->value = $value;
-
-        return $this;
-    }
-
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    public function addChild(Token $token)
-    {
-        if ($token->getType() === Token::ATTRIBUTE) {
-            $this->attributes[] = $token;
-
-            return $this;
-        }
-
-        $this->children[] = $token;
-
-        return $this;
-    }
-
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    public function hasChildren()
-    {
-        return !empty($this->children);
-    }
 
     public function isAttribute()
     {
