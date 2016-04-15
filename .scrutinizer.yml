@@ -25,7 +25,8 @@ tools:
 build:
     tests:
         override:
-            command: 'phpunit --coverage-clover=php-coverage.serialized'
-            coverage:
-                file: 'php-coverage.serialized'
-                format: 'php-clover'
+            -
+                command: 'phpunit --coverage-clover=some-file'
+                coverage:
+                    file: 'some-file'
+                    format: 'php-clover'
