@@ -62,11 +62,12 @@ class Element extends AbstractToken
 
         // Is self-closing?
         $posOfSelfClosingBracket = strpos($remainingHtml, '/>');
-        if ($posOfSelfClosingBracket == $posOfClosingBracket - 1) {
+        if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket == $posOfClosingBracket - 1) {
+            // Self-closing element.
             return $remainingHtml;
         }
 
-        // Not self-closing element.
+        // Open element.
         return $this->parseContents($remainingHtml);
     }
 

@@ -116,6 +116,13 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     'name' => 'asdf'
                 )
             ),
+            'simple closed followed by text' => array(
+                '<asdf/>asdfasdf',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf'
+                )
+            ),
             'closed with valueless attribute' => array(
                 '<asdf foo1 />',
                 array(
@@ -197,6 +204,22 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         array(
                             'type' => 'text',
                             'value' => 'foo'
+                        )
+                    )
+                )
+            ),
+            'open with text content and whitespace' => array(
+                '<asdf foo="bar" >   foo-bar    </asdf>',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo' => 'bar'
+                    ),
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'foo-bar'
                         )
                     )
                 )
