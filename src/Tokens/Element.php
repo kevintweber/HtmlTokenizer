@@ -26,7 +26,7 @@ class Element extends AbstractToken
 
     public function isClosingElementImplied($html)
     {
-        $name = $this->parseElementName($html);
+        // $name = $this->parseElementName($html);
 
         /// @todo
 
