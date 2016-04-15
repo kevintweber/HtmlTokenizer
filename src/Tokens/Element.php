@@ -24,6 +24,15 @@ class Element extends AbstractToken
         $this->name = null;
     }
 
+    public function isClosingElementImplied($html)
+    {
+        $name = $this->parseElementName($html);
+
+        /// @todo
+
+        return false;
+    }
+
     public static function isMatch($html)
     {
         return preg_match("/^<[a-zA-Z]/", $html) === 1;
@@ -31,69 +40,146 @@ class Element extends AbstractToken
 
     public function parse($html)
     {
-        // First we will try to find the name of the element.
-        // This is actually a bit tough.
+        $this->name = $this->parseElementName($html);
 
-        // Find the position of the first '>' character.
-        // If we take substrings of this position, we will get:
-        //  * Open elements:   <elem></elem>           => <elem>
-        //  * Closed elements: <elem/>                 => <elem/>
-        //  * With attributes: <elem attr="1"></elem>  => <elem attr="1">
-        //  * Special attr:    <elem attr=">"></elem>  => <elem attr=">
-        $posOfFirstClosingBracket = strpos($html, '>');
-        if ($posOfFirstClosingBracket === false) {
+        // Parse attributes.
+        $remainingHtml = substr($html, strlen($this->name) + 1);
+        while (strpos($remainingHtml, '>') !== false && preg_match("/^\s*[\/]?>/", $remainingHtml) === 0) {
+            $remainingHtml = $this->parseAttribute($remainingHtml);
+        }
+
+        // Find position of end of tag.
+        $posOfClosingBracket = strpos($remainingHtml, '>');
+        if ($posOfClosingBracket === false) {
             if ($this->getThrowOnError()) {
-                throw new ParseException('Invalid element: Element tag not closed.');
+                throw new ParseException('Invalid element: missing closing bracket.');
             }
 
             return '';
         }
 
-        // Find the first space.
-        // This only gives a value less than the first '>' character if
-        // attributes are present.
-        $posOfFirstSpace = strpos($html, ' ');
-        $posOfFirstMarker = $posOfFirstClosingBracket;
-        if ($posOfFirstSpace > 0) {
-            $posOfFirstMarker = min($posOfFirstSpace, $posOfFirstClosingBracket);
+        $remainingHtml = trim(substr($remainingHtml, $posOfClosingBracket + 1));
+
+        // Is self-closing?
+        $posOfSelfClosingBracket = strpos($remainingHtml, '/>');
+        if ($posOfSelfClosingBracket == $posOfClosingBracket - 1) {
+            return $remainingHtml;
         }
 
-        // If we take substrings of the first marker, we will get:
-        //  * Open elements:   <elem></elem>           => <elem>
-        //  * Closed elements: <elem/>                 => <elem/>
-        //  * With attributes: <elem attr="1"></elem>  => <elem
-        //  * Special attr:    <elem attr=">"></elem>  => <elem
-        $this->name = trim(substr($html, 1, $posOfFirstMarker - 1), "\/>");
-
-        // Parse attributes.
-        $remainingHtml = trim(substr($html, strlen($this->name) + 1));
-        while (!($remainingHtml[0] == '>' || substr($remainingHtml, 0, 2) == '/>')) {
-            $remainingHtml = trim($this->parseAttribute($remainingHtml));
-        }
-
-        return $remainingHtml;
+        // Not self-closing element.
+        return $this->parseContents($remainingHtml);
     }
 
     private function parseAttribute($html)
     {
-        // As above, we must find the first occurance of the end of the tag or
-        // a space.
-        $posOfFirstClosingBracket = strpos($html, '>');
-        $posOfFirstSpace = strpos($html, ' ');
-        $posOfFirstMarker = $posOfFirstClosingBracket;
-        if ($posOfFirstSpace > 0) {
-            $posOfFirstMarker = min($posOfFirstSpace, $posOfFirstClosingBracket);
+        // Will match the first entire name/value attribute pair.
+        $attrMatchSuccessful = preg_match(
+            "/(\s*([^>\s]*))/",
+            $html,
+            $attributeMatches
+        );
+        if ($attrMatchSuccessful !== 1) {
+            if ($this->getThrowOnError()) {
+                throw new ParseException('Invalid attribute.');
+            }
+
+            return '';
         }
 
-        // Full attribute text.
-        $attribute = trim(substr($html, 0, $posOfFirstMarker), "\/>");
+        $posOfEqualsSign = strpos($attributeMatches[2], '=');
+        if ($posOfEqualsSign === false) {
+            // Valueless attribute.
+            $this->attributes[trim($attributeMatches[2])] = true;
+        } else {
+            list($name, $value) = explode('=', $attributeMatches[2]);
+            if ($value[0] === "'" || $value[0] === '"') {
+                $valueMatchSuccessful = preg_match(
+                    "/" . $value[0] . "(.*?(?<!\\\))" . $value[0] . "/s",
+                    $value,
+                    $valueMatches
+                );
+                if ($valueMatchSuccessful !== 1) {
+                    if ($this->getThrowOnError()) {
+                        throw new ParseException('Invalid value encapsulation.');
+                    }
 
-        // Find equals sign to determine if attribute uses empty syntax.
-        $posOfEqualsSign = strpos($attribute, '=');
+                    return '';
+                }
 
-        /// @todo
+                $value = $valueMatches[1];
+            }
 
-        return trim(substr($html, strlen($attribute)));
+            $this->attributes[trim($name)] = trim($value);
+        }
+
+        // Return the html minus the current attribute.
+        $posOfAttribute = strpos($html, $attributeMatches[2]);
+
+        return substr($html, $posOfAttribute + strlen($attributeMatches[2]));
+    }
+
+    private function parseContents($html)
+    {
+        $remainingHtml = trim($html);
+        if ($remainingHtml == '') {
+            return '';
+        }
+
+        // Parse contents one token at a time.
+        while (preg_match("/^<\/\s*" . $this->name . "\s*>/is", $remainingHtml) === 0) {
+            // Validate closing bracket actually exists.
+            $posOfClosingBracket = strpos($remainingHtml, '>');
+            if ($posOfClosingBracket === false) {
+                if ($this->getThrowOnError()) {
+                    throw new ParseException('Invalid attribute.');
+                }
+
+                return '';
+            }
+
+            $token = TokenFactory::buildFromHtml(
+                $remainingHtml,
+                null,
+                $this->getThrowOnError()
+            );
+
+            if ($token === false || $token->isClosingElementImplied($remainingHtml)) {
+                return $remainingHtml;
+            }
+
+            $remainingHtml = trim($token->parse($remainingHtml));
+            $this->children[] = $token;
+        }
+
+        // Remove remaining closing tag.
+        $posOfClosingBracket = strpos($remainingHtml, '>');
+
+        return substr($remainingHtml, $posOfClosingBracket + 1);
+    }
+
+    /**
+     * Will get the element name from the html string.
+     *
+     * @param $html string
+     *
+     * @return string The element name.
+     */
+    private function parseElementName($html)
+    {
+        $elementMatchSuccessful = preg_match(
+            "/^(<(([a-z0-9\-]+:)?[a-z0-9\-]+))/i",
+            $html,
+            $elementMatches
+        );
+        if ($elementMatchSuccessful !== 1) {
+            if ($this->getThrowOnError()) {
+                throw new ParseException('Invalid element name.');
+            }
+
+            return '';
+        }
+
+        return $elementMatches[2];
     }
 
     public function getAttributes()
@@ -137,6 +223,13 @@ class Element extends AbstractToken
             $result['attributes'] = array();
             foreach ($this->attributes as $name => $value) {
                 $result['attributes'][$name] = $value;
+            }
+        }
+
+        if (!empty($this->children)) {
+            $result['children'] = array();
+            foreach ($this->children as $child) {
+                $result['children'][] = $child->toArray();
             }
         }
 

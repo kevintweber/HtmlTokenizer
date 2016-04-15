@@ -11,12 +11,9 @@ interface Token
     const ELEMENT   = 'element';
     const TEXT      = 'text';
 
-    /**
-     * Will return the type of token.
-     *
-     * @return string
-     */
-    public function getType();
+    public function isClosingElementImplied($html);
+    public static function isMatch($html);
+    public function parse($html);
 
     /**
      * Will return the parent token or null if none.
@@ -24,6 +21,13 @@ interface Token
      * @return Token|null
      */
     public function getParent();
+
+    /**
+     * Will return the type of token.
+     *
+     * @return string
+     */
+    public function getType();
 
     public function isAttribute();
     public function isCDATA();

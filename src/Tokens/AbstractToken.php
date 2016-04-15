@@ -27,9 +27,6 @@ abstract class AbstractToken implements Token
         $this->type = $type;
     }
 
-    abstract public static function isMatch($html);
-    abstract public function parse($html);
-
     /**
      * Getter for 'parent'.
      *

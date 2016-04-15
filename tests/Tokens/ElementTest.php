@@ -81,7 +81,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             ),
             'parse error' => array(
                 '<asdf',
-                null,
+                'asdf',
                 ''
             )
         );
@@ -116,13 +116,88 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     'name' => 'asdf'
                 )
             ),
-            'closed with 1 attribute' => array(
-                '<asdf foo="bar"/>',
+            'closed with valueless attribute' => array(
+                '<asdf foo1 />',
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
                     'attributes' => array(
-                        'foo' => 'bar'
+                        'foo1' => true
+                    )
+                )
+            ),
+            'closed with unquoted attribute' => array(
+                '<asdf foo2=bar2 />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo2' => 'bar2'
+                    )
+                )
+            ),
+            'closed with single-quoted attribute' => array(
+                '<asdf foo3=\'bar3\' />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo3' => 'bar3'
+                    )
+                )
+            ),
+            'closed with double-quoted attribute' => array(
+                '<asdf foo4="bar4" />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo4' => 'bar4'
+                    )
+                )
+            ),
+            'closed with multiple attributes' => array(
+                '<asdf     foo1="bar1"     foo2="bar2" foo3="bar3"      />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo1' => 'bar1',
+                        'foo2' => 'bar2',
+                        'foo3' => 'bar3'
+                    )
+                )
+            ),
+            'closed with all attributes' => array(
+                '<asdf foo1 foo2=bar2 foo3=\'bar3\\\'bar3\' foo4="bar4\"bar4" />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo1' => true,
+                        'foo2' => 'bar2',
+                        'foo3' => 'bar3\\\'bar3',
+                        'foo4' => 'bar4\\"bar4',
+                    )
+                )
+            ),
+            'simple open' => array(
+                '<asdf></asdf>',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf'
+                )
+            ),
+            'simple open with text content' => array(
+                '<asdf>foo</asdf>',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'foo'
+                        )
                     )
                 )
             )

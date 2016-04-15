@@ -11,9 +11,6 @@ class HtmlTokenizer
     /** @var array */
     private $options;
 
-    /** @var TokenFactory */
-    private $tokenFactory;
-
     /** @var array[Token] */
     private $tokens;
 
@@ -41,7 +38,11 @@ class HtmlTokenizer
         $tokens = new TokenCollection();
         $remainingHtml = trim((string) $html);
         while (strlen($remainingHtml) > 0) {
-            $token = $this->tokenFactory->buildFromHtml($remainingHtml);
+            $token = TokenFactory::buildFromHtml(
+                $remainingHtml,
+                null,
+                $this->options['throwOnError']
+            );
             if ($token === false) {
                 // Error has occurred, so we stop.
                 break;

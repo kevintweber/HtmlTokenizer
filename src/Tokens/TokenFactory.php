@@ -6,41 +6,30 @@ use Kevintweber\HtmlTokenizer\Execptions\TokenMatchingException;
 
 class TokenFactory
 {
-    /** @var boolean */
-    private $throwOnError;
-
-    /**
-     * Constructor
-     */
-    public function __construct($throwOnError)
-    {
-        $this->throwOnError = (boolean) $throwOnError;
-    }
-
-    public function buildFromHtml($html, Token $parent = null)
+    public static function buildFromHtml($html, Token $parent = null, $throwOnError = false)
     {
         if (Text::isMatch($html)) {
-            return new Text($parent, $this->throwOnError);
+            return new Text($parent, $throwOnError);
         }
 
         if (Element::isMatch($html)) {
-            return new Element($parent, $this->throwOnError);
+            return new Element($parent, $throwOnError);
         }
 
         if (Comment::isMatch($html)) {
-            return new Comment($parent, $this->throwOnError);
+            return new Comment($parent, $throwOnError);
         }
 
         if (CData::isMatch($html)) {
-            return new CData($parent, $this->throwOnError);
+            return new CData($parent, $throwOnError);
         }
 
         if (DocType::isMatch($html)) {
-            return new DocType($parent, $this->throwOnError);
+            return new DocType($parent, $throwOnError);
         }
 
         // Error condition
-        if ($this->throwOnError) {
+        if ($throwOnError) {
             throw new TokenMatchingException();
         }
 
