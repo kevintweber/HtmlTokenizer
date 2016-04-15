@@ -59,13 +59,13 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/kevintweber/html-tokenizer.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/kevintweber/html-tokenizer/master.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/kevintweber/HtmlTokenizer/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/kevintweber/html-tokenizer.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/kevintweber/html-tokenizer.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/kevintweber/html-tokenizer.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/kevintweber/html-tokenizer
-[link-travis]: https://travis-ci.org/kevintweber/html-tokenizer
+[link-travis]: https://travis-ci.org/kevintweber/HtmlTokenizer.svg?branch=master
 [link-scrutinizer]: https://scrutinizer-ci.com/g/kevintweber/html-tokenizer/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/kevintweber/html-tokenizer
 [link-downloads]: https://packagist.org/packages/kevintweber/html-tokenizer
