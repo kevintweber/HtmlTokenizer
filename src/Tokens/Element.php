@@ -24,6 +24,13 @@ class Element extends AbstractToken
         $this->name = null;
     }
 
+    /**
+     * Does the parent have an implied closing tag?
+     *
+     * @param string $html
+     *
+     * @return boolean
+     */
     public function isClosingElementImplied($html)
     {
         $parent = $this->getParent();
@@ -107,6 +114,13 @@ class Element extends AbstractToken
         return false;
     }
 
+    /**
+     * Will parse this element.
+     *
+     * @param string $html
+     *
+     * @return string Remaining HTML.
+     */
     public function parse($html)
     {
         $this->name = $this->parseElementName($html);
@@ -139,10 +153,17 @@ class Element extends AbstractToken
         return $this->parseContents($remainingHtml);
     }
 
+    /**
+     * Will parse attributes.
+     *
+     * @param string $html
+     *
+     * @return string Remaining HTML.
+     */
     private function parseAttribute($html)
     {
         // Will match the first entire name/value attribute pair.
-        $attrMatchSuccessful = preg_match(
+        preg_match(
             "/(\s*([^>\s]*))/",
             $html,
             $attributeMatches
@@ -180,6 +201,13 @@ class Element extends AbstractToken
         return substr($html, $posOfAttribute + strlen($attributeMatches[2]));
     }
 
+    /**
+     * Will parse the contents of this element.
+     *
+     * @param string $html
+     *
+     * @return string Remaining HTML.
+     */
     private function parseContents($html)
     {
         $remainingHtml = trim($html);
@@ -234,21 +262,37 @@ class Element extends AbstractToken
         return strtolower($elementMatches[2]);
     }
 
+    /**
+     * Getter for 'attributes'.
+     *
+     * @return array
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * @return boolean
+     */
     public function hasAttributes()
     {
         return !empty($this->attributes);
     }
 
+    /**
+     * Getter for 'children'.
+     *
+     * @return array
+     */
     public function getChildren()
     {
         return $this->children;
     }
 
+    /**
+     * @return boolean
+     */
     public function hasChildren()
     {
         return !empty($this->children);
