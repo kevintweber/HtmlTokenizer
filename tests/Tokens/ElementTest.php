@@ -226,5 +226,52 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
+
+    /**
+     * @dataProvider impliedClosingTagDataProvider
+     */
+    public function testImpliedClosingTag($html, $expectedArray)
+    {
+
+    }
+
+    public function impliedClosingTagDataProvider()
+    {
+        return array(
+            'closed-only elements' => array(
+                '<div><base><link><meta><hr><br><asdf /></div>',
+                array(
+                    'type' => 'element',
+                    'name' => 'div',
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'base'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'link'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'meta'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'hr'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'br'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'asdf'
+                        )
+                    )
+                )
+            )
+        );
+    }
 }
 

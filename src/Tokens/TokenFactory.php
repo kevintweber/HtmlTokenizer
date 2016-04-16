@@ -25,7 +25,7 @@ class TokenFactory
         }
 
         if (DocType::isMatch($html)) {
-            return new DocType($parent, $throwOnError);
+            return new DocType(null, $throwOnError);
         }
 
         // Error condition

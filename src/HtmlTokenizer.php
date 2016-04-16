@@ -11,9 +11,6 @@ class HtmlTokenizer
     /** @var array */
     private $options;
 
-    /** @var array[Token] */
-    private $tokens;
-
     /**
      * Constructor
      */
@@ -23,7 +20,6 @@ class HtmlTokenizer
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
-        $this->tokenFactory = new TokenFactory($this->options['throwOnError']);
     }
 
     /**

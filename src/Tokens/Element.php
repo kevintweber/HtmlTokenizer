@@ -26,9 +26,80 @@ class Element extends AbstractToken
 
     public function isClosingElementImplied($html)
     {
-        // $name = $this->parseElementName($html);
+        $name = $this->parseElementName($html);
+        $parentName = null;
+        $parent = $this->getParent();
+        if ($parent instanceof self) {
+            $parentName = $parent->getName();
+        }
 
-        /// @todo
+        // HEAD: no closing tag.
+        if ($name === 'body' && $parentName === 'head') {
+            return true;
+        }
+
+        // Closed-only elements.
+        // Closing tags not required.  We will close them now.
+        switch ($parentName) {
+        case 'base':
+        case 'link':
+        case 'meta':
+        case 'hr':
+        case 'br':
+            return true;
+        }
+
+        // P
+        if ($parentName === 'p') {
+            switch ($name) {
+            case 'address':
+            case 'article':
+            case 'aside':
+            case 'blockquote':
+            case 'details':
+            case 'div':
+            case 'dl':
+            case 'fieldset':
+            case 'figcaption':
+            case 'figure':
+            case 'footer':
+            case 'form':
+            case 'h1':
+            case 'h2':
+            case 'h3':
+            case 'h4':
+            case 'h5':
+            case 'h6':
+            case 'header':
+            case 'hgroup':
+            case 'hr':
+            case 'main':
+            case 'menu':
+            case 'nav':
+            case 'ol':
+            case 'p':
+            case 'pre':
+            case 'section':
+            case 'table':
+            case 'ul':
+                return true;
+            }
+        }
+
+        // LI
+        if ($parentName == 'li' && $name == 'li') {
+            return true;
+        }
+
+        // DT and DD
+        if (($parentName == 'dt' || $parentName == 'dd') && ($name == 'dt' || $name == 'dd')) {
+            return true;
+        }
+
+        // RP and RT
+        if (($parentName == 'rp' || $parentName == 'rt') && ($name == 'rp' || $name == 'rt')) {
+            return true;
+        }
 
         return false;
     }
@@ -180,7 +251,7 @@ class Element extends AbstractToken
             return '';
         }
 
-        return $elementMatches[2];
+        return strtolower($elementMatches[2]);
     }
 
     public function getAttributes()
