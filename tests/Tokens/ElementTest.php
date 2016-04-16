@@ -415,5 +415,26 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testAttributes()
+    {
+        $element = new Element();
+        $this->assertFalse($element->hasAttributes());
+        $element->parse('<img class="asdf" />');
+        $this->assertTrue($element->hasAttributes());
+        $this->assertEquals(
+            array('class' => 'asdf'),
+            $element->getAttributes()
+        );
+    }
+
+    public function testChildren()
+    {
+        $element = new Element();
+        $this->assertFalse($element->hasChildren());
+        $element->parse('<div>asdf</div>');
+        $this->assertTrue($element->hasChildren());
+        $this->assertEquals(1, count($element->getChildren()));
+    }
 }
 

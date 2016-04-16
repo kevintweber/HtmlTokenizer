@@ -119,19 +119,4 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
     {
         return new \ArrayIterator($this->tokens);
     }
-
-    public function filter(\Closure $filter)
-    {
-        return new static(array_filter($this->tokens, $filter));
-    }
-
-    public function map(\Closure $func)
-    {
-        return new static(array_map($func, $this->tokens));
-    }
-
-    public function slice($offset, $length = null)
-    {
-        return array_slice($this->tokens, $offset, $length, true);
-    }
 }

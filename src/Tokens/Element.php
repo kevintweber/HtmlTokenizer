@@ -41,12 +41,7 @@ class Element extends AbstractToken
 
         // Closed-only elements.
         // Closing tags not required.  We will close them now.
-        switch ($parentName) {
-        case 'base':
-        case 'link':
-        case 'meta':
-        case 'hr':
-        case 'br':
+        if ($this->isClosedOnlyElement($parentName)) {
             return true;
         }
 
@@ -103,6 +98,15 @@ class Element extends AbstractToken
         }
 
         return false;
+    }
+
+    private function isClosedOnlyElement($name)
+    {
+        return $name == 'base' ||
+            $name == 'link' ||
+            $name == 'meta' ||
+            $name == 'hr' ||
+            $name == 'br';
     }
 
     public static function isMatch($html)
