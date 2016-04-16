@@ -28,31 +28,6 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 $this->createElement('head'),
                 true
             ),
-            'base' => array(
-                '<meta>',
-                $this->createElement('base'),
-                true
-            ),
-            'link' => array(
-                '<meta>',
-                $this->createElement('link'),
-                true
-            ),
-            'meta' => array(
-                '<meta>',
-                $this->createElement('meta'),
-                true
-            ),
-            'hr' => array(
-                '<div>',
-                $this->createElement('hr'),
-                true
-            ),
-            'br' => array(
-                '<div>',
-                $this->createElement('br'),
-                true
-            ),
             'p-address' => array(
                 '<address>',
                 $this->createElement('p'),
@@ -296,6 +271,16 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'closed with 1 attribute containing equals sign' => array(
+                '<asdf foo="bar=bar2" />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo' => 'bar=bar2'
+                    )
+                )
+            ),
             'closed with multiple attributes' => array(
                 '<asdf     foo1="bar1"     foo2="bar2" foo3="bar3"      />',
                 array(
@@ -317,7 +302,20 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         'foo1' => true,
                         'foo2' => 'bar2',
                         'foo3' => 'bar3\\\'bar3',
+                        'foo4' => 'bar4\\"bar4'
+                    )
+                )
+            ),
+            'closed with all attributes - reordered' => array(
+                '<asdf foo4="bar4\"bar4" foo2=bar2 foo1 foo3=\'bar3\\\'bar3\' />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
                         'foo4' => 'bar4\\"bar4',
+                        'foo2' => 'bar2',
+                        'foo1' => true,
+                        'foo3' => 'bar3\\\'bar3'
                     )
                 )
             ),
@@ -356,7 +354,75 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         )
                     )
                 )
-            )
+            ),
+            'link followed by conditional comment' => array(
+                '<head><link href=../assets/css/docs.min.css rel=stylesheet><!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]--></head>',
+                array(
+                    'type' => 'element',
+                    'name' => 'head',
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'link',
+                            'attributes' => array(
+                                'href' => '../assets/css/docs.min.css',
+                                'rel' => 'stylesheet'
+                            )
+                        ),
+                        array(
+                            'type' => 'comment',
+                            'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]'
+                        )
+                    )
+                )
+            ),
+            'link followed by whitespace and conditional comment' => array(
+                '<head><link href=../assets/css/docs.min.css rel=stylesheet>    <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->    </head>',
+                array(
+                    'type' => 'element',
+                    'name' => 'head',
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'link',
+                            'attributes' => array(
+                                'href' => '../assets/css/docs.min.css',
+                                'rel' => 'stylesheet'
+                            )
+                        ),
+                        array(
+                            'type' => 'comment',
+                            'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]'
+                        )
+                    )
+                )
+            ),
+            'script tag' => array(
+                '<script> asdf    </script>',
+                array(
+                    'type' => 'element',
+                    'name' => 'script',
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'asdf',
+                        )
+                    )
+                )
+            ),
+            'script tag without end' => array(
+                '<script> asdf  ',
+                array(
+                    'type' => 'element',
+                    'name' => 'script',
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'asdf',
+                        )
+                    )
+                )
+            ),
         );
     }
 
@@ -447,4 +513,3 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($element->getChildren()));
     }
 }
-

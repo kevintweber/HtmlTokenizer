@@ -10,10 +10,10 @@ class TokenFactory
     {
         $matchCriteria = array(
             'Text' => "/^[^<]/",
-            'Element' => "/^<[a-z]/i",
             'Comment' => "/^<!--/",
             'CData' => "/^<!\[CDATA\[/",
-            'DocType' => "/^<!DOCTYPE /i"
+            'DocType' => "/^<!DOCTYPE /i",
+            'Element' => "/^<[a-z]/i"
         );
         foreach ($matchCriteria as $className => $regex) {
             if (preg_match($regex, $html) === 1) {

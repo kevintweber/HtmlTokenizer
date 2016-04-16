@@ -7,11 +7,11 @@ class Text extends AbstractToken
     /** @var string */
     private $value;
 
-    public function __construct(Token $parent = null, $throwOnError = false)
+    public function __construct(Token $parent = null, $throwOnError = false, $forcedValue = null)
     {
         parent::__construct(Token::TEXT, $parent, $throwOnError);
 
-        $this->value = null;
+        $this->value = $forcedValue;
     }
 
     public function parse($html)

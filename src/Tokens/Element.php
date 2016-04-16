@@ -46,19 +46,6 @@ class Element extends AbstractToken
             return true;
         }
 
-        // Closed-only elements.
-        // Closing tags not required.  We will close them now.
-        $closedOnlyElements = array(
-            'base',
-            'link',
-            'meta',
-            'hr',
-            'br'
-        );
-        if (array_search($parentName, $closedOnlyElements) !== false) {
-            return true;
-        }
-
         // P
         $elementsNotChildrenOfP = array(
             'address',
@@ -128,7 +115,7 @@ class Element extends AbstractToken
         // Parse attributes.
         $remainingHtml = substr($html, strlen($this->name) + 1);
         while (strpos($remainingHtml, '>') !== false && preg_match("/^\s*[\/]?>/", $remainingHtml) === 0) {
-            $remainingHtml = $this->parseAttribute($remainingHtml);
+            $remainingHtml = $this->parseAttribute(trim($remainingHtml));
         }
 
         // Find position of end of tag.
@@ -149,6 +136,18 @@ class Element extends AbstractToken
             return $remainingHtml;
         }
 
+        // Lets close those closed-only elements that are left open.
+        $closedOnlyElements = array(
+            'base',
+            'link',
+            'meta',
+            'hr',
+            'br'
+        );
+        if (array_search($this->name, $closedOnlyElements) !== false) {
+            return $remainingHtml;
+        }
+
         // Open element.
         return $this->parseContents($remainingHtml);
     }
@@ -162,23 +161,27 @@ class Element extends AbstractToken
      */
     private function parseAttribute($html)
     {
+        $remainingHtml = trim($html);
+
         // Will match the first entire name/value attribute pair.
         preg_match(
-            "/(\s*([^>\s]*))/",
-            $html,
+            "/((([a-z0-9\-_]+:)?[a-z0-9\-_]+)(\s*=\s*)?)/i",
+            $remainingHtml,
             $attributeMatches
         );
 
-        $posOfEqualsSign = strpos($attributeMatches[2], '=');
-        if ($posOfEqualsSign === false) {
+        $name = $attributeMatches[2];
+        $remainingHtml = substr(strstr($remainingHtml, $name), strlen($name));
+        if (preg_match("/^\s*=\s*/", $remainingHtml) === 0) {
             // Valueless attribute.
-            $this->attributes[trim($attributeMatches[2])] = true;
+            $this->attributes[trim($name)] = true;
         } else {
-            list($name, $value) = explode('=', $attributeMatches[2]);
-            if ($value[0] === "'" || $value[0] === '"') {
+            $remainingHtml = ltrim($remainingHtml, ' =');
+            if ($remainingHtml[0] === "'" || $remainingHtml[0] === '"') {
+                // Quote enclosed attribute value.
                 $valueMatchSuccessful = preg_match(
-                    "/" . $value[0] . "(.*?(?<!\\\))" . $value[0] . "/s",
-                    $value,
+                    "/" . $remainingHtml[0] . "(.*?(?<!\\\))" . $remainingHtml[0] . "/s",
+                    $remainingHtml,
                     $valueMatches
                 );
                 if ($valueMatchSuccessful !== 1) {
@@ -190,15 +193,23 @@ class Element extends AbstractToken
                 }
 
                 $value = $valueMatches[1];
+            } else {
+                // No quotes enclosing the attribute value.
+                preg_match("/(\s*([^>\s]*(?<!\/)))/", $remainingHtml, $valueMatches);
+                $value = $valueMatches[2];
             }
 
-            $this->attributes[trim($name)] = trim($value);
+            $this->attributes[trim($name)] = $value;
+
+            // Determine remaining html.
+            $posOfAttributeValue = strpos($html, $value);
+            $remainingHtml = trim(
+                substr($html, $posOfAttributeValue + strlen($value))
+            );
+            $remainingHtml = ltrim($remainingHtml, '\'"/ ');
         }
 
-        // Return the html minus the current attribute.
-        $posOfAttribute = strpos($html, $attributeMatches[2]);
-
-        return substr($html, $posOfAttribute + strlen($attributeMatches[2]));
+        return $remainingHtml;
     }
 
     /**
@@ -213,6 +224,11 @@ class Element extends AbstractToken
         $remainingHtml = trim($html);
         if ($remainingHtml == '') {
             return '';
+        }
+
+        // Nothing to parse inside a script tag.
+        if ($this->name == 'script') {
+            return $this->parseScriptContents($remainingHtml);
         }
 
         // Parse contents one token at a time.
@@ -260,6 +276,43 @@ class Element extends AbstractToken
         }
 
         return strtolower($elementMatches[2]);
+    }
+
+    /**
+     * Will parse the script contents correctly.
+     *
+     * @param $html string
+     *
+     * @return string The remaining HTML.
+     */
+    private function parseScriptContents($html)
+    {
+        $remainingHtml = trim($html);
+
+        $matchingResult = preg_match("/(<\/\s*script\s*>)/i", $html, $endOfScriptMatches);
+        if ($matchingResult === 0) {
+            $value = $remainingHtml;
+            $remainingHtml = '';
+        } else {
+            $closingTag = $endOfScriptMatches[1];
+            $value = trim(
+                substr($remainingHtml, 0, strpos($remainingHtml, $closingTag))
+            );
+            $remainingHtml = substr(
+                strstr($remainingHtml, $closingTag),
+                strlen($closingTag)
+            );
+        }
+
+        // Handle no contents.
+        if ($value == '') {
+            return $remainingHtml;
+        }
+
+        $text = new Text($this, $this->getThrowOnError(), $value);
+        $this->children[] = $text;
+
+        return $remainingHtml;
     }
 
     /**
