@@ -2,7 +2,7 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
-use Kevintweber\HtmlTokenizer\Execptions\TokenMatchingException;
+use Kevintweber\HtmlTokenizer\Exceptions\TokenMatchingException;
 
 class TokenFactory
 {

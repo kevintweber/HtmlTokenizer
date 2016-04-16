@@ -71,7 +71,7 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetExists($offset)
     {
-        return array_search($offset, $this->tokens) !== false;
+        return array_key_exists($offset, $this->tokens);
     }
 
     /**
@@ -87,6 +87,10 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetSet($offset, $value)
     {
+        if (!$value instanceof Token) {
+            throw new \InvalidArgumentException('Value must be of type Token.');
+        }
+
         $this->tokens[$offset] = $value;
     }
 
