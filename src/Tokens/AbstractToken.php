@@ -4,6 +4,9 @@ namespace Kevintweber\HtmlTokenizer\Tokens;
 
 abstract class AbstractToken implements Token
 {
+    /** @var int */
+    private $depth;
+
     /** @var null|Token */
     private $parent;
 
@@ -22,9 +25,19 @@ abstract class AbstractToken implements Token
             throw new \InvalidArgumentException('Invalid type: ' . $type);
         }
 
+        $this->depth = 0;
+        if ($parent instanceof Token) {
+            $this->depth = $parent->getDepth() + 1;
+        }
+
         $this->parent = $parent;
         $this->throwOnError = (boolean) $throwOnError;
         $this->type = $type;
+    }
+
+    public function getDepth()
+    {
+        return $this->depth;
     }
 
     public function isClosingElementImplied($html)

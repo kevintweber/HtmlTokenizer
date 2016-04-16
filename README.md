@@ -28,7 +28,33 @@ $htmlDocument = file_get_contents("path/to/html/document.html");
 
 $htmlTokenizer = new HtmlTokenizer();
 $tokens = $htmlTokenizer->parse($htmlDocument);
+
+// Once you have tokens, you can manipulate them.
+foreach ($tokens as $token) {
+    if ($token->isElement()) {
+        echo $token->getName() . "\n";
+    }
+}
+
+// Or just output them to an array.
+$tokenArray = $tokens->toArray();
 ```
+
+Some uses of HTML tokens:
+- Tidy/Minify HTML output
+- Preprocess HTML
+- Filter HTML
+- Sanitize HTML
+
+### Limitations
+
+Currently, this package will tokenize HTML5 and XHTML.
+
+It tries to handle errors according to the standard.  The tokenizer can handle
+some (but not all) malformed HTML.  You can set the tokenizer to fail silently
+(default functionality) or throw an exception when it encounters an error.
+
+If you come across valid HTML this package cannot parse, please submit an issue.
 
 ## Change log
 

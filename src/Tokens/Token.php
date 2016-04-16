@@ -42,6 +42,13 @@ interface Token
      */
     public function getType();
 
+    /**
+     * Will return the nesting depth of this token.
+     *
+     * @return int
+     */
+    public function getDepth();
+
     public function isCDATA();
     public function isComment();
     public function isDocType();
