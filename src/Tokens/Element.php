@@ -26,12 +26,13 @@ class Element extends AbstractToken
 
     public function isClosingElementImplied($html)
     {
-        $name = $this->parseElementName($html);
-        $parentName = null;
         $parent = $this->getParent();
-        if ($parent instanceof self) {
-            $parentName = $parent->getName();
+        if ($parent === null || !($parent instanceof self)) {
+            return false;
         }
+
+        $name = $this->parseElementName($html);
+        $parentName = $parent->getName();
 
         // HEAD: no closing tag.
         if ($name === 'body' && $parentName === 'head') {
@@ -129,10 +130,9 @@ class Element extends AbstractToken
             return '';
         }
 
-        $remainingHtml = trim(substr($remainingHtml, $posOfClosingBracket + 1));
-
         // Is self-closing?
         $posOfSelfClosingBracket = strpos($remainingHtml, '/>');
+        $remainingHtml = trim(substr($remainingHtml, $posOfClosingBracket + 1));
         if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket == $posOfClosingBracket - 1) {
             // Self-closing element.
             return $remainingHtml;
@@ -199,16 +199,6 @@ class Element extends AbstractToken
 
         // Parse contents one token at a time.
         while (preg_match("/^<\/\s*" . $this->name . "\s*>/is", $remainingHtml) === 0) {
-            // Validate closing bracket actually exists.
-            $posOfClosingBracket = strpos($remainingHtml, '>');
-            if ($posOfClosingBracket === false) {
-                if ($this->getThrowOnError()) {
-                    throw new ParseException('Invalid attribute.');
-                }
-
-                return '';
-            }
-
             $token = TokenFactory::buildFromHtml(
                 $remainingHtml,
                 $this,

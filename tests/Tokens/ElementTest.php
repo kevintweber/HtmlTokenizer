@@ -7,6 +7,129 @@ use Kevintweber\HtmlTokenizer\Tokens\Element;
 class ElementTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @dataProvider isClosingElementImpliedDataProvider
+     */
+    public function testIsClosingElementImplied($html, $parent = null, $expectedResult = true)
+    {
+        $element = new Element($parent);
+        $this->assertEquals($expectedResult, $element->isClosingElementImplied($html));
+    }
+
+    public function isClosingElementImpliedDataProvider()
+    {
+        return array(
+            'no parent' => array(
+                '<body>',
+                null,
+                false
+            ),
+            'head' => array(
+                '<body>',
+                $this->createElement('head'),
+                true
+            ),
+            'base' => array(
+                '<meta>',
+                $this->createElement('base'),
+                true
+            ),
+            'link' => array(
+                '<meta>',
+                $this->createElement('link'),
+                true
+            ),
+            'meta' => array(
+                '<meta>',
+                $this->createElement('meta'),
+                true
+            ),
+            'hr' => array(
+                '<div>',
+                $this->createElement('hr'),
+                true
+            ),
+            'br' => array(
+                '<div>',
+                $this->createElement('br'),
+                true
+            ),
+            'p-address' => array(
+                '<address>',
+                $this->createElement('p'),
+                true
+            ),
+            'p-article' => array(
+                '<article>',
+                $this->createElement('p'),
+                true
+            ),
+            'p-div' => array(
+                '<div>',
+                $this->createElement('p'),
+                true
+            ),
+            'p-b' => array(
+                '<b>',
+                $this->createElement('p'),
+                false
+            ),
+            'li' => array(
+                '<li>',
+                $this->createElement('li'),
+                true
+            ),
+            'dd-dd' => array(
+                '<dd>',
+                $this->createElement('dd'),
+                true
+            ),
+            'dd-dt' => array(
+                '<dd>',
+                $this->createElement('dt'),
+                true
+            ),
+            'dt-dd' => array(
+                '<dt>',
+                $this->createElement('dd'),
+                true
+            ),
+            'dt-dt' => array(
+                '<dt>',
+                $this->createElement('dt'),
+                true
+            ),
+            'rp-rp' => array(
+                '<rp>',
+                $this->createElement('rp'),
+                true
+            ),
+            'rp-rt' => array(
+                '<rp>',
+                $this->createElement('rt'),
+                true
+            ),
+            'rt-rp' => array(
+                '<rt>',
+                $this->createElement('rp'),
+                true
+            ),
+            'rt-rt' => array(
+                '<rt>',
+                $this->createElement('rt'),
+                true
+            )
+        );
+    }
+
+    private function createElement($tag)
+    {
+        $element = new Element();
+        $element->parse('<' . $tag . '/>');
+
+        return $element;
+    }
+
+    /**
      * @dataProvider isMatchDataProvider
      */
     public function testIsMatch($html, $expectedOutput)
@@ -240,6 +363,23 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function impliedClosingTagDataProvider()
     {
         return array(
+            'head' => array(
+                '<html><head><body></body></html>',
+                array(
+                    'type' => 'element',
+                    'name' => 'html',
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'head'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'body'
+                        )
+                    )
+                )
+            ),
             'closed-only elements' => array(
                 '<div><base><link><meta><hr><br><asdf /></div>',
                 array(
