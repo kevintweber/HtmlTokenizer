@@ -232,7 +232,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testImpliedClosingTag($html, $expectedArray)
     {
-
+        $element = new Element();
+        $element->parse($html);
+        $this->assertEquals($expectedArray, $element->toArray());
     }
 
     public function impliedClosingTagDataProvider()

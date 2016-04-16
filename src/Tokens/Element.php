@@ -211,7 +211,7 @@ class Element extends AbstractToken
 
             $token = TokenFactory::buildFromHtml(
                 $remainingHtml,
-                null,
+                $this,
                 $this->getThrowOnError()
             );
 
