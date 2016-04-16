@@ -4,7 +4,9 @@
     "description": "Will tokenize HTML.",
     "keywords": [
         "kevintweber",
-        "html-tokenizer"
+        "html-tokenizer",
+        "html",
+        "token"
     ],
     "homepage": "https://github.com/kevintweber/HtmlTokenizer",
     "license": "MIT",
