@@ -130,25 +130,6 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider isMatchDataProvider
-     */
-    public function testIsMatch($html, $expectedOutput)
-    {
-        $this->assertSame((boolean) $expectedOutput, Element::isMatch($html));
-    }
-
-    public function isMatchDataProvider()
-    {
-        return array(
-            'cdata' => array('<![CDATA[asdf]]>', false),
-            'comment' => array('<!-- asdf -->', false),
-            'doctype' => array('<!DOCTYPE HTML>', false),
-            'element' => array('<asdf />asdf', true),
-            'text' => array('asdf', false)
-        );
-    }
-
-    /**
      * @dataProvider parseDataProvider
      */
     public function testParse($html, $expectedName, $expectedRemainingHtml)
@@ -206,6 +187,11 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 '<asdf',
                 'asdf',
                 ''
+            ),
+            'php' => array(
+                '<asdf><?php echo "asdf"; ?></asdf>',
+                'asdf',
+                '<?php echo "asdf"; ?></asdf>'
             )
         );
     }
@@ -217,6 +203,30 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         $element = new Element(null, true);
         $element->parse('<asdf');
+    }
+
+    /**
+     * @expectedException Kevintweber\HtmlTokenizer\Exceptions\ParseException
+     */
+    public function testExceptionInParseElementName()
+    {
+        $element = new Element();
+        $this->assertEquals('', $element->parse('<?php'));
+
+        $element = new Element(null, true);
+        $element->parse('<?php');
+    }
+
+    /**
+     * @expectedException Kevintweber\HtmlTokenizer\Exceptions\ParseException
+     */
+    public function testExceptionInParseAttribute()
+    {
+        $element = new Element();
+        $this->assertEquals('', $element->parse('<asdf foo=\'bar" />'));
+
+        $element = new Element(null, true);
+        $element->parse('<asdf foo=\'bar" />');
     }
 
     /**

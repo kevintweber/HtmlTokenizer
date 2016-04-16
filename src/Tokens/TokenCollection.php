@@ -29,43 +29,6 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
         return $result;
     }
 
-    public function reset()
-    {
-        return reset($this->tokens);
-    }
-
-    public function current()
-    {
-        return current($this->tokens);
-    }
-
-    public function end()
-    {
-        return end($this->tokens);
-    }
-
-    public function next()
-    {
-        return next($this->tokens);
-    }
-
-    public function prev()
-    {
-        return prev($this->tokens);
-    }
-
-    public function remove(Token $token)
-    {
-        $key = array_search($token, $this->tokens, true);
-        if ($key === false) {
-            return false;
-        }
-
-        unset($this->tokens[$key]);
-
-        return true;
-    }
-
     /**
      * Required by the ArrayAccess interface.
      */
@@ -89,6 +52,12 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
     {
         if (!$value instanceof Token) {
             throw new \InvalidArgumentException('Value must be of type Token.');
+        }
+
+        if ($offset === null) {
+            $this->tokens[] = $value;
+
+            return;
         }
 
         $this->tokens[$offset] = $value;

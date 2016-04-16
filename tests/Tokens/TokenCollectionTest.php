@@ -3,6 +3,7 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\Comment;
+use Kevintweber\HtmlTokenizer\Tokens\Text;
 use Kevintweber\HtmlTokenizer\Tokens\TokenCollection;
 
 class TokenCollectionTest extends \PHPUnit_Framework_TestCase
@@ -14,17 +15,6 @@ class TokenCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $collection->count());
         $this->assertTrue($collection->isEmpty());
         $this->assertFalse(isset($collection[0]));
-    }
-
-    public function testRemove()
-    {
-        $collection = new TokenCollection();
-        $token = new Comment();
-        $collection[0] = $token;
-        $this->assertEquals(1, $collection->count());
-        $this->assertTrue($collection->remove($token));
-        $this->assertEquals(0, $collection->count());
-        $this->assertFalse($collection->remove($token));
     }
 
     public function testArrayAccess()
@@ -51,5 +41,21 @@ class TokenCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $collection = new TokenCollection();
         $collection[0] = 5;
+    }
+
+    public function testIterator()
+    {
+        $collection = new TokenCollection();
+        $this->assertTrue($collection->isEmpty());
+        $token1 = new Comment();
+        $token2 = new Text();
+        $collection[] = $token1;
+        $collection[] = $token2;
+        $testArray = array();
+        foreach ($collection as $token) {
+            $testArray[] = $token;
+        }
+
+        $this->assertEquals(array($token1, $token2), $testArray);
     }
 }

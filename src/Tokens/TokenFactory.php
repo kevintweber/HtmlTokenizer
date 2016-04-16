@@ -8,24 +8,19 @@ class TokenFactory
 {
     public static function buildFromHtml($html, Token $parent = null, $throwOnError = false)
     {
-        if (Text::isMatch($html)) {
-            return new Text($parent, $throwOnError);
-        }
+        $matchCriteria = array(
+            'Text' => "/^[^<]/",
+            'Element' => "/^<[a-z]/i",
+            'Comment' => "/^<!--/",
+            'CData' => "/^<!\[CDATA\[/",
+            'DocType' => "/^<!DOCTYPE /i"
+        );
+        foreach ($matchCriteria as $className => $regex) {
+            if (preg_match($regex, $html) === 1) {
+                $fullClassName = "Kevintweber\\HtmlTokenizer\\Tokens\\" . $className;
 
-        if (Element::isMatch($html)) {
-            return new Element($parent, $throwOnError);
-        }
-
-        if (Comment::isMatch($html)) {
-            return new Comment($parent, $throwOnError);
-        }
-
-        if (CData::isMatch($html)) {
-            return new CData($parent, $throwOnError);
-        }
-
-        if (DocType::isMatch($html)) {
-            return new DocType(null, $throwOnError);
+                return new $fullClassName($parent, $throwOnError);
+            }
         }
 
         // Error condition

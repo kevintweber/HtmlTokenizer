@@ -41,45 +41,52 @@ class Element extends AbstractToken
 
         // Closed-only elements.
         // Closing tags not required.  We will close them now.
-        if ($this->isClosedOnlyElement($parentName)) {
+        $closedOnlyElements = array(
+            'base',
+            'link',
+            'meta',
+            'hr',
+            'br'
+        );
+        if (array_search($parentName, $closedOnlyElements) !== false) {
             return true;
         }
 
         // P
-        if ($parentName === 'p') {
-            switch ($name) {
-            case 'address':
-            case 'article':
-            case 'aside':
-            case 'blockquote':
-            case 'details':
-            case 'div':
-            case 'dl':
-            case 'fieldset':
-            case 'figcaption':
-            case 'figure':
-            case 'footer':
-            case 'form':
-            case 'h1':
-            case 'h2':
-            case 'h3':
-            case 'h4':
-            case 'h5':
-            case 'h6':
-            case 'header':
-            case 'hgroup':
-            case 'hr':
-            case 'main':
-            case 'menu':
-            case 'nav':
-            case 'ol':
-            case 'p':
-            case 'pre':
-            case 'section':
-            case 'table':
-            case 'ul':
-                return true;
-            }
+        $elementsNotChildrenOfP = array(
+            'address',
+            'article',
+            'aside',
+            'blockquote',
+            'details',
+            'div',
+            'dl',
+            'fieldset',
+            'figcaption',
+            'figure',
+            'footer',
+            'form',
+            'h1',
+            'h2',
+            'h3',
+            'h4',
+            'h5',
+            'h6',
+            'header',
+            'hgroup',
+            'hr',
+            'main',
+            'menu',
+            'nav',
+            'ol',
+            'p',
+            'pre',
+            'section',
+            'table',
+            'ul'
+        );
+        if ($parentName === 'p' && array_search($name, $elementsNotChildrenOfP) !== false) {
+            return true;
         }
 
         // LI
@@ -98,20 +105,6 @@ class Element extends AbstractToken
         }
 
         return false;
-    }
-
-    private function isClosedOnlyElement($name)
-    {
-        return $name == 'base' ||
-            $name == 'link' ||
-            $name == 'meta' ||
-            $name == 'hr' ||
-            $name == 'br';
-    }
-
-    public static function isMatch($html)
-    {
-        return preg_match("/^<[a-zA-Z]/", $html) === 1;
     }
 
     public function parse($html)
@@ -154,13 +147,6 @@ class Element extends AbstractToken
             $html,
             $attributeMatches
         );
-        if ($attrMatchSuccessful !== 1) {
-            if ($this->getThrowOnError()) {
-                throw new ParseException('Invalid attribute.');
-            }
-
-            return '';
-        }
 
         $posOfEqualsSign = strpos($attributeMatches[2], '=');
         if ($posOfEqualsSign === false) {

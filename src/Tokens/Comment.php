@@ -16,16 +16,6 @@ class Comment extends AbstractToken
         $this->value = null;
     }
 
-    public function isClosingElementImplied($html)
-    {
-        return false;
-    }
-
-    public static function isMatch($html)
-    {
-        return preg_match("/^<!--/", $html) === 1;
-    }
-
     public function parse($html)
     {
         $posOfEndOfComment = strpos($html, '-->');

@@ -7,25 +7,6 @@ use Kevintweber\HtmlTokenizer\Tokens\Comment;
 class CommentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider isMatchDataProvider
-     */
-    public function testIsMatch($html, $expectedOutput)
-    {
-        $this->assertSame((boolean) $expectedOutput, Comment::isMatch($html));
-    }
-
-    public function isMatchDataProvider()
-    {
-        return array(
-            'cdata' => array('<![CDATA[asdf]]>', false),
-            'comment' => array('<!-- asdf -->', true),
-            'doctype' => array('<!DOCTYPE HTML>', false),
-            'element' => array('<asdf />asdf', false),
-            'text' => array('asdf', false)
-        );
-    }
-
-    /**
      * @dataProvider parseDataProvider
      */
     public function testParse($html, $expectedValue, $expectedRemainingHtml)

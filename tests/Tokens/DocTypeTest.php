@@ -7,25 +7,6 @@ use Kevintweber\HtmlTokenizer\Tokens\DocType;
 class DocTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider isMatchDataProvider
-     */
-    public function testIsMatch($html, $expectedOutput)
-    {
-        $this->assertSame((boolean) $expectedOutput, DocType::isMatch($html));
-    }
-
-    public function isMatchDataProvider()
-    {
-        return array(
-            'cdata' => array('<![CDATA[asdf]]>', false),
-            'comment' => array('<!-- asdf -->', false),
-            'doctype' => array('<!DOCTYPE HTML>', true),
-            'element' => array('<asdf />asdf', false),
-            'text' => array('asdf', false)
-        );
-    }
-
-    /**
      * @dataProvider parseDataProvider
      */
     public function testParse($html, $expectedValue, $expectedRemainingHtml)

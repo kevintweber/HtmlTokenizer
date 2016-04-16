@@ -4,22 +4,18 @@ namespace Kevintweber\HtmlTokenizer;
 
 use Kevintweber\HtmlTokenizer\Tokens\TokenCollection;
 use Kevintweber\HtmlTokenizer\Tokens\TokenFactory;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HtmlTokenizer
 {
-    /** @var array */
-    private $options;
+    /** @var boolean */
+    private $throwOnError;
 
     /**
      * Constructor
      */
-    public function __construct(array $options = array())
+    public function __construct($throwOnError = false)
     {
-        $resolver = new OptionsResolver();
-        $this->configureOptions($resolver);
-
-        $this->options = $resolver->resolve($options);
+        $this->throwOnError = (boolean) $throwOnError;
     }
 
     /**
@@ -37,7 +33,7 @@ class HtmlTokenizer
             $token = TokenFactory::buildFromHtml(
                 $remainingHtml,
                 null,
-                $this->options['throwOnError']
+                $this->throwOnError
             );
             if ($token === false) {
                 // Error has occurred, so we stop.
@@ -49,12 +45,5 @@ class HtmlTokenizer
         }
 
         return $tokens;
-    }
-
-    protected function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'throwOnError' => false
-        ));
     }
 }

@@ -27,11 +27,11 @@ abstract class AbstractToken implements Token
         $this->type = $type;
     }
 
-    /**
-     * Getter for 'parent'.
-     *
-     * @return Token
-     */
+    public function isClosingElementImplied($html)
+    {
+        return false;
+    }
+
     public function getParent()
     {
         return $this->parent;
@@ -55,12 +55,6 @@ abstract class AbstractToken implements Token
     public function getType()
     {
         return $this->type;
-    }
-
-
-    public function isAttribute()
-    {
-        return $this->type === Token::ATTRIBUTE;
     }
 
     public function isCDATA()
@@ -90,8 +84,7 @@ abstract class AbstractToken implements Token
 
     protected function isValidType($type)
     {
-        return $type === Token::ATTRIBUTE
-            || $type === Token::CDATA
+        return $type === Token::CDATA
             || $type === Token::COMMENT
             || $type === Token::DOCTYPE
             || $type === Token::ELEMENT
