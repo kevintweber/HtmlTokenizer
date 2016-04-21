@@ -18,7 +18,7 @@ class CData extends AbstractToken
 
     public function parse($html)
     {
-        $posOfEndOfCData = strpos($html, ']]>');
+        $posOfEndOfCData = mb_strpos($html, ']]>');
         if ($posOfEndOfCData === false) {
             if ($this->getThrowOnError()) {
                 throw new ParseException('Invalid CDATA.');
@@ -27,9 +27,9 @@ class CData extends AbstractToken
             return '';
         }
 
-        $this->value = trim(substr($html, 9, $posOfEndOfCData - 9));
+        $this->value = trim(mb_substr($html, 9, $posOfEndOfCData - 9));
 
-        return trim(substr($html, $posOfEndOfCData + 3));
+        return trim(mb_substr($html, $posOfEndOfCData + 3));
     }
 
     /**

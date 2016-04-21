@@ -16,16 +16,16 @@ class Text extends AbstractToken
 
     public function parse($html)
     {
-        $posOfNextElement = strpos($html, '<');
+        $posOfNextElement = mb_strpos($html, '<');
         if ($posOfNextElement === false) {
             $this->value = $html;
 
             return '';
         }
 
-        $this->value = trim(substr($html, 0, $posOfNextElement));
+        $this->value = trim(mb_substr($html, 0, $posOfNextElement));
 
-        return substr($html, $posOfNextElement);
+        return mb_substr($html, $posOfNextElement);
     }
 
     /**

@@ -113,13 +113,13 @@ class Element extends AbstractToken
         $this->name = $this->parseElementName($html);
 
         // Parse attributes.
-        $remainingHtml = substr($html, strlen($this->name) + 1);
-        while (strpos($remainingHtml, '>') !== false && preg_match("/^\s*[\/]?>/", $remainingHtml) === 0) {
+        $remainingHtml = mb_substr($html, mb_strlen($this->name) + 1);
+        while (mb_strpos($remainingHtml, '>') !== false && preg_match("/^\s*[\/]?>/", $remainingHtml) === 0) {
             $remainingHtml = $this->parseAttribute(trim($remainingHtml));
         }
 
         // Find position of end of tag.
-        $posOfClosingBracket = strpos($remainingHtml, '>');
+        $posOfClosingBracket = mb_strpos($remainingHtml, '>');
         if ($posOfClosingBracket === false) {
             if ($this->getThrowOnError()) {
                 throw new ParseException('Invalid element: missing closing bracket.');
@@ -129,8 +129,8 @@ class Element extends AbstractToken
         }
 
         // Is self-closing?
-        $posOfSelfClosingBracket = strpos($remainingHtml, '/>');
-        $remainingHtml = trim(substr($remainingHtml, $posOfClosingBracket + 1));
+        $posOfSelfClosingBracket = mb_strpos($remainingHtml, '/>');
+        $remainingHtml = trim(mb_substr($remainingHtml, $posOfClosingBracket + 1));
         if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket == $posOfClosingBracket - 1) {
             // Self-closing element.
             return $remainingHtml;
@@ -171,7 +171,7 @@ class Element extends AbstractToken
         );
 
         $name = $attributeMatches[2];
-        $remainingHtml = substr(strstr($remainingHtml, $name), strlen($name));
+        $remainingHtml = mb_substr(mb_strstr($remainingHtml, $name), mb_strlen($name));
         if (preg_match("/^\s*=\s*/", $remainingHtml) === 0) {
             // Valueless attribute.
             $this->attributes[trim($name)] = true;
@@ -202,9 +202,9 @@ class Element extends AbstractToken
             $this->attributes[trim($name)] = $value;
 
             // Determine remaining html.
-            $posOfAttributeValue = strpos($html, $value);
+            $posOfAttributeValue = mb_strpos($html, $value);
             $remainingHtml = trim(
-                substr($html, $posOfAttributeValue + strlen($value))
+                mb_substr($html, $posOfAttributeValue + mb_strlen($value))
             );
             $remainingHtml = ltrim($remainingHtml, '\'"/ ');
         }
@@ -248,9 +248,9 @@ class Element extends AbstractToken
         }
 
         // Remove remaining closing tag.
-        $posOfClosingBracket = strpos($remainingHtml, '>');
+        $posOfClosingBracket = mb_strpos($remainingHtml, '>');
 
-        return substr($remainingHtml, $posOfClosingBracket + 1);
+        return mb_substr($remainingHtml, $posOfClosingBracket + 1);
     }
 
     /**
@@ -275,7 +275,7 @@ class Element extends AbstractToken
             return '';
         }
 
-        return strtolower($elementMatches[2]);
+        return mb_strtolower($elementMatches[2]);
     }
 
     /**
@@ -296,11 +296,11 @@ class Element extends AbstractToken
         } else {
             $closingTag = $endOfScriptMatches[1];
             $value = trim(
-                substr($remainingHtml, 0, strpos($remainingHtml, $closingTag))
+                mb_substr($remainingHtml, 0, mb_strpos($remainingHtml, $closingTag))
             );
-            $remainingHtml = substr(
-                strstr($remainingHtml, $closingTag),
-                strlen($closingTag)
+            $remainingHtml = mb_substr(
+                mb_strstr($remainingHtml, $closingTag),
+                mb_strlen($closingTag)
             );
         }
 

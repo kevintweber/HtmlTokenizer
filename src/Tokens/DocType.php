@@ -18,7 +18,7 @@ class DocType extends AbstractToken
 
     public function parse($html)
     {
-        $posOfEndOfDocType = strpos($html, '>');
+        $posOfEndOfDocType = mb_strpos($html, '>');
         if ($posOfEndOfDocType === false) {
             if ($this->getThrowOnError()) {
                 throw new ParseException('Invalid DOCTYPE.');
@@ -27,9 +27,9 @@ class DocType extends AbstractToken
             return '';
         }
 
-        $this->value = trim(substr($html, 10, $posOfEndOfDocType - 10));
+        $this->value = trim(mb_substr($html, 10, $posOfEndOfDocType - 10));
 
-        return trim(substr($html, $posOfEndOfDocType + 1));
+        return trim(mb_substr($html, $posOfEndOfDocType + 1));
     }
 
     /**

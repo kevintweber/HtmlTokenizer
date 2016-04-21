@@ -18,7 +18,7 @@ class Comment extends AbstractToken
 
     public function parse($html)
     {
-        $posOfEndOfComment = strpos($html, '-->');
+        $posOfEndOfComment = mb_strpos($html, '-->');
         if ($posOfEndOfComment === false) {
             if ($this->getThrowOnError()) {
                 throw new ParseException('Invalid comment.');
@@ -27,9 +27,9 @@ class Comment extends AbstractToken
             return '';
         }
 
-        $this->value = trim(substr($html, 4, $posOfEndOfComment - 4));
+        $this->value = trim(mb_substr($html, 4, $posOfEndOfComment - 4));
 
-        return trim(substr($html, $posOfEndOfComment + 3));
+        return trim(mb_substr($html, $posOfEndOfComment + 3));
     }
 
     /**
