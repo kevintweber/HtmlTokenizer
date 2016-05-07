@@ -6,7 +6,7 @@ use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class Element extends AbstractToken
 {
-    /** @var array[Token] */
+    /** @var array */
     private $attributes;
 
     /** @var array[Token] */
@@ -228,7 +228,12 @@ class Element extends AbstractToken
 
         // Nothing to parse inside a script tag.
         if ($this->name == 'script') {
-            return $this->parseScriptContents($remainingHtml);
+            return $this->parseForeignContents('script', $remainingHtml);
+        }
+
+        // Nothing to parse inside a style tag.
+        if ($this->name == 'style') {
+            return $this->parseForeignContents('style', $remainingHtml);
         }
 
         // Parse contents one token at a time.
@@ -285,11 +290,15 @@ class Element extends AbstractToken
      *
      * @return string The remaining HTML.
      */
-    private function parseScriptContents($html)
+    private function parseForeignContents($tag, $html)
     {
         $remainingHtml = trim($html);
 
-        $matchingResult = preg_match("/(<\/\s*script\s*>)/i", $html, $endOfScriptMatches);
+        $matchingResult = preg_match(
+            "/(<\/\s*" . $tag . "\s*>)/i",
+            $html,
+            $endOfScriptMatches
+        );
         if ($matchingResult === 0) {
             $value = $remainingHtml;
             $remainingHtml = '';

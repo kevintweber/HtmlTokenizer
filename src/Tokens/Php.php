@@ -4,32 +4,35 @@ namespace Kevintweber\HtmlTokenizer\Tokens;
 
 use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
-class Comment extends AbstractToken
+class Php extends AbstractToken
 {
     /** @var string */
     private $value;
 
     public function __construct(Token $parent = null, $throwOnError = false)
     {
-        parent::__construct(Token::COMMENT, $parent, $throwOnError);
+        parent::__construct(Token::PHP, $parent, $throwOnError);
 
         $this->value = null;
     }
 
     public function parse($html)
     {
-        $posOfEndOfComment = mb_strpos($html, '-->');
-        if ($posOfEndOfComment === false) {
-            if ($this->getThrowOnError()) {
-                throw new ParseException('Invalid comment.');
-            }
+        $startPos = 3;
+        if (mb_substr($html, 0, 5) == '<?php') {
+            $startPos = 6;
+        }
+
+        $posOfEndOfPhp = mb_strpos($html, '?>');
+        if ($posOfEndOfPhp === false) {
+            $this->value = trim(mb_substr($html, $startPos));
 
             return '';
         }
 
-        $this->value = trim(mb_substr($html, 4, $posOfEndOfComment - 4));
+        $this->value = trim(mb_substr($html, $startPos, $posOfEndOfPhp - 3));
 
-        return trim(mb_substr($html, $posOfEndOfComment + 3));
+        return trim(mb_substr($html, $posOfEndOfPhp + 2));
     }
 
     /**
@@ -45,7 +48,7 @@ class Comment extends AbstractToken
     public function toArray()
     {
         return array(
-            'type' => 'comment',
+            'type' => 'php',
             'value' => $this->value
         );
     }

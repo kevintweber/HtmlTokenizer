@@ -8,6 +8,7 @@ interface Token
     const COMMENT   = 'comment';
     const DOCTYPE   = 'doctype';
     const ELEMENT   = 'element';
+    const PHP       = 'php';
     const TEXT      = 'text';
 
     /**
@@ -53,6 +54,7 @@ interface Token
     public function isComment();
     public function isDocType();
     public function isElement();
+    public function isPhp();
     public function isText();
 
     /**

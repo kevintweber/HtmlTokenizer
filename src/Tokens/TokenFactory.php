@@ -13,7 +13,8 @@ class TokenFactory
             'Comment' => "/^<!--/",
             'CData' => "/^<!\[CDATA\[/",
             'DocType' => "/^<!DOCTYPE /i",
-            'Element' => "/^<[a-z]/i"
+            'Element' => "/^<[a-z]/i",
+            'Php' => "/^(<\?\s)|(<\?php\s)?/i"
         );
         foreach ($matchCriteria as $className => $regex) {
             if (preg_match($regex, $html) === 1) {

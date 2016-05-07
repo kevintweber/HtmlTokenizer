@@ -90,6 +90,11 @@ abstract class AbstractToken implements Token
         return $this->type === Token::ELEMENT;
     }
 
+    public function isPhp()
+    {
+        return $this->type === Token::PHP;
+    }
+
     public function isText()
     {
         return $this->type === Token::TEXT;
@@ -101,6 +106,7 @@ abstract class AbstractToken implements Token
             || $type === Token::COMMENT
             || $type === Token::DOCTYPE
             || $type === Token::ELEMENT
+            || $type === Token::PHP
             || $type === Token::TEXT;
     }
 }
