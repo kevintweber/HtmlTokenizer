@@ -39,6 +39,28 @@ class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
                         'value' => 'asdf'
                     )
                 )
+            ),
+            'contains php' => array(
+                '<!-- comment --><div class="asdf1"><?php echo "asdf5"; ?></div>',
+                array(
+                    array(
+                        'type' => 'comment',
+                        'value' => 'comment'
+                    ),
+                    array(
+                        'type' => 'element',
+                        'name' => 'div',
+                        'attributes' => array(
+                            'class' => 'asdf1'
+                        ),
+                        'children' => array(
+                            array(
+                                'type' => 'php',
+                                'value' => 'echo "asdf5";'
+                            )
+                        )
+                    ),
+                )
             )
         );
     }

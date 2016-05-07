@@ -9,7 +9,7 @@ class TokenFactory
     public static function buildFromHtml($html, Token $parent = null, $throwOnError = false)
     {
         $matchCriteria = array(
-            'Php' => "/^(<\?\s)|(<\?php\s)/i",
+            'Php' => "/^(<\?\s)|^(<\?php\s)/i",
             'Text' => "/^[^<]/",
             'Comment' => "/^<!--/",
             'CData' => "/^<!\[CDATA\[/",
