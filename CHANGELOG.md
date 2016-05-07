@@ -4,7 +4,10 @@ All Notable changes to `html-tokenizer` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [Unreleased] - 2016-XX-XX
+## [0.2.0] - 2016-05-18
+
+### Added
+- Added PHP token.
 
 ### Changed
 - Use mb_* string functions.  Polyfill added.

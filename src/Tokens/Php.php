@@ -2,8 +2,6 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
-use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
-
 class Php extends AbstractToken
 {
     /** @var string */
@@ -30,7 +28,7 @@ class Php extends AbstractToken
             return '';
         }
 
-        $this->value = trim(mb_substr($html, $startPos, $posOfEndOfPhp - 3));
+        $this->value = trim(mb_substr($html, $startPos, $posOfEndOfPhp - $startPos - 1));
 
         return trim(mb_substr($html, $posOfEndOfPhp + 2));
     }

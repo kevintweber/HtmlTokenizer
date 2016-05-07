@@ -37,6 +37,14 @@ class TokenFactoryTest extends \PHPUnit_Framework_TestCase
             array(
                 '<!DOCTYPE asdf >',
                 'Kevintweber\HtmlTokenizer\Tokens\DocType'
+            ),
+            array(
+                '<?php asdf; ?>',
+                'Kevintweber\HtmlTokenizer\Tokens\Php'
+            ),
+            array(
+                '<? asdf; ?>',
+                'Kevintweber\HtmlTokenizer\Tokens\Php'
             )
         );
     }

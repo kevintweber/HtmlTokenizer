@@ -166,7 +166,12 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             'php' => array(
                 '<asdf><?php echo "asdf"; ?></asdf>',
                 'asdf',
-                '<?php echo "asdf"; ?></asdf>'
+                ''
+            ),
+            'multibyte characters' => array(
+                '<asdf>לֶף־בֵּית</asdf>',
+                'asdf',
+                ''
             )
         );
     }
@@ -423,6 +428,45 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
+            'style tag' => array(
+                '<style> body { color: green; }    </style>',
+                array(
+                    'type' => 'element',
+                    'name' => 'style',
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'body { color: green; }',
+                        )
+                    )
+                )
+            ),
+            'style tag without end' => array(
+                '<style> body { color: green; }  ',
+                array(
+                    'type' => 'element',
+                    'name' => 'style',
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'body { color: green; }',
+                        )
+                    )
+                )
+            ),
+            'multibyte characters' => array(
+                '<asdf>לֶף־בֵּית</asdf>',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'children' => array(
+                        array(
+                            'type' => 'text',
+                            'value' => 'לֶף־בֵּית',
+                        )
+                    )
+                )
+            )
         );
     }
 
