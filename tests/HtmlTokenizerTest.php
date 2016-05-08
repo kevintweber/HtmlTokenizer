@@ -9,10 +9,14 @@ class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider parseDataProvider
      */
-    public function testParse($html, array $expectedTokenArray)
+    public function testParse($html, array $expectedTokenArray, $debug = false)
     {
         $htmlTokenizer = new HtmlTokenizer();
         $tokens = $htmlTokenizer->parse($html);
+        if ($debug) {
+            var_dump($html, $tokens->toArray());
+        }
+
         $this->assertEquals(
             $expectedTokenArray,
             $tokens->toArray()
@@ -36,16 +40,16 @@ class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
                 array(
                     array(
                         'type' => 'text',
-                        'value' => 'asdf'
+                        'value' => 'asdf '
                     )
                 )
             ),
             'contains php' => array(
-                '<!-- comment --><div class="asdf1"><?php echo "asdf5"; ?></div>',
+                '<!-- comments --><div class="asdf1"><?php echo "asdf5"; ?></div>',
                 array(
                     array(
                         'type' => 'comment',
-                        'value' => 'comment'
+                        'value' => 'comments'
                     ),
                     array(
                         'type' => 'element',
@@ -59,7 +63,7 @@ class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
                                 'value' => 'echo "asdf5";'
                             )
                         )
-                    ),
+                    )
                 )
             )
         );

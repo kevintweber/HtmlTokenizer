@@ -31,9 +31,9 @@ class CDataTest extends \PHPUnit_Framework_TestCase
                 '<whoa />'
             ),
             'with whitespace' => array(
-                '<![CDATA[      asdf     ]]>   <whoa />',
+                '    <![CDATA[      asdf     ]]>    <whoa />',
                 'asdf',
-                '<whoa />'
+                '    <whoa />'
             ),
             'parse error' => array(
                 '<![CDATA[      asdf',

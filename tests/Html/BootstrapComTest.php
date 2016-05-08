@@ -105,7 +105,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         0 =>
                                         array (
                                             'type' => 'text',
-                                            'value' => 'Bootstrap &middot; The world\'s most popular mobile-first and responsive front-end framework.',
+                                            'value' => ' Bootstrap &middot; The world\'s most popular mobile-first and responsive front-end framework. ',
                                         ),
                                     ),
                                 ),
@@ -884,7 +884,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 0 =>
                                                                                 array (
                                                                                     'type' => 'text',
-                                                                                    'value' => 'Bootstrap ships with vanilla CSS, but its source code utilizes the two most popular CSS preprocessors,',
+                                                                                    'value' => 'Bootstrap ships with vanilla CSS, but its source code utilizes the two most popular CSS preprocessors, ',
                                                                                 ),
                                                                                 1 =>
                                                                                 array (
@@ -906,7 +906,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 2 =>
                                                                                 array (
                                                                                     'type' => 'text',
-                                                                                    'value' => 'and',
+                                                                                    'value' => ' and ',
                                                                                 ),
                                                                                 3 =>
                                                                                 array (
@@ -931,6 +931,11 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                     'value' => '. Quickly get started with precompiled CSS or build on the source.',
                                                                                 ),
                                                                             ),
+                                                                        ),
+                                                                        2 =>
+                                                                        array (
+                                                                            'type' => 'text',
+                                                                            'value' => ' ',
                                                                         ),
                                                                     ),
                                                                 ),
@@ -984,6 +989,11 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 ),
                                                                             ),
                                                                         ),
+                                                                        2 =>
+                                                                        array (
+                                                                            'type' => 'text',
+                                                                            'value' => ' ',
+                                                                        ),
                                                                     ),
                                                                 ),
                                                             ),
@@ -1035,6 +1045,11 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                     'value' => 'With Bootstrap, you get extensive and beautiful documentation for common HTML elements, dozens of custom HTML and CSS components, and awesome jQuery plugins.',
                                                                                 ),
                                                                             ),
+                                                                        ),
+                                                                        2 =>
+                                                                        array (
+                                                                            'type' => 'text',
+                                                                            'value' => ' ',
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1140,7 +1155,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         0 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => 'Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing',
+                                                            'value' => 'Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing ',
                                                         ),
                                                         1 =>
                                                         array (
@@ -1162,7 +1177,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         2 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => 'or by exploring some of our favorites.',
+                                                            'value' => ' or by exploring some of our favorites.',
                                                         ),
                                                     ),
                                                 ),
@@ -1217,6 +1232,14 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'alt' => 'Lyft',
                                                                                 'class' => 'img-responsive',
                                                                             ),
+'children' =>
+                                                                            array (
+                                                                                0 =>
+                                                                                array (
+                                                                                    'type' => 'text',
+                                                                                    'value' => ' ',
+                                                                                ),
+                                                                            ),
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1253,6 +1276,14 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'src' => '/assets/img/expo-vogue.jpg',
                                                                                 'alt' => 'Vogue',
                                                                                 'class' => 'img-responsive',
+                                                                            ),
+                                                                            'children' =>
+                                                                            array (
+                                                                                0 =>
+                                                                                array (
+                                                                                    'type' => 'text',
+                                                                                    'value' => ' ',
+                                                                                ),
                                                                             ),
                                                                         ),
                                                                     ),
@@ -1291,6 +1322,14 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'alt' => 'Riot Design',
                                                                                 'class' => 'img-responsive',
                                                                             ),
+                                                                            'children' =>
+                                                                            array (
+                                                                                0 =>
+                                                                                array (
+                                                                                    'type' => 'text',
+                                                                                    'value' => ' ',
+                                                                                ),
+                                                                            ),
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1327,6 +1366,14 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'src' => '/assets/img/expo-newsweek.jpg',
                                                                                 'alt' => 'Newsweek',
                                                                                 'class' => 'img-responsive',
+                                                                            ),
+                                                                            'children' =>
+                                                                            array (
+                                                                                0 =>
+                                                                                array (
+                                                                                    'type' => 'text',
+                                                                                    'value' => ' ',
+                                                                                ),
                                                                             ),
                                                                         ),
                                                                     ),
@@ -1525,7 +1572,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         0 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => 'Designed and built with all the love in the world by',
+                                                            'value' => 'Designed and built with all the love in the world by ',
                                                         ),
                                                         1 =>
                                                         array (
@@ -1548,7 +1595,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         2 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => 'and',
+                                                            'value' => ' and ',
                                                         ),
                                                         3 =>
                                                         array (
@@ -1571,7 +1618,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         4 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => '. Maintained by the',
+                                                            'value' => '. Maintained by the ',
                                                         ),
                                                         5 =>
                                                         array (
@@ -1593,7 +1640,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         6 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => 'with the help of',
+                                                            'value' => ' with the help of ',
                                                         ),
                                                         7 =>
                                                         array (
@@ -1628,7 +1675,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         0 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => 'Code licensed',
+                                                            'value' => 'Code licensed ',
                                                         ),
                                                         1 =>
                                                         array (
@@ -1652,7 +1699,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         2 =>
                                                         array (
                                                             'type' => 'text',
-                                                            'value' => ', docs',
+                                                            'value' => ', docs ',
                                                         ),
                                                         3 =>
                                                         array (

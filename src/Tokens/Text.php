@@ -16,14 +16,34 @@ class Text extends AbstractToken
 
     public function parse($html)
     {
+        // Collapse whitespace before TEXT.
+        $startingWhitespace = '';
+        if (preg_match("/(^\s)/", $html) === 1) {
+            $startingWhitespace = ' ';
+        }
+
         $posOfNextElement = mb_strpos($html, '<');
         if ($posOfNextElement === false) {
-            $this->value = $html;
+            $this->value = $startingWhitespace . trim($html);
 
             return '';
         }
 
-        $this->value = trim(mb_substr($html, 0, $posOfNextElement));
+        // Find full length of TEXT.
+        $text = mb_substr($html, 0, $posOfNextElement);
+        if (trim($text) == '') {
+            $this->value = ' ';
+
+            return mb_substr($html, $posOfNextElement);
+        }
+
+        // Collapse whitespace after TEXT.
+        $endingWhitespace = '';
+        if (preg_match("/(\s$)/", $text) === 1) {
+            $endingWhitespace = ' ';
+        }
+
+        $this->value = $startingWhitespace . trim($text) . $endingWhitespace;
 
         return mb_substr($html, $posOfNextElement);
     }

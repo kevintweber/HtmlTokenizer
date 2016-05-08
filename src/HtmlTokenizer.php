@@ -40,7 +40,7 @@ class HtmlTokenizer
                 break;
             }
 
-            $remainingHtml = trim($token->parse($remainingHtml));
+            $remainingHtml = $token->parse($remainingHtml);
             $tokens[] = $token;
         }
 

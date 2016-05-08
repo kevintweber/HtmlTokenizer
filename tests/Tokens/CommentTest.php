@@ -31,9 +31,9 @@ class CommentTest extends \PHPUnit_Framework_TestCase
                 '<whoa />'
             ),
             'with whitespace' => array(
-                '<!--     asdf      -->      <whoa />',
+                '   <!--     asdf      -->    <whoa />',
                 'asdf',
-                '<whoa />'
+                '    <whoa />'
             ),
             'no whitespace' => array(
                 '<!--asdf-->yo',
@@ -43,7 +43,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
             'two comments' => array(
                 "<!-- asdf -->\n\n<!-- asdf -->",
                 'asdf',
-                '<!-- asdf -->'
+                "\n\n<!-- asdf -->"
             ),
             'parse error' => array(
                 '<!-- asdf',

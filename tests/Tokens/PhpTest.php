@@ -26,9 +26,9 @@ class PhpTest extends \PHPUnit_Framework_TestCase
                 ''
             ),
             'simple with whitespace' => array(
-                '<?php        echo "asdf";                ?>    ',
+                '    <?php        echo "asdf";                ?>    g',
                 'echo "asdf";',
-                ''
+                '    g'
             ),
             'containing element' => array(
                 '<?php echo "<div>asdf</div>"; ?>',

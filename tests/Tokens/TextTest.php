@@ -32,12 +32,12 @@ class TextTest extends \PHPUnit_Framework_TestCase
             ),
             'with element and trailing whitespace' => array(
                 'asdf      <whoa />',
-                'asdf',
+                'asdf ',
                 '<whoa />'
             ),
             'with comment' => array(
-                'asdf<!-- comment -->',
-                'asdf',
+                '   asdf<!-- comment -->',
+                ' asdf',
                 '<!-- comment -->'
             )
         );

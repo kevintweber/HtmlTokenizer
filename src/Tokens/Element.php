@@ -110,12 +110,13 @@ class Element extends AbstractToken
      */
     public function parse($html)
     {
+        $html = ltrim($html);
         $this->name = $this->parseElementName($html);
 
         // Parse attributes.
         $remainingHtml = mb_substr($html, mb_strlen($this->name) + 1);
         while (mb_strpos($remainingHtml, '>') !== false && preg_match("/^\s*[\/]?>/", $remainingHtml) === 0) {
-            $remainingHtml = $this->parseAttribute(trim($remainingHtml));
+            $remainingHtml = $this->parseAttribute($remainingHtml);
         }
 
         // Find position of end of tag.
@@ -130,7 +131,7 @@ class Element extends AbstractToken
 
         // Is self-closing?
         $posOfSelfClosingBracket = mb_strpos($remainingHtml, '/>');
-        $remainingHtml = trim(mb_substr($remainingHtml, $posOfClosingBracket + 1));
+        $remainingHtml = mb_substr($remainingHtml, $posOfClosingBracket + 1);
         if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket == $posOfClosingBracket - 1) {
             // Self-closing element.
             return $remainingHtml;
@@ -161,7 +162,7 @@ class Element extends AbstractToken
      */
     private function parseAttribute($html)
     {
-        $remainingHtml = trim($html);
+        $remainingHtml = ltrim($html);
 
         // Will match the first entire name/value attribute pair.
         preg_match(
@@ -221,27 +222,27 @@ class Element extends AbstractToken
      */
     private function parseContents($html)
     {
-        $remainingHtml = trim($html);
-        if ($remainingHtml == '') {
+        if (trim($html) == '') {
             return '';
         }
 
         // Don't parse contents of "iframe" element.
         if ($this->name == 'iframe') {
-            return $this->parseNoContents('iframe', $remainingHtml);
+            return $this->parseNoContents('iframe', $html);
         }
 
         // Only TEXT inside a "script" element.
         if ($this->name == 'script') {
-            return $this->parseForeignContents('script', $remainingHtml);
+            return $this->parseForeignContents('script', $html);
         }
 
         // Only TEXT inside a "style" element.
         if ($this->name == 'style') {
-            return $this->parseForeignContents('style', $remainingHtml);
+            return $this->parseForeignContents('style', $html);
         }
 
         // Parse contents one token at a time.
+        $remainingHtml = $html;
         while (preg_match("/^<\/\s*" . $this->name . "\s*>/is", $remainingHtml) === 0) {
             $token = TokenFactory::buildFromHtml(
                 $remainingHtml,
@@ -253,8 +254,16 @@ class Element extends AbstractToken
                 return $remainingHtml;
             }
 
-            $remainingHtml = trim($token->parse($remainingHtml));
+            $remainingHtml = $token->parse($remainingHtml);
             $this->children[] = $token;
+        }
+
+        // Remove last token if contains only whitespace.
+        if (!empty($this->children)) {
+            $lastChild = array_pop((array_slice($this->children, -1)));
+            if ($lastChild->isText() && trim($lastChild->getValue()) == '') {
+                array_pop($this->children);
+            }
         }
 
         // Remove remaining closing tag.
@@ -298,15 +307,14 @@ class Element extends AbstractToken
      */
     private function parseForeignContents($tag, $html)
     {
-        $remainingHtml = trim($html);
-
+        $remainingHtml = ltrim($html);
         $matchingResult = preg_match(
             "/(<\/\s*" . $tag . "\s*>)/i",
             $html,
             $endOfScriptMatches
         );
         if ($matchingResult === 0) {
-            $value = $remainingHtml;
+            $value = trim($remainingHtml);
             $remainingHtml = '';
         } else {
             $closingTag = $endOfScriptMatches[1];
@@ -342,8 +350,7 @@ class Element extends AbstractToken
      */
     private function parseNoContents($tag, $html)
     {
-        $remainingHtml = trim($html);
-
+        $remainingHtml = ltrim($html);
         $matchingResult = preg_match(
             "/(<\/\s*" . $tag . "\s*>)/i",
             $html,

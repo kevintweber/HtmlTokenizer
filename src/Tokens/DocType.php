@@ -18,6 +18,7 @@ class DocType extends AbstractToken
 
     public function parse($html)
     {
+        $html = ltrim($html);
         $posOfEndOfDocType = mb_strpos($html, '>');
         if ($posOfEndOfDocType === false) {
             if ($this->getThrowOnError()) {
@@ -29,7 +30,7 @@ class DocType extends AbstractToken
 
         $this->value = trim(mb_substr($html, 10, $posOfEndOfDocType - 10));
 
-        return trim(mb_substr($html, $posOfEndOfDocType + 1));
+        return mb_substr($html, $posOfEndOfDocType + 1);
     }
 
     /**

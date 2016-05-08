@@ -9,12 +9,12 @@ class TokenFactory
     public static function buildFromHtml($html, Token $parent = null, $throwOnError = false)
     {
         $matchCriteria = array(
-            'Php' => "/^(<\?\s)|^(<\?php\s)/i",
-            'Text' => "/^[^<]/",
-            'Comment' => "/^<!--/",
-            'CData' => "/^<!\[CDATA\[/",
-            'DocType' => "/^<!DOCTYPE /i",
-            'Element' => "/^<[a-z]/i"
+            'Php' => "/(^\s*<\?\s)|(^\s*<\?php\s)/i",
+            'Comment' => "/^\s*<!--/",
+            'CData' => "/^\s*<!\[CDATA\[/",
+            'DocType' => "/^\s*<!DOCTYPE /i",
+            'Element' => "/^\s*<[a-z]/i",
+            'Text' => "/^[^<]/"
         );
         foreach ($matchCriteria as $className => $regex) {
             if (preg_match($regex, $html) === 1) {

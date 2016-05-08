@@ -152,7 +152,7 @@ The tokens are of the following types:
 | `cdata`   | \<![CDATA[ Character data goes in here. ]]> |
 | `comment` | \<!-- Comments go in here. --> |
 | `doctype` | \<!DOCTYPE html> |
-| `element` | \<div>Most of your markup will be elements.\</div> |
+| `element` | \<img alt="Most of your markup will be elements."/> |
 | `php`     | \<?php echo "PHP code goes in here."; ?> |
 | `text`    | Most of your content will be text. |
 

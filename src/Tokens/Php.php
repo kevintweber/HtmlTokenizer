@@ -16,6 +16,7 @@ class Php extends AbstractToken
 
     public function parse($html)
     {
+        $html = ltrim($html);
         $startPos = 3;
         if (mb_substr($html, 0, 5) == '<?php') {
             $startPos = 6;
@@ -30,7 +31,7 @@ class Php extends AbstractToken
 
         $this->value = trim(mb_substr($html, $startPos, $posOfEndOfPhp - $startPos - 1));
 
-        return trim(mb_substr($html, $posOfEndOfPhp + 2));
+        return mb_substr($html, $posOfEndOfPhp + 2);
     }
 
     /**

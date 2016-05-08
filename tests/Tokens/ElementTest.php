@@ -212,10 +212,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider toArrayDataProvider
      */
-    public function testToArray($html, $expectedArray)
+    public function testToArray($html, $expectedArray, $debug = false)
     {
         $element = new Element();
         $element->parse($html);
+        if ($debug) {
+            var_dump($html, $element->toArray());
+        }
+
         $this->assertEquals($expectedArray, $element->toArray());
     }
 
@@ -355,7 +359,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     'children' => array(
                         array(
                             'type' => 'text',
-                            'value' => 'foo-bar'
+                            'value' => ' foo-bar '
                         )
                     )
                 )

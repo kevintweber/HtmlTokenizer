@@ -9,8 +9,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 - Contents of "iframe" element ignored.
 
-### Todo
-- Collapse whitespace around text correctly.
+### Fixed
+- Collapse whitespace correctly.
 
 ## [0.2.1] - 2016-05-07
 
