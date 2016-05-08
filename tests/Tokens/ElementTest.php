@@ -466,6 +466,32 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         )
                     )
                 )
+            ),
+            'iframe' => array(
+                '<div><iframe><html><body>yo!</body></html></iframe></div>',
+                array(
+                    'type' => 'element',
+                    'name' => 'div',
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'iframe'
+                        )
+                    )
+                )
+            ),
+            'malformed iframe' => array(
+                '<div><iframe><html><body>yo!</body></html>',
+                array(
+                    'type' => 'element',
+                    'name' => 'div',
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'iframe'
+                        )
+                    )
+                )
             )
         );
     }

@@ -226,12 +226,17 @@ class Element extends AbstractToken
             return '';
         }
 
-        // Nothing to parse inside a script tag.
+        // Don't parse contents of "iframe" element.
+        if ($this->name == 'iframe') {
+            return $this->parseNoContents('iframe', $remainingHtml);
+        }
+
+        // Only TEXT inside a "script" element.
         if ($this->name == 'script') {
             return $this->parseForeignContents('script', $remainingHtml);
         }
 
-        // Nothing to parse inside a style tag.
+        // Only TEXT inside a "style" element.
         if ($this->name == 'style') {
             return $this->parseForeignContents('style', $remainingHtml);
         }
@@ -284,8 +289,9 @@ class Element extends AbstractToken
     }
 
     /**
-     * Will parse the script contents correctly.
+     * Will parse the script and style contents correctly.
      *
+     * @param $tag  string
      * @param $html string
      *
      * @return string The remaining HTML.
@@ -322,6 +328,37 @@ class Element extends AbstractToken
         $this->children[] = $text;
 
         return $remainingHtml;
+    }
+
+    /**
+     * Will not parse the contents of an element.
+     *
+     * "iframe" elements.
+     *
+     * @param $tag  string
+     * @param $html string
+     *
+     * @return string The remaining HTML.
+     */
+    private function parseNoContents($tag, $html)
+    {
+        $remainingHtml = trim($html);
+
+        $matchingResult = preg_match(
+            "/(<\/\s*" . $tag . "\s*>)/i",
+            $html,
+            $endOfScriptMatches
+        );
+        if ($matchingResult === 0) {
+            return '';
+        }
+
+        $closingTag = $endOfScriptMatches[1];
+
+        return mb_substr(
+            mb_strstr($remainingHtml, $closingTag),
+            mb_strlen($closingTag)
+        );
     }
 
     /**
