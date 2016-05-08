@@ -260,7 +260,8 @@ class Element extends AbstractToken
 
         // Remove last token if contains only whitespace.
         if (!empty($this->children)) {
-            $lastChild = array_pop((array_slice($this->children, -1)));
+            $lastChildArray = array_slice($this->children, -1);
+            $lastChild = array_pop($lastChildArray);
             if ($lastChild->isText() && trim($lastChild->getValue()) == '') {
                 array_pop($this->children);
             }
