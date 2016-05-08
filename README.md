@@ -146,6 +146,7 @@ array(
 ### Tokens
 
 The tokens are of the following types:
+
 | Name      | Example |
 |:--------- |:------- |
 | `cdata`   | \<![CDATA[ Character data goes in here. ]]> |
