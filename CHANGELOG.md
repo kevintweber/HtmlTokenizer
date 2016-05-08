@@ -4,7 +4,7 @@ All Notable changes to `html-tokenizer` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 2016-XX-XX
+## [0.2.2] 2016-05-08
 
 ### Added
 - Contents of "iframe" element ignored.
