@@ -146,14 +146,14 @@ array(
 ### Tokens
 
 The tokens are of the following types:
-| Name | Example |
-| ------ | ------- |
-| `cdata` | <![CDATA[ Character data goes in here. ]]> |
-| `comment` | <!-- Comments go in here. --> |
-| `doctype` | <!DOCTYPE html> |
-| `element` | <div>Most of your markup will be elements.</div> |
-| `php` | <?php echo "PHP code goes in here."; ?> |
-| `text` | Most of your content will be text. |
+| Name      | Example |
+|:--------- |:------- |
+| `cdata`   | \<![CDATA[ Character data goes in here. ]]> |
+| `comment` | \<!-- Comments go in here. --> |
+| `doctype` | \<!DOCTYPE html> |
+| `element` | \<div>Most of your markup will be elements.\</div> |
+| `php`     | \<?php echo "PHP code goes in here."; ?> |
+| `text`    | Most of your content will be text. |
 
 ### Special parsing situations
 - Contents of an "iframe" element are not parsed.
