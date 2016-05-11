@@ -203,10 +203,15 @@ class Element extends AbstractToken
             $this->attributes[trim($name)] = $value;
 
             // Determine remaining html.
-            $posOfAttributeValue = mb_strpos($html, $value);
-            $remainingHtml = trim(
-                mb_substr($html, $posOfAttributeValue + mb_strlen($value))
-            );
+            if ($value == '') {
+                $remainingHtml = ltrim(mb_substr(ltrim($html), mb_strlen($name) + 3));
+            } else {
+                $posOfAttributeValue = mb_strpos($html, $value);
+                $remainingHtml = ltrim(
+                    mb_substr($html, $posOfAttributeValue + mb_strlen($value))
+                );
+            }
+
             $remainingHtml = ltrim($remainingHtml, '\'"/ ');
         }
 

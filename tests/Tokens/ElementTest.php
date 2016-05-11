@@ -133,6 +133,16 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 'asdf',
                 ''
             ),
+            'closed with empty attribute' => array(
+                '<asdf foo/>',
+                'asdf',
+                ''
+            ),
+            'closed with explicit empty attribute' => array(
+                '<asdf foo=""/>',
+                'asdf',
+                ''
+            ),
             'closed with 1 attr and whitespace' => array(
                 '<asdf foo="bar" />',
                 'asdf',
@@ -277,6 +287,16 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     'name' => 'asdf',
                     'attributes' => array(
                         'foo4' => 'bar4'
+                    )
+                )
+            ),
+            'closed with empty double-quoted attribute' => array(
+                '<asdf foo4="" />',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'foo4' => ''
                     )
                 )
             ),
