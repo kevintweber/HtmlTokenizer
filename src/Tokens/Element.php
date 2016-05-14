@@ -206,9 +206,16 @@ class Element extends AbstractToken
             if ($value == '') {
                 $remainingHtml = ltrim(mb_substr(ltrim($html), mb_strlen($name) + 3));
             } else {
-                $posOfAttributeValue = mb_strpos($html, $value);
+                $remainingHtml = ltrim($html);
+
+                // Remove attribute name.
+                $remainingHtml = mb_substr($remainingHtml, mb_strlen($name));
+                $posOfAttributeValue = mb_strpos($remainingHtml, $value);
                 $remainingHtml = ltrim(
-                    mb_substr($html, $posOfAttributeValue + mb_strlen($value))
+                    mb_substr(
+                        $remainingHtml,
+                        $posOfAttributeValue + mb_strlen($value)
+                    )
                 );
             }
 

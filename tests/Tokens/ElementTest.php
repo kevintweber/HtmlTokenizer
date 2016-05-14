@@ -138,6 +138,11 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 'asdf',
                 ''
             ),
+            'closed with pseudo-empty attribute' => array(
+                '<asdf disabled="disabled"/>',
+                'asdf',
+                ''
+            ),
             'closed with explicit empty attribute' => array(
                 '<asdf foo=""/>',
                 'asdf',
@@ -307,6 +312,16 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                     'name' => 'asdf',
                     'attributes' => array(
                         'foo' => 'bar=bar2'
+                    )
+                )
+            ),
+            'closed with pseudo-empty attribute' => array(
+                '<asdf disabled="disabled"/>',
+                array(
+                    'type' => 'element',
+                    'name' => 'asdf',
+                    'attributes' => array(
+                        'disabled' => 'disabled'
                     )
                 )
             ),
