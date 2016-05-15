@@ -531,6 +531,59 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         )
                     )
                 )
+            ),
+            'ol - varied children' => array(
+                '<ol class="qwerty"><!-- <h1>bad</h1> --><li value=2>asdf1</li>asdf2<script><![CDATA[asdf]]></script><div>asdf3</div></ol>',
+                array(
+                    'type' => 'element',
+                    'name' => 'ol',
+                    'attributes' => array(
+                        'class' => 'qwerty'
+                    ),
+                    'children' => array(
+                        array(
+                            'type' => 'comment',
+                            'value' => '<h1>bad</h1>'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'li',
+                            'attributes' => array(
+                                'value' => '2'
+                            ),
+                            'children' => array(
+                                array(
+                                    'type' => 'text',
+                                    'value' => 'asdf1'
+                                )
+                            ),
+                        ),
+                        array(
+                            'type' => 'text',
+                            'value' => 'asdf2'
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'script',
+                            'children' => array(
+                                array(
+                                    'type' => 'text',
+                                    'value' => '<![CDATA[asdf]]>'
+                                )
+                            )
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'div',
+                            'children' => array(
+                                array(
+                                    'type' => 'text',
+                                    'value' => 'asdf3'
+                                )
+                            )
+                        )
+                    )
+                )
             )
         );
     }
