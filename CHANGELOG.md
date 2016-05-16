@@ -4,6 +4,11 @@ All Notable changes to `html-tokenizer` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [0.2.5] 2016-XX-XX
+
+### Fixed
+- Better handling of closed-only elements.  ("img" element was being given children.)
+
 ## [0.2.4] 2016-05-14
 
 ### Fixed
