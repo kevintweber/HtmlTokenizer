@@ -584,6 +584,63 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         )
                     )
                 )
+            ),
+            'form - malformed div in form' => array(
+                '<form action="http://www.google.com/search" method="get"><label>Google: <input type="search" name="q"><div action="yo!" method="post"><input type="hidden" value="9"/></div></label><input type="submit" value="Search..."></form>',
+                array(
+                    'type' => 'element',
+                    'name' => 'form',
+                    'attributes' => array(
+                        'action' => 'http://www.google.com/search',
+                        'method' => 'get'
+                    ),
+                    'children' => array(
+                        array(
+                            'type' => 'element',
+                            'name' => 'label',
+                            'children' => array(
+                                array(
+                                    'type' => 'text',
+                                    'value' => 'Google: '
+                                ),
+                                array(
+                                    'type' => 'element',
+                                    'name' => 'input',
+                                    'attributes' => array(
+                                        'type' => 'search',
+                                        'name' => 'q'
+                                    )
+                                ),
+                                array(
+                                    'type' => 'element',
+                                    'name' => 'div',
+                                    'attributes' => array(
+                                        'action' => 'yo!',
+                                        'method' => 'post'
+                                    ),
+                                    'children' => array(
+                                        array(
+                                            'type' => 'element',
+                                            'name' => 'input',
+                                            'attributes' => array(
+                                                'type' => 'hidden',
+                                                'value' => '9'
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        array(
+                            'type' => 'element',
+                            'name' => 'input',
+                            'attributes' => array(
+                                'type' => 'submit',
+                                'value' => 'Search...'
+                            )
+                        )
+                    )
+                )
             )
         );
     }

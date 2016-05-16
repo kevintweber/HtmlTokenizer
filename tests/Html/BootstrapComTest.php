@@ -860,82 +860,74 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         'alt' => 'Sass and Less support',
                                                                         'class' => 'img-responsive',
                                                                     ),
+                                                                ),
+                                                                1 =>
+                                                                array (
+                                                                    'type' => 'element',
+                                                                    'name' => 'h3',
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
-                                                                            'type' => 'element',
-                                                                            'name' => 'h3',
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => 'Preprocessors',
-                                                                                ),
-                                                                            ),
+                                                                            'type' => 'text',
+                                                                            'value' => 'Preprocessors',
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                2 =>
+                                                                array (
+                                                                    'type' => 'element',
+                                                                    'name' => 'p',
+                                                                    'children' =>
+                                                                    array (
+                                                                        0 =>
+                                                                        array (
+                                                                            'type' => 'text',
+                                                                            'value' => 'Bootstrap ships with vanilla CSS, but its source code utilizes the two most popular CSS preprocessors, ',
                                                                         ),
                                                                         1 =>
                                                                         array (
                                                                             'type' => 'element',
-                                                                            'name' => 'p',
+                                                                            'name' => 'a',
+                                                                            'attributes' =>
+                                                                            array (
+                                                                                'href' => '../css/#less',
+                                                                            ),
                                                                             'children' =>
                                                                             array (
                                                                                 0 =>
                                                                                 array (
                                                                                     'type' => 'text',
-                                                                                    'value' => 'Bootstrap ships with vanilla CSS, but its source code utilizes the two most popular CSS preprocessors, ',
-                                                                                ),
-                                                                                1 =>
-                                                                                array (
-                                                                                    'type' => 'element',
-                                                                                    'name' => 'a',
-                                                                                    'attributes' =>
-                                                                                    array (
-                                                                                        'href' => '../css/#less',
-                                                                                    ),
-                                                                                    'children' =>
-                                                                                    array (
-                                                                                        0 =>
-                                                                                        array (
-                                                                                            'type' => 'text',
-                                                                                            'value' => 'Less',
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                2 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => ' and ',
-                                                                                ),
-                                                                                3 =>
-                                                                                array (
-                                                                                    'type' => 'element',
-                                                                                    'name' => 'a',
-                                                                                    'attributes' =>
-                                                                                    array (
-                                                                                        'href' => '../css/#sass',
-                                                                                    ),
-                                                                                    'children' =>
-                                                                                    array (
-                                                                                        0 =>
-                                                                                        array (
-                                                                                            'type' => 'text',
-                                                                                            'value' => 'Sass',
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                4 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => '. Quickly get started with precompiled CSS or build on the source.',
+                                                                                    'value' => 'Less',
                                                                                 ),
                                                                             ),
                                                                         ),
                                                                         2 =>
                                                                         array (
                                                                             'type' => 'text',
-                                                                            'value' => ' ',
+                                                                            'value' => ' and ',
+                                                                        ),
+                                                                        3 =>
+                                                                        array (
+                                                                            'type' => 'element',
+                                                                            'name' => 'a',
+                                                                            'attributes' =>
+                                                                            array (
+                                                                                'href' => '../css/#sass',
+                                                                            ),
+                                                                            'children' =>
+                                                                            array (
+                                                                                0 =>
+                                                                                array (
+                                                                                    'type' => 'text',
+                                                                                    'value' => 'Sass',
+                                                                                ),
+                                                                            ),
+                                                                        ),
+                                                                        4 =>
+                                                                        array (
+                                                                            'type' => 'text',
+                                                                            'value' => '. Quickly get started with precompiled CSS or build on the source.',
                                                                         ),
                                                                     ),
                                                                 ),
@@ -961,38 +953,30 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         'alt' => 'Responsive across devices',
                                                                         'class' => 'img-responsive',
                                                                     ),
+                                                                ),
+                                                                1 =>
+                                                                array (
+                                                                    'type' => 'element',
+                                                                    'name' => 'h3',
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
-                                                                            'type' => 'element',
-                                                                            'name' => 'h3',
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => 'One framework, every device.',
-                                                                                ),
-                                                                            ),
+                                                                            'type' => 'text',
+                                                                            'value' => 'One framework, every device.',
                                                                         ),
-                                                                        1 =>
-                                                                        array (
-                                                                            'type' => 'element',
-                                                                            'name' => 'p',
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => 'Bootstrap easily and efficiently scales your websites and applications with a single code base, from phones to tablets to desktops with CSS media queries.',
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                        2 =>
+                                                                    ),
+                                                                ),
+                                                                2 =>
+                                                                array (
+                                                                    'type' => 'element',
+                                                                    'name' => 'p',
+                                                                    'children' =>
+                                                                    array (
+                                                                        0 =>
                                                                         array (
                                                                             'type' => 'text',
-                                                                            'value' => ' ',
+                                                                            'value' => 'Bootstrap easily and efficiently scales your websites and applications with a single code base, from phones to tablets to desktops with CSS media queries.',
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1018,38 +1002,30 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         'alt' => 'Components',
                                                                         'class' => 'img-responsive',
                                                                     ),
+                                                                ),
+                                                                1 =>
+                                                                array (
+                                                                    'type' => 'element',
+                                                                    'name' => 'h3',
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
-                                                                            'type' => 'element',
-                                                                            'name' => 'h3',
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => 'Full of features',
-                                                                                ),
-                                                                            ),
+                                                                            'type' => 'text',
+                                                                            'value' => 'Full of features',
                                                                         ),
-                                                                        1 =>
-                                                                        array (
-                                                                            'type' => 'element',
-                                                                            'name' => 'p',
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => 'With Bootstrap, you get extensive and beautiful documentation for common HTML elements, dozens of custom HTML and CSS components, and awesome jQuery plugins.',
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                        2 =>
+                                                                    ),
+                                                                ),
+                                                                2 =>
+                                                                array (
+                                                                    'type' => 'element',
+                                                                    'name' => 'p',
+                                                                    'children' =>
+                                                                    array (
+                                                                        0 =>
                                                                         array (
                                                                             'type' => 'text',
-                                                                            'value' => ' ',
+                                                                            'value' => 'With Bootstrap, you get extensive and beautiful documentation for common HTML elements, dozens of custom HTML and CSS components, and awesome jQuery plugins.',
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1232,14 +1208,6 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'alt' => 'Lyft',
                                                                                 'class' => 'img-responsive',
                                                                             ),
-'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => ' ',
-                                                                                ),
-                                                                            ),
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1276,14 +1244,6 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'src' => '/assets/img/expo-vogue.jpg',
                                                                                 'alt' => 'Vogue',
                                                                                 'class' => 'img-responsive',
-                                                                            ),
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => ' ',
-                                                                                ),
                                                                             ),
                                                                         ),
                                                                     ),
@@ -1322,14 +1282,6 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'alt' => 'Riot Design',
                                                                                 'class' => 'img-responsive',
                                                                             ),
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => ' ',
-                                                                                ),
-                                                                            ),
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1366,14 +1318,6 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 'src' => '/assets/img/expo-newsweek.jpg',
                                                                                 'alt' => 'Newsweek',
                                                                                 'class' => 'img-responsive',
-                                                                            ),
-                                                                            'children' =>
-                                                                            array (
-                                                                                0 =>
-                                                                                array (
-                                                                                    'type' => 'text',
-                                                                                    'value' => ' ',
-                                                                                ),
                                                                             ),
                                                                         ),
                                                                     ),
@@ -1427,7 +1371,7 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                     ),
                                                 ),
                                             ),
-                                        ),
+),
                                     ),
                                 ),
                                 6 =>

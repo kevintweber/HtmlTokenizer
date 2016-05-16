@@ -139,11 +139,20 @@ class Element extends AbstractToken
 
         // Lets close those closed-only elements that are left open.
         $closedOnlyElements = array(
+            'area',
             'base',
+            'br',
+            'col',
+            'embed',
+            'hr',
+            'img',
+            'input',
             'link',
             'meta',
-            'hr',
-            'br'
+            'param',
+            'source',
+            'track',
+            'wbr'
         );
         if (array_search($this->name, $closedOnlyElements) !== false) {
             return $remainingHtml;
