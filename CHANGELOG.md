@@ -4,7 +4,10 @@ All Notable changes to `html-tokenizer` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [0.2.5] 2016-XX-XX
+## [0.3] 2016-05-17
+
+### Added
+- Tokens now contain the line and character position of the token within the origonal html.
 
 ### Fixed
 - Better handling of closed-only elements.  ("img" element was being given children.)

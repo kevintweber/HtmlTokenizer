@@ -245,14 +245,18 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 '<asdf/>',
                 array(
                     'type' => 'element',
-                    'name' => 'asdf'
+                    'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             ),
             'simple closed followed by text' => array(
                 '<asdf/>asdfasdf',
                 array(
                     'type' => 'element',
-                    'name' => 'asdf'
+                    'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             ),
             'closed with valueless attribute' => array(
@@ -260,6 +264,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo1' => true
                     )
@@ -270,6 +276,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo2' => 'bar2'
                     )
@@ -280,6 +288,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo3' => 'bar3'
                     )
@@ -290,6 +300,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo4' => 'bar4'
                     )
@@ -300,6 +312,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo4' => ''
                     )
@@ -310,6 +324,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo' => 'bar=bar2'
                     )
@@ -320,6 +336,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'disabled' => 'disabled'
                     )
@@ -330,6 +348,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo1' => 'bar1',
                         'foo2' => 'bar2',
@@ -342,6 +362,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo1' => true,
                         'foo2' => 'bar2',
@@ -355,6 +377,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo4' => 'bar4\\"bar4',
                         'foo2' => 'bar2',
@@ -367,7 +391,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 '<asdf></asdf>',
                 array(
                     'type' => 'element',
-                    'name' => 'asdf'
+                    'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             ),
             'simple open with text content' => array(
@@ -375,10 +401,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'text',
-                            'value' => 'foo'
+                            'value' => 'foo',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -388,13 +418,17 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'foo' => 'bar'
                     ),
                     'children' => array(
                         array(
                             'type' => 'text',
-                            'value' => ' foo-bar '
+                            'value' => ' foo-bar ',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -404,10 +438,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'head',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'element',
                             'name' => 'link',
+                            'line' => 0,
+                            'position' => 0,
                             'attributes' => array(
                                 'href' => '../assets/css/docs.min.css',
                                 'rel' => 'stylesheet'
@@ -415,7 +453,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         ),
                         array(
                             'type' => 'comment',
-                            'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]'
+                            'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -425,10 +465,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'head',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'element',
                             'name' => 'link',
+                            'line' => 0,
+                            'position' => 0,
                             'attributes' => array(
                                 'href' => '../assets/css/docs.min.css',
                                 'rel' => 'stylesheet'
@@ -436,7 +480,9 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         ),
                         array(
                             'type' => 'comment',
-                            'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]'
+                            'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -446,10 +492,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'script',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'text',
                             'value' => 'asdf',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -459,10 +509,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'script',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'text',
                             'value' => 'asdf',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -472,10 +526,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'style',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'text',
                             'value' => 'body { color: green; }',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -485,10 +543,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'style',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'text',
                             'value' => 'body { color: green; }',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -498,10 +560,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'asdf',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'text',
                             'value' => 'לֶף־בֵּית',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -511,10 +577,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'div',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'element',
-                            'name' => 'iframe'
+                            'name' => 'iframe',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -524,10 +594,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'div',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'element',
-                            'name' => 'iframe'
+                            'name' => 'iframe',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -537,48 +611,66 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'ol',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'class' => 'qwerty'
                     ),
                     'children' => array(
                         array(
                             'type' => 'comment',
-                            'value' => '<h1>bad</h1>'
+                            'value' => '<h1>bad</h1>',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
                             'name' => 'li',
+                            'line' => 0,
+                            'position' => 0,
                             'attributes' => array(
                                 'value' => '2'
                             ),
                             'children' => array(
                                 array(
                                     'type' => 'text',
-                                    'value' => 'asdf1'
+                                    'value' => 'asdf1',
+                                    'line' => 0,
+                                    'position' => 0
                                 )
                             ),
                         ),
                         array(
                             'type' => 'text',
-                            'value' => 'asdf2'
+                            'value' => 'asdf2',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
                             'name' => 'script',
+                            'line' => 0,
+                            'position' => 0,
                             'children' => array(
                                 array(
                                     'type' => 'text',
-                                    'value' => '<![CDATA[asdf]]>'
+                                    'value' => '<![CDATA[asdf]]>',
+                                    'line' => 0,
+                                    'position' => 0
                                 )
                             )
                         ),
                         array(
                             'type' => 'element',
                             'name' => 'div',
+                            'line' => 0,
+                            'position' => 0,
                             'children' => array(
                                 array(
                                     'type' => 'text',
-                                    'value' => 'asdf3'
+                                    'value' => 'asdf3',
+                                    'line' => 0,
+                                    'position' => 0
                                 )
                             )
                         )
@@ -590,6 +682,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'form',
+                    'line' => 0,
+                    'position' => 0,
                     'attributes' => array(
                         'action' => 'http://www.google.com/search',
                         'method' => 'get'
@@ -598,14 +692,20 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         array(
                             'type' => 'element',
                             'name' => 'label',
+                            'line' => 0,
+                            'position' => 0,
                             'children' => array(
                                 array(
                                     'type' => 'text',
-                                    'value' => 'Google: '
+                                    'value' => 'Google: ',
+                                    'line' => 0,
+                                    'position' => 0
                                 ),
                                 array(
                                     'type' => 'element',
                                     'name' => 'input',
+                                    'line' => 0,
+                                    'position' => 0,
                                     'attributes' => array(
                                         'type' => 'search',
                                         'name' => 'q'
@@ -614,6 +714,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                                 array(
                                     'type' => 'element',
                                     'name' => 'div',
+                                    'line' => 0,
+                                    'position' => 0,
                                     'attributes' => array(
                                         'action' => 'yo!',
                                         'method' => 'post'
@@ -622,6 +724,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                                         array(
                                             'type' => 'element',
                                             'name' => 'input',
+                                            'line' => 0,
+                                            'position' => 0,
                                             'attributes' => array(
                                                 'type' => 'hidden',
                                                 'value' => '9'
@@ -634,6 +738,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                         array(
                             'type' => 'element',
                             'name' => 'input',
+                            'line' => 0,
+                            'position' => 0,
                             'attributes' => array(
                                 'type' => 'submit',
                                 'value' => 'Search...'
@@ -663,14 +769,20 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'html',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'element',
-                            'name' => 'head'
+                            'name' => 'head',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
-                            'name' => 'body'
+                            'name' => 'body',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )
@@ -680,30 +792,44 @@ class ElementTest extends \PHPUnit_Framework_TestCase
                 array(
                     'type' => 'element',
                     'name' => 'div',
+                    'line' => 0,
+                    'position' => 0,
                     'children' => array(
                         array(
                             'type' => 'element',
-                            'name' => 'base'
+                            'name' => 'base',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
-                            'name' => 'link'
+                            'name' => 'link',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
-                            'name' => 'meta'
+                            'name' => 'meta',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
-                            'name' => 'hr'
+                            'name' => 'hr',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
-                            'name' => 'br'
+                            'name' => 'br',
+                            'line' => 0,
+                            'position' => 0
                         ),
                         array(
                             'type' => 'element',
-                            'name' => 'asdf'
+                            'name' => 'asdf',
+                            'line' => 0,
+                            'position' => 0
                         )
                     )
                 )

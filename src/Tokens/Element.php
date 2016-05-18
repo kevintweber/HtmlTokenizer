@@ -2,6 +2,7 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
+use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class Element extends AbstractToken
@@ -111,6 +112,13 @@ class Element extends AbstractToken
     public function parse($html)
     {
         $html = ltrim($html);
+
+        // Get token position.
+        $positionArray = HtmlTokenizer::getPosition($html);
+        $this->setLine($positionArray['line']);
+        $this->setPosition($positionArray['position']);
+
+        // Parse name.
         $this->name = $this->parseElementName($html);
 
         // Parse attributes.
@@ -330,6 +338,11 @@ class Element extends AbstractToken
     private function parseForeignContents($tag, $html)
     {
         $remainingHtml = ltrim($html);
+
+        // Get token position.
+        $positionArray = HtmlTokenizer::getPosition($remainingHtml);
+
+        // Find all contents.
         $matchingResult = preg_match(
             "/(<\/\s*" . $tag . "\s*>)/i",
             $html,
@@ -355,6 +368,8 @@ class Element extends AbstractToken
         }
 
         $text = new Text($this, $this->getThrowOnError(), $value);
+        $text->setLine($positionArray['line']);
+        $text->setPosition($positionArray['position']);
         $this->children[] = $text;
 
         return $remainingHtml;
@@ -440,7 +455,9 @@ class Element extends AbstractToken
     {
         $result = array(
             'type' => 'element',
-            'name' => $this->name
+            'name' => $this->name,
+            'line' => $this->getLine(),
+            'position' => $this->getPosition()
         );
 
         if (!empty($this->attributes)) {

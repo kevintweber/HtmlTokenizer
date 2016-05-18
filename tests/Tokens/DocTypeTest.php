@@ -74,7 +74,9 @@ class DocTypeTest extends \PHPUnit_Framework_TestCase
                 '<!DOCTYPE asdf>',
                 array(
                     'type' => 'doctype',
-                    'value' => 'asdf'
+                    'value' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             )
         );

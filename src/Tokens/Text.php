@@ -2,6 +2,8 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
+use Kevintweber\HtmlTokenizer\HtmlTokenizer;
+
 class Text extends AbstractToken
 {
     /** @var string */
@@ -16,6 +18,11 @@ class Text extends AbstractToken
 
     public function parse($html)
     {
+        // Get token position.
+        $positionArray = HtmlTokenizer::getPosition($html);
+        $this->setLine($positionArray['line']);
+        $this->setPosition($positionArray['position']);
+
         // Collapse whitespace before TEXT.
         $startingWhitespace = '';
         if (preg_match("/(^\s)/", $html) === 1) {
@@ -62,7 +69,9 @@ class Text extends AbstractToken
     {
         return array(
             'type' => 'text',
-            'value' => $this->value
+            'value' => $this->value,
+            'line' => $this->getLine(),
+            'position' => $this->getPosition()
         );
     }
 }

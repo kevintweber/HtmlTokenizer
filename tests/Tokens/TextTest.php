@@ -60,7 +60,9 @@ class TextTest extends \PHPUnit_Framework_TestCase
                 'asdf',
                 array(
                     'type' => 'text',
-                    'value' => 'asdf'
+                    'value' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             )
         );

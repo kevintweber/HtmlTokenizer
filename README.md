@@ -66,23 +66,33 @@ will produce the following array:
 array(
     array(
         'type' => 'doctype',
-        'value' => 'html'
+        'value' => 'html',
+        'line' => 0,
+        'position' => 0
     ),
     array(
         'type' => 'element',
         'name' => 'html',
+        'line' => 1,
+        'position' => 0,
         'children' => array(
             array(
                 'type' => 'element',
                 'name' => 'head',
+                'line' => 2,
+                'position' => 4,
                 'children' => array(
                     array(
                         'type' => 'element',
                         'name' => 'title',
+                        'line' => 3,
+                        'position' => 8,
                         'children' => array(
                             array(
                                 'type' => 'text',
-                                'value' => 'Test'
+                                'value' => 'Test',
+                                'line' => 3,
+                                'position' => 15
                             )
                         )
                     )
@@ -91,48 +101,66 @@ array(
             array(
                 'type' => 'element',
                 'name' => 'body',
+                'line' => 5,
+                'position' => 4,
                 'children' => array(
                     array(
                         'type' => 'comment',
-                        'value' => 'Start of content.'
+                        'value' => 'Start of content.',
+                        'line' => 6,
+                        'position' => 8
                     ),
                     array(
                         'type' => 'element',
                         'name' => 'h1',
+                        'line' => 7,
+                        'position' => 8,
                         'attributes' => array(
                             'id' => 'big_title'
                         ),
                         'children' => array(
                             array(
                                 'type' => 'text',
-                                'value' => 'Whoa!'
+                                'value' => 'Whoa!',
+                                'line' => 7,
+                                'position' => 27
                             )
                         )
                     ),
                     array(
                         'type' => 'element',
                         'name' => 'div',
+                        'line' => 8,
+                        'position' => 8,
                         'attributes' => array(
                             'class' => 'centered'
                         ),
                         'children' => array(
                             array(
                                 'type' => 'text',
-                                'value' => 'It'
+                                'value' => 'It ',
+                                'line' => 8,
+                                'position' => 30
                             ),
                             array(
                                 'type' => 'element',
                                 'name' => 'em',
+                                'line' => 8,
+                                'position' => 33,
                                 'children' => array(
                                     array(
                                         'type' => 'text',
-                                        'value' => 'parses'
+                                        'value' => 'parses',
+                                        'line' => 8,
+                                        'position' => 37
                                     )
                                 )
                             ),
                             array(
                                 'type' => 'text',
-                                'value' => '!'
+                                'value' => '!',
+                                'line' => 8,
+                                'position' => 48
                             )
                         )
                     )

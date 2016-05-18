@@ -69,7 +69,9 @@ class CDataTest extends \PHPUnit_Framework_TestCase
                 '<![CDATA[asdf]]>',
                 array(
                     'type' => 'cdata',
-                    'value' => 'asdf'
+                    'value' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             )
         );

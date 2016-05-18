@@ -2,6 +2,7 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
+use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class CData extends AbstractToken
@@ -19,6 +20,13 @@ class CData extends AbstractToken
     public function parse($html)
     {
         $html = ltrim($html);
+
+        // Get token position.
+        $positionArray = HtmlTokenizer::getPosition($html);
+        $this->setLine($positionArray['line']);
+        $this->setPosition($positionArray['position']);
+
+        // Parse token.
         $posOfEndOfCData = mb_strpos($html, ']]>');
         if ($posOfEndOfCData === false) {
             if ($this->getThrowOnError()) {
@@ -47,7 +55,9 @@ class CData extends AbstractToken
     {
         return array(
             'type' => 'cdata',
-            'value' => $this->value
+            'value' => $this->value,
+            'line' => $this->getLine(),
+            'position' => $this->getPosition()
         );
     }
 }

@@ -7,8 +7,14 @@ abstract class AbstractToken implements Token
     /** @var int */
     private $depth;
 
+    /** @var int */
+    private $line;
+
     /** @var null|Token */
     private $parent;
+
+    /** @var int */
+    private $position;
 
     /** @var boolean */
     private $throwOnError;
@@ -30,6 +36,8 @@ abstract class AbstractToken implements Token
             $this->depth = $parent->getDepth() + 1;
         }
 
+        $this->line = 0;
+        $this->position = 0;
         $this->parent = $parent;
         $this->throwOnError = (boolean) $throwOnError;
         $this->type = $type;
@@ -40,6 +48,24 @@ abstract class AbstractToken implements Token
         return $this->depth;
     }
 
+    /**
+     * Getter for 'line'.
+     */
+    public function getLine()
+    {
+        return $this->line;
+    }
+
+    /**
+     * Chainable setter for 'line'.
+     */
+    public function setLine($line)
+    {
+        $this->line = (int) $line;
+
+        return $this;
+    }
+
     public function isClosingElementImplied($html)
     {
         return false;
@@ -48,6 +74,24 @@ abstract class AbstractToken implements Token
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Getter for 'position'.
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Chainable setter for 'position'.
+     */
+    public function setPosition($position)
+    {
+        $this->position = (int) $position;
+
+        return $this;
     }
 
     /**

@@ -10,6 +10,9 @@ class HtmlTokenizer
     /** @var boolean */
     private $throwOnError;
 
+    /** @var string */
+    private static $allHtml = '';
+
     /**
      * Constructor
      */
@@ -27,6 +30,7 @@ class HtmlTokenizer
      */
     public function parse($html)
     {
+        self::$allHtml = $html;
         $tokens = new TokenCollection();
         $remainingHtml = trim((string) $html);
         while (mb_strlen($remainingHtml) > 0) {
@@ -45,5 +49,25 @@ class HtmlTokenizer
         }
 
         return $tokens;
+    }
+
+    public static function getPosition($partialHtml)
+    {
+        $position = mb_strrpos(self::$allHtml, $partialHtml);
+        $parsedHtml = mb_substr(self::$allHtml, 0, $position);
+        $line = mb_substr_count($parsedHtml, "\n");
+        if ($line === 0) {
+            return array(
+                'line' => 0,
+                'position' => $position
+            );
+        }
+
+        $lastNewLinePosition = mb_strrpos($parsedHtml, "\n");
+
+        return array(
+            'line' => $line,
+            'position' => mb_strlen(mb_substr($parsedHtml, $lastNewLinePosition))
+        );
     }
 }

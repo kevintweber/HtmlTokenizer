@@ -60,7 +60,9 @@ class PhpTest extends \PHPUnit_Framework_TestCase
                 '<?php echo "asdf"; ?>',
                 array(
                     'type' => 'php',
-                    'value' => 'echo "asdf";'
+                    'value' => 'echo "asdf";',
+                    'line' => 0,
+                    'position' => 0
                 )
             )
         );

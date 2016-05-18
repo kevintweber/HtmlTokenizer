@@ -79,7 +79,9 @@ class CommentTest extends \PHPUnit_Framework_TestCase
                 '<!-- asdf -->',
                 array(
                     'type' => 'comment',
-                    'value' => 'asdf'
+                    'value' => 'asdf',
+                    'line' => 0,
+                    'position' => 0
                 )
             )
         );

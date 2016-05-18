@@ -20,11 +20,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                 array (
                     'type' => 'doctype',
                     'value' => 'html',
+                    'line' => 0,
+                    'position' => 0,
                 ),
                 1 =>
                 array (
                     'type' => 'element',
                     'name' => 'html',
+                    'line' => 0,
+                    'position' => 16,
                     'attributes' =>
                     array (
                         'lang' => 'en',
@@ -35,12 +39,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                         array (
                             'type' => 'element',
                             'name' => 'head',
+                            'line' => 0,
+                            'position' => 31,
                             'children' =>
                             array (
                                 0 =>
                                 array (
                                     'type' => 'element',
                                     'name' => 'meta',
+                                    'line' => 0,
+                                    'position' => 39,
                                     'attributes' =>
                                     array (
                                         'charset' => 'utf-8',
@@ -50,6 +58,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'meta',
+                                    'line' => 0,
+                                    'position' => 60,
                                     'attributes' =>
                                     array (
                                         'http-equiv' => 'X-UA-Compatible',
@@ -60,6 +70,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'meta',
+                                    'line' => 0,
+                                    'position' => 112,
                                     'attributes' =>
                                     array (
                                         'name' => 'viewport',
@@ -70,6 +82,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'meta',
+                                    'line' => 0,
+                                    'position' => 178,
                                     'attributes' =>
                                     array (
                                         'name' => 'description',
@@ -80,6 +94,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'meta',
+                                    'line' => 0,
+                                    'position' => 328,
                                     'attributes' =>
                                     array (
                                         'name' => 'keywords',
@@ -90,6 +106,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'meta',
+                                    'line' => 0,
+                                    'position' => 445,
                                     'attributes' =>
                                     array (
                                         'name' => 'author',
@@ -100,12 +118,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'title',
+                                    'line' => 0,
+                                    'position' => 528,
                                     'children' =>
                                     array (
                                         0 =>
                                         array (
                                             'type' => 'text',
                                             'value' => ' Bootstrap &middot; The world\'s most popular mobile-first and responsive front-end framework. ',
+                                            'line' => 0,
+                                            'position' => 535,
                                         ),
                                     ),
                                 ),
@@ -113,6 +135,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'link',
+                                    'line' => 0,
+                                    'position' => 639,
                                     'attributes' =>
                                     array (
                                         'href' => '../dist/css/bootstrap.min.css',
@@ -123,6 +147,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'link',
+                                    'line' => 0,
+                                    'position' => 697,
                                     'attributes' =>
                                     array (
                                         'href' => '../assets/css/docs.min.css',
@@ -133,11 +159,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'comment',
                                     'value' => '[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]',
+                                    'line' => 0,
+                                    'position' => 751,
                                 ),
                                 10 =>
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 0,
+                                    'position' => 848,
                                     'attributes' =>
                                     array (
                                         'src' => '../assets/js/ie-emulation-modes-warning.js',
@@ -148,11 +178,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                     'type' => 'comment',
                                     'value' => '[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]',
+                                    'line' => 0,
+                                    'position' => 912,
                                 ),
                                 12 =>
                                 array (
                                     'type' => 'element',
                                     'name' => 'link',
+                                    'line' => 1,
+                                    'position' => 90,
                                     'attributes' =>
                                     array (
                                         'rel' => 'apple-touch-icon',
@@ -163,6 +197,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'link',
+                                    'line' => 1,
+                                    'position' => 145,
                                     'attributes' =>
                                     array (
                                         'rel' => 'icon',
@@ -173,12 +209,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 179,
                                     'children' =>
                                     array (
                                         0 =>
                                         array (
                                             'type' => 'text',
                                             'value' => '!function(e,t,a,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=t.createElement(a),s=t.getElementsByTagName(a)[0],o.async=1,o.src=n,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-146052-10","getbootstrap.com"),ga("send","pageview");',
+                                            'line' => 1,
+                                            'position' => 187,
                                         ),
                                     ),
                                 ),
@@ -188,6 +228,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                         array (
                             'type' => 'element',
                             'name' => 'body',
+                            'line' => 1,
+                            'position' => 575,
                             'attributes' =>
                             array (
                                 'class' => 'bs-docs-home',
@@ -198,6 +240,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'a',
+                                    'line' => 1,
+                                    'position' => 601,
                                     'attributes' =>
                                     array (
                                         'id' => 'skippy',
@@ -210,6 +254,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'element',
                                             'name' => 'div',
+                                            'line' => 1,
+                                            'position' => 662,
                                             'attributes' =>
                                             array (
                                                 'class' => 'container',
@@ -220,6 +266,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'span',
+                                                    'line' => 1,
+                                                    'position' => 683,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'skiplink-text',
@@ -230,6 +278,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Skip to main content',
+                                                            'line' => 1,
+                                                            'position' => 709,
                                                         ),
                                                     ),
                                                 ),
@@ -241,6 +291,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'a',
+                                    'line' => 1,
+                                    'position' => 747,
                                     'attributes' =>
                                     array (
                                         'href' => 'http://blog.getbootstrap.com/2015/08/19/bootstrap-4-alpha/',
@@ -252,6 +304,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'text',
                                             'value' => 'Aww yeah, Bootstrap 4 is coming!',
+                                            'line' => 1,
+                                            'position' => 833,
                                         ),
                                     ),
                                 ),
@@ -259,6 +313,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'header',
+                                    'line' => 1,
+                                    'position' => 871,
                                     'attributes' =>
                                     array (
                                         'class' => 'navbar navbar-static-top bs-docs-nav',
@@ -271,6 +327,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'element',
                                             'name' => 'div',
+                                            'line' => 1,
+                                            'position' => 944,
                                             'attributes' =>
                                             array (
                                                 'class' => 'container',
@@ -281,6 +339,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'div',
+                                                    'line' => 1,
+                                                    'position' => 966,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'navbar-header',
@@ -291,6 +351,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'button',
+                                                            'line' => 1,
+                                                            'position' => 992,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'navbar-toggle collapsed',
@@ -306,6 +368,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'span',
+                                                                    'line' => 1,
+                                                                    'position' => 1133,
                                                                     'attributes' =>
                                                                     array (
                                                                         'class' => 'sr-only',
@@ -316,6 +380,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Toggle navigation',
+                                                                            'line' => 1,
+                                                                            'position' => 1153,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -323,6 +389,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'span',
+                                                                    'line' => 1,
+                                                                    'position' => 1178,
                                                                     'attributes' =>
                                                                     array (
                                                                         'class' => 'icon-bar',
@@ -332,6 +400,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'span',
+                                                                    'line' => 1,
+                                                                    'position' => 1207,
                                                                     'attributes' =>
                                                                     array (
                                                                         'class' => 'icon-bar',
@@ -341,6 +411,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'span',
+                                                                    'line' => 1,
+                                                                    'position' => 1236,
                                                                     'attributes' =>
                                                                     array (
                                                                         'class' => 'icon-bar',
@@ -352,6 +424,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 1275,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => '..',
@@ -363,6 +437,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'Bootstrap',
+                                                                    'line' => 1,
+                                                                    'position' => 1306,
                                                                 ),
                                                             ),
                                                         ),
@@ -372,6 +448,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'nav',
+                                                    'line' => 1,
+                                                    'position' => 1327,
                                                     'attributes' =>
                                                     array (
                                                         'id' => 'bs-navbar',
@@ -383,6 +461,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'ul',
+                                                            'line' => 1,
+                                                            'position' => 1379,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'nav navbar-nav',
@@ -393,12 +473,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1407,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1412,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../getting-started/',
@@ -409,6 +493,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Getting started',
+                                                                                    'line' => 1,
+                                                                                    'position' => 1442,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -418,12 +504,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1468,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1473,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../css/',
@@ -434,6 +524,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'CSS',
+                                                                                    'line' => 1,
+                                                                                    'position' => 1491,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -443,12 +535,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1505,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1510,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../components/',
@@ -459,6 +555,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Components',
+                                                                                    'line' => 1,
+                                                                                    'position' => 1535,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -468,12 +566,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1556,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1561,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../javascript/',
@@ -484,6 +586,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'JavaScript',
+                                                                                    'line' => 1,
+                                                                                    'position' => 1586,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -493,12 +597,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1607,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1612,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../customize/',
@@ -509,6 +617,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Customize',
+                                                                                    'line' => 1,
+                                                                                    'position' => 1636,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -520,6 +630,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'ul',
+                                                            'line' => 1,
+                                                            'position' => 1662,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'nav navbar-nav navbar-right',
@@ -530,12 +642,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1703,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1707,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => 'http://themes.getbootstrap.com',
@@ -547,6 +663,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Themes',
+                                                                                    'line' => 1,
+                                                                                    'position' => 1861,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -556,12 +674,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 1877,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 1881,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => 'http://expo.getbootstrap.com',
@@ -573,6 +695,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Expo',
+                                                                                    'line' => 1,
+                                                                                    'position' => 2031,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -582,12 +706,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'li',
+                                                                    'line' => 1,
+                                                                    'position' => 2045,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 2049,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => 'http://blog.getbootstrap.com',
@@ -599,6 +727,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Blog',
+                                                                                    'line' => 1,
+                                                                                    'position' => 2199,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -616,6 +746,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'main',
+                                    'line' => 1,
+                                    'position' => 2244,
                                     'attributes' =>
                                     array (
                                         'class' => 'bs-docs-masthead',
@@ -629,6 +761,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'element',
                                             'name' => 'div',
+                                            'line' => 1,
+                                            'position' => 2307,
                                             'attributes' =>
                                             array (
                                                 'class' => 'container',
@@ -639,6 +773,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'span',
+                                                    'line' => 1,
+                                                    'position' => 2329,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline',
@@ -649,6 +785,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'B',
+                                                            'line' => 1,
+                                                            'position' => 2405,
                                                         ),
                                                     ),
                                                 ),
@@ -656,6 +794,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 2414,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'lead',
@@ -666,6 +806,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.',
+                                                            'line' => 1,
+                                                            'position' => 2428,
                                                         ),
                                                     ),
                                                 ),
@@ -673,6 +815,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 2551,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'lead',
@@ -683,6 +827,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 2566,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => 'getting-started#download',
@@ -695,6 +841,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'Download Bootstrap',
+                                                                    'line' => 1,
+                                                                    'position' => 2765,
                                                                 ),
                                                             ),
                                                         ),
@@ -704,6 +852,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 2793,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'version',
@@ -714,6 +864,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Currently v3.3.6',
+                                                            'line' => 1,
+                                                            'position' => 2810,
                                                         ),
                                                     ),
                                                 ),
@@ -721,6 +873,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'div',
+                                                    'line' => 1,
+                                                    'position' => 2831,
                                                     'attributes' =>
                                                     array (
                                                         'id' => 'carbonads-container',
@@ -731,6 +885,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 2859,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'carbonad',
@@ -741,6 +897,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'div',
+                                                                    'line' => 1,
+                                                                    'position' => 2879,
                                                                     'attributes' =>
                                                                     array (
                                                                         'id' => 'azcarbon',
@@ -750,12 +908,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'script',
+                                                                    'line' => 1,
+                                                                    'position' => 2902,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'var z=document.createElement("script");z.async=!0,z.src="http://engine.carbonads.com/z/32341/azcarbon_2_1_0_HORIZ";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);',
+                                                                            'line' => 1,
+                                                                            'position' => 2910,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -771,6 +933,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'div',
+                                    'line' => 1,
+                                    'position' => 3139,
                                     'attributes' =>
                                     array (
                                         'class' => 'bs-docs-featurette',
@@ -781,6 +945,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'element',
                                             'name' => 'div',
+                                            'line' => 1,
+                                            'position' => 3170,
                                             'attributes' =>
                                             array (
                                                 'class' => 'container',
@@ -791,6 +957,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'h2',
+                                                    'line' => 1,
+                                                    'position' => 3192,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'bs-docs-featurette-title',
@@ -801,6 +969,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Designed for everyone, everywhere.',
+                                                            'line' => 1,
+                                                            'position' => 3227,
                                                         ),
                                                     ),
                                                 ),
@@ -808,6 +978,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 3267,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'lead',
@@ -818,6 +990,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Bootstrap makes front-end web development faster and easier. It\'s made for folks of all skill levels, devices of all shapes, and projects of all sizes.',
+                                                            'line' => 1,
+                                                            'position' => 3281,
                                                         ),
                                                     ),
                                                 ),
@@ -825,6 +999,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'hr',
+                                                    'line' => 1,
+                                                    'position' => 3437,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'half-rule',
@@ -834,6 +1010,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'div',
+                                                    'line' => 1,
+                                                    'position' => 3458,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'row',
@@ -844,6 +1022,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 3474,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-sm-4',
@@ -854,6 +1034,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'img',
+                                                                    'line' => 1,
+                                                                    'position' => 3495,
                                                                     'attributes' =>
                                                                     array (
                                                                         'src' => 'assets/img/sass-less.png',
@@ -865,12 +1047,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'h3',
+                                                                    'line' => 1,
+                                                                    'position' => 3579,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Preprocessors',
+                                                                            'line' => 1,
+                                                                            'position' => 3583,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -878,17 +1064,23 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'p',
+                                                                    'line' => 1,
+                                                                    'position' => 3602,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Bootstrap ships with vanilla CSS, but its source code utilizes the two most popular CSS preprocessors, ',
+                                                                            'line' => 1,
+                                                                            'position' => 3605,
                                                                         ),
                                                                         1 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 3708,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../css/#less',
@@ -899,6 +1091,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Less',
+                                                                                    'line' => 1,
+                                                                                    'position' => 3729,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -906,11 +1100,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => ' and ',
+                                                                            'line' => 1,
+                                                                            'position' => 3737,
                                                                         ),
                                                                         3 =>
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'a',
+                                                                            'line' => 1,
+                                                                            'position' => 3742,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'href' => '../css/#sass',
@@ -921,6 +1119,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                                 array (
                                                                                     'type' => 'text',
                                                                                     'value' => 'Sass',
+                                                                                    'line' => 1,
+                                                                                    'position' => 3763,
                                                                                 ),
                                                                             ),
                                                                         ),
@@ -928,6 +1128,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => '. Quickly get started with precompiled CSS or build on the source.',
+                                                                            'line' => 1,
+                                                                            'position' => 3771,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -937,6 +1139,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 3849,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-sm-4',
@@ -947,6 +1151,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'img',
+                                                                    'line' => 1,
+                                                                    'position' => 3870,
                                                                     'attributes' =>
                                                                     array (
                                                                         'src' => 'assets/img/devices.png',
@@ -958,12 +1164,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'h3',
+                                                                    'line' => 1,
+                                                                    'position' => 3956,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'One framework, every device.',
+                                                                            'line' => 1,
+                                                                            'position' => 3960,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -971,12 +1181,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'p',
+                                                                    'line' => 1,
+                                                                    'position' => 3994,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Bootstrap easily and efficiently scales your websites and applications with a single code base, from phones to tablets to desktops with CSS media queries.',
+                                                                            'line' => 1,
+                                                                            'position' => 3997,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -986,6 +1200,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 4163,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-sm-4',
@@ -996,6 +1212,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'img',
+                                                                    'line' => 1,
+                                                                    'position' => 4184,
                                                                     'attributes' =>
                                                                     array (
                                                                         'src' => 'assets/img/components.png',
@@ -1007,12 +1225,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'h3',
+                                                                    'line' => 1,
+                                                                    'position' => 4256,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Full of features',
+                                                                            'line' => 1,
+                                                                            'position' => 4260,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1020,12 +1242,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'p',
+                                                                    'line' => 1,
+                                                                    'position' => 4282,
                                                                     'children' =>
                                                                     array (
                                                                         0 =>
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'With Bootstrap, you get extensive and beautiful documentation for common HTML elements, dozens of custom HTML and CSS components, and awesome jQuery plugins.',
+                                                                            'line' => 1,
+                                                                            'position' => 4285,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1037,6 +1263,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'hr',
+                                                    'line' => 1,
+                                                    'position' => 4461,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'half-rule',
@@ -1046,6 +1274,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 4482,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'lead',
@@ -1056,6 +1286,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Bootstrap is open source. It\'s hosted, developed, and maintained on GitHub.',
+                                                            'line' => 1,
+                                                            'position' => 4496,
                                                         ),
                                                     ),
                                                 ),
@@ -1063,6 +1295,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'a',
+                                                    'line' => 1,
+                                                    'position' => 4576,
                                                     'attributes' =>
                                                     array (
                                                         'href' => 'https://github.com/twbs/bootstrap',
@@ -1074,6 +1308,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'View the GitHub project',
+                                                            'line' => 1,
+                                                            'position' => 4649,
                                                         ),
                                                     ),
                                                 ),
@@ -1085,6 +1321,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'div',
+                                    'line' => 1,
+                                    'position' => 4691,
                                     'attributes' =>
                                     array (
                                         'class' => 'bs-docs-featurette',
@@ -1095,6 +1333,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'element',
                                             'name' => 'div',
+                                            'line' => 1,
+                                            'position' => 4722,
                                             'attributes' =>
                                             array (
                                                 'class' => 'container',
@@ -1105,6 +1345,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'h2',
+                                                    'line' => 1,
+                                                    'position' => 4744,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'bs-docs-featurette-title',
@@ -1115,6 +1357,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Built with Bootstrap.',
+                                                            'line' => 1,
+                                                            'position' => 4779,
                                                         ),
                                                     ),
                                                 ),
@@ -1122,6 +1366,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 4806,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'lead',
@@ -1132,11 +1378,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing ',
+                                                            'line' => 1,
+                                                            'position' => 4820,
                                                         ),
                                                         1 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 4934,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => '../getting-started/#examples',
@@ -1147,6 +1397,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'collection of examples',
+                                                                    'line' => 1,
+                                                                    'position' => 4971,
                                                                 ),
                                                             ),
                                                         ),
@@ -1154,6 +1406,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => ' or by exploring some of our favorites.',
+                                                            'line' => 1,
+                                                            'position' => 4997,
                                                         ),
                                                     ),
                                                 ),
@@ -1161,6 +1415,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'hr',
+                                                    'line' => 1,
+                                                    'position' => 5041,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'half-rule',
@@ -1170,6 +1426,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'div',
+                                                    'line' => 1,
+                                                    'position' => 5062,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'row bs-docs-featured-sites',
@@ -1180,6 +1438,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 5103,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-xs-6 col-sm-3',
@@ -1190,6 +1450,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 5135,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => 'http://expo.getbootstrap.com/2014/10/29/lyft',
@@ -1202,6 +1464,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'img',
+                                                                            'line' => 1,
+                                                                            'position' => 5215,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'src' => '/assets/img/expo-lyft.jpg',
@@ -1217,6 +1481,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 5293,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-xs-6 col-sm-3',
@@ -1227,6 +1493,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 5325,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => 'http://expo.getbootstrap.com/2014/09/30/vogue',
@@ -1239,6 +1507,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'img',
+                                                                            'line' => 1,
+                                                                            'position' => 5407,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'src' => '/assets/img/expo-vogue.jpg',
@@ -1254,6 +1524,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 5487,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-xs-6 col-sm-3',
@@ -1264,6 +1536,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 5519,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => 'http://expo.getbootstrap.com/2014/03/13/riot-design',
@@ -1276,6 +1550,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'img',
+                                                                            'line' => 1,
+                                                                            'position' => 5615,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'src' => '/assets/img/expo-riot.jpg',
@@ -1291,6 +1567,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'div',
+                                                            'line' => 1,
+                                                            'position' => 5702,
                                                             'attributes' =>
                                                             array (
                                                                 'class' => 'col-xs-6 col-sm-3',
@@ -1301,6 +1579,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 5734,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => 'http://expo.getbootstrap.com/2014/02/12/newsweek',
@@ -1313,6 +1593,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'element',
                                                                             'name' => 'img',
+                                                                            'line' => 1,
+                                                                            'position' => 5822,
                                                                             'attributes' =>
                                                                             array (
                                                                                 'src' => '/assets/img/expo-newsweek.jpg',
@@ -1330,6 +1612,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'hr',
+                                                    'line' => 1,
+                                                    'position' => 5915,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'half-rule',
@@ -1339,6 +1623,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 5936,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'lead',
@@ -1349,6 +1635,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.',
+                                                            'line' => 1,
+                                                            'position' => 5950,
                                                         ),
                                                     ),
                                                 ),
@@ -1356,6 +1644,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'a',
+                                                    'line' => 1,
+                                                    'position' => 6039,
                                                     'attributes' =>
                                                     array (
                                                         'href' => 'http://expo.getbootstrap.com',
@@ -1367,17 +1657,21 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Explore the Expo',
+                                                            'line' => 1,
+                                                            'position' => 6107,
                                                         ),
                                                     ),
                                                 ),
                                             ),
-),
+                                        ),
                                     ),
                                 ),
                                 6 =>
                                 array (
                                     'type' => 'element',
                                     'name' => 'footer',
+                                    'line' => 1,
+                                    'position' => 6143,
                                     'attributes' =>
                                     array (
                                         'class' => 'bs-docs-footer',
@@ -1389,6 +1683,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                         array (
                                             'type' => 'element',
                                             'name' => 'div',
+                                            'line' => 1,
+                                            'position' => 6190,
                                             'attributes' =>
                                             array (
                                                 'class' => 'container',
@@ -1399,6 +1695,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'ul',
+                                                    'line' => 1,
+                                                    'position' => 6212,
                                                     'attributes' =>
                                                     array (
                                                         'class' => 'bs-docs-footer-links',
@@ -1409,12 +1707,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'li',
+                                                            'line' => 1,
+                                                            'position' => 6244,
                                                             'children' =>
                                                             array (
                                                                 0 =>
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 6248,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => 'https://github.com/twbs/bootstrap',
@@ -1425,6 +1727,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'GitHub',
+                                                                            'line' => 1,
+                                                                            'position' => 6290,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1434,12 +1738,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'li',
+                                                            'line' => 1,
+                                                            'position' => 6306,
                                                             'children' =>
                                                             array (
                                                                 0 =>
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 6310,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => 'https://twitter.com/getbootstrap',
@@ -1450,6 +1758,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Twitter',
+                                                                            'line' => 1,
+                                                                            'position' => 6351,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1459,12 +1769,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'li',
+                                                            'line' => 1,
+                                                            'position' => 6368,
                                                             'children' =>
                                                             array (
                                                                 0 =>
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 6372,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => '../getting-started/#examples',
@@ -1475,6 +1789,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'Examples',
+                                                                            'line' => 1,
+                                                                            'position' => 6409,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1484,12 +1800,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'li',
+                                                            'line' => 1,
+                                                            'position' => 6427,
                                                             'children' =>
                                                             array (
                                                                 0 =>
                                                                 array (
                                                                     'type' => 'element',
                                                                     'name' => 'a',
+                                                                    'line' => 1,
+                                                                    'position' => 6431,
                                                                     'attributes' =>
                                                                     array (
                                                                         'href' => '../about/',
@@ -1500,6 +1820,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                         array (
                                                                             'type' => 'text',
                                                                             'value' => 'About',
+                                                                            'line' => 1,
+                                                                            'position' => 6451,
                                                                         ),
                                                                     ),
                                                                 ),
@@ -1511,17 +1833,23 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 6472,
                                                     'children' =>
                                                     array (
                                                         0 =>
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Designed and built with all the love in the world by ',
+                                                            'line' => 1,
+                                                            'position' => 6475,
                                                         ),
                                                         1 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 6528,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => 'https://twitter.com/mdo',
@@ -1533,6 +1861,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => '@mdo',
+                                                                    'line' => 1,
+                                                                    'position' => 6574,
                                                                 ),
                                                             ),
                                                         ),
@@ -1540,11 +1870,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => ' and ',
+                                                            'line' => 1,
+                                                            'position' => 6582,
                                                         ),
                                                         3 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 6587,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => 'https://twitter.com/fat',
@@ -1556,6 +1890,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => '@fat',
+                                                                    'line' => 1,
+                                                                    'position' => 6633,
                                                                 ),
                                                             ),
                                                         ),
@@ -1563,11 +1899,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => '. Maintained by the ',
+                                                            'line' => 1,
+                                                            'position' => 6641,
                                                         ),
                                                         5 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 6661,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => 'https://github.com/orgs/twbs/people',
@@ -1578,6 +1918,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'core team',
+                                                                    'line' => 1,
+                                                                    'position' => 6705,
                                                                 ),
                                                             ),
                                                         ),
@@ -1585,11 +1927,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => ' with the help of ',
+                                                            'line' => 1,
+                                                            'position' => 6718,
                                                         ),
                                                         7 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 6736,
                                                             'attributes' =>
                                                             array (
                                                                 'href' => 'https://github.com/twbs/bootstrap/graphs/contributors',
@@ -1600,6 +1946,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'our contributors',
+                                                                    'line' => 1,
+                                                                    'position' => 6798,
                                                                 ),
                                                             ),
                                                         ),
@@ -1607,6 +1955,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => '.',
+                                                            'line' => 1,
+                                                            'position' => 6818,
                                                         ),
                                                     ),
                                                 ),
@@ -1614,17 +1964,23 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                 array (
                                                     'type' => 'element',
                                                     'name' => 'p',
+                                                    'line' => 1,
+                                                    'position' => 6824,
                                                     'children' =>
                                                     array (
                                                         0 =>
                                                         array (
                                                             'type' => 'text',
                                                             'value' => 'Code licensed ',
+                                                            'line' => 1,
+                                                            'position' => 6827,
                                                         ),
                                                         1 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 6841,
                                                             'attributes' =>
                                                             array (
                                                                 'rel' => 'license',
@@ -1637,6 +1993,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'MIT',
+                                                                    'line' => 1,
+                                                                    'position' => 6929,
                                                                 ),
                                                             ),
                                                         ),
@@ -1644,11 +2002,15 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => ', docs ',
+                                                            'line' => 1,
+                                                            'position' => 6936,
                                                         ),
                                                         3 =>
                                                         array (
                                                             'type' => 'element',
                                                             'name' => 'a',
+                                                            'line' => 1,
+                                                            'position' => 6943,
                                                             'attributes' =>
                                                             array (
                                                                 'rel' => 'license',
@@ -1661,6 +2023,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                                 array (
                                                                     'type' => 'text',
                                                                     'value' => 'CC BY 3.0',
+                                                                    'line' => 1,
+                                                                    'position' => 7022,
                                                                 ),
                                                             ),
                                                         ),
@@ -1668,6 +2032,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                                         array (
                                                             'type' => 'text',
                                                             'value' => '.',
+                                                            'line' => 1,
+                                                            'position' => 7035,
                                                         ),
                                                     ),
                                                 ),
@@ -1679,6 +2045,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 7060,
                                     'attributes' =>
                                     array (
                                         'src' => 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js',
@@ -1688,12 +2056,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 7147,
                                     'children' =>
                                     array (
                                         0 =>
                                         array (
                                             'type' => 'text',
                                             'value' => 'window.jQuery||document.write(\'<script src="../assets/js/vendor/jquery.min.js"><\\/script>\');',
+                                            'line' => 1,
+                                            'position' => 7155,
                                         ),
                                     ),
                                 ),
@@ -1701,6 +2073,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 7256,
                                     'attributes' =>
                                     array (
                                         'src' => '../dist/js/bootstrap.min.js',
@@ -1710,6 +2084,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 7305,
                                     'attributes' =>
                                     array (
                                         'src' => '../assets/js/docs.min.js',
@@ -1719,6 +2095,8 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 7351,
                                     'attributes' =>
                                     array (
                                         'src' => '../assets/js/ie10-viewport-bug-workaround.js',
@@ -1728,12 +2106,16 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
                                 array (
                                     'type' => 'element',
                                     'name' => 'script',
+                                    'line' => 1,
+                                    'position' => 7417,
                                     'children' =>
                                     array (
                                         0 =>
                                         array (
                                             'type' => 'text',
                                             'value' => 'var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();',
+                                            'line' => 1,
+                                            'position' => 7425,
                                         ),
                                     ),
                                 ),
@@ -1744,5 +2126,5 @@ class BootstrapComTest extends \PHPUnit_Framework_TestCase
             ),
             $tokens->toArray()
         );
-    }
 }
+    }

@@ -2,6 +2,7 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
+use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class Comment extends AbstractToken
@@ -19,6 +20,13 @@ class Comment extends AbstractToken
     public function parse($html)
     {
         $html = ltrim($html);
+
+        // Get token position.
+        $positionArray = HtmlTokenizer::getPosition($html);
+        $this->setLine($positionArray['line']);
+        $this->setPosition($positionArray['position']);
+
+        // Parse token.
         $posOfEndOfComment = mb_strpos($html, '-->');
         if ($posOfEndOfComment === false) {
             if ($this->getThrowOnError()) {
@@ -47,7 +55,9 @@ class Comment extends AbstractToken
     {
         return array(
             'type' => 'comment',
-            'value' => $this->value
+            'value' => $this->value,
+            'line' => $this->getLine(),
+            'position' => $this->getPosition()
         );
     }
 }
