@@ -12,6 +12,27 @@ interface Token
     const TEXT      = 'text';
 
     /**
+     * Will return the nesting depth of the token.
+     *
+     * @return int
+     */
+    public function getDepth();
+
+    /**
+     * Will return the token line number.
+     *
+     * @return int
+     */
+    public function getLine();
+
+    /**
+     * Will return the token line position.
+     *
+     * @return int
+     */
+    public function getPosition();
+
+    /**
      * Will return true of the parent should be closed automatically.
      *
      * @param string $html
@@ -42,13 +63,6 @@ interface Token
      * @return string
      */
     public function getType();
-
-    /**
-     * Will return the nesting depth of this token.
-     *
-     * @return int
-     */
-    public function getDepth();
 
     public function isCDATA();
     public function isComment();
