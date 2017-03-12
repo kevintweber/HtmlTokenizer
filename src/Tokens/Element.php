@@ -375,8 +375,6 @@ class Element extends AbstractToken
         }
 
         $text = new Text($this, $this->getThrowOnError(), $this->value);
-        $text->line = $positionArray['line'];
-        $text->position = $positionArray['position'];
         $this->children[] = $text;
 
         return $remainingHtml;

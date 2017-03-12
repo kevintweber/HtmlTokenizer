@@ -11,6 +11,11 @@ class Text extends AbstractToken
         parent::__construct(Token::TEXT, $parent, $throwOnError);
 
         $this->value = $forcedValue;
+        if ($forcedValue !== '') {
+            $positionArray = HtmlTokenizer::getPosition($forcedValue);
+            $this->line = $positionArray['line'];
+            $this->position = $positionArray['position'];
+        }
     }
 
     public function parse(string $html) : string
