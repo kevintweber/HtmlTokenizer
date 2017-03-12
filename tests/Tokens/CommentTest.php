@@ -3,18 +3,19 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\Comment;
+use PHPUnit\Framework\TestCase;
 
-class CommentTest extends \PHPUnit_Framework_TestCase
+class CommentTest extends TestCase
 {
     /**
      * @dataProvider parseDataProvider
      */
     public function testParse($html, $expectedValue, $expectedRemainingHtml)
     {
-        $comment = new Comment();
+        $comment = new Comment(null, false);
         $remainingHtml = $comment->parse($html);
-        $this->assertEquals($expectedValue, $comment->getValue());
-        $this->assertEquals($expectedRemainingHtml, $remainingHtml);
+        $this->assertSame($expectedValue, $comment->getValue());
+        $this->assertSame($expectedRemainingHtml, $remainingHtml);
     }
 
     public function parseDataProvider()
@@ -47,7 +48,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
             ),
             'parse error' => array(
                 '<!-- asdf',
-                null,
+                '',
                 ''
             )
         );

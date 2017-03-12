@@ -2,6 +2,7 @@
 
 namespace Kevintweber\HtmlTokenizer;
 
+use Kevintweber\HtmlTokenizer\Tokens\Token;
 use Kevintweber\HtmlTokenizer\Tokens\TokenCollection;
 use Kevintweber\HtmlTokenizer\Tokens\TokenFactory;
 
@@ -16,9 +17,9 @@ class HtmlTokenizer
     /**
      * Constructor
      */
-    public function __construct($throwOnError = false)
+    public function __construct(bool $throwOnError = true)
     {
-        $this->throwOnError = (boolean) $throwOnError;
+        $this->throwOnError = $throwOnError;
     }
 
     /**
@@ -28,7 +29,7 @@ class HtmlTokenizer
      *
      * @return TokenCollection
      */
-    public function parse($html)
+    public function parse(string $html) : TokenCollection
     {
         self::$allHtml = $html;
         $tokens = new TokenCollection();
@@ -39,7 +40,7 @@ class HtmlTokenizer
                 null,
                 $this->throwOnError
             );
-            if ($token === false) {
+            if (!$token instanceof Token) {
                 // Error has occurred, so we stop.
                 break;
             }
@@ -51,7 +52,7 @@ class HtmlTokenizer
         return $tokens;
     }
 
-    public static function getPosition($partialHtml)
+    public static function getPosition(string $partialHtml) : array
     {
         $position = mb_strrpos(self::$allHtml, $partialHtml);
         $parsedHtml = mb_substr(self::$allHtml, 0, $position);

@@ -3,13 +3,24 @@
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
 use Kevintweber\HtmlTokenizer\Exceptions\TokenMatchingException;
+use Prophecy\Argument\Token\TokenInterface;
 
 class TokenFactory
 {
-    public static function buildFromHtml($html, Token $parent = null, $throwOnError = false)
+    /**
+     * Factory method to build the correct token.
+     *
+     * @param string     $html
+     * @param Token|null $parent
+     * @param bool       $throwOnError
+     *
+     * @return TokenInterface|null
+     * @throws TokenMatchingException
+     */
+    public static function buildFromHtml(string $html, Token $parent = null, bool $throwOnError = true)
     {
         $matchCriteria = array(
-            'Php' => "/(^\s*<\?\s)|(^\s*<\?php\s)/i",
+            'Php' => "/^\s*<\?(php)?\s/i",
             'Comment' => "/^\s*<!--/",
             'CData' => "/^\s*<!\[CDATA\[/",
             'DocType' => "/^\s*<!DOCTYPE /i",
@@ -28,7 +39,5 @@ class TokenFactory
         if ($throwOnError) {
             throw new TokenMatchingException();
         }
-
-        return false;
     }
 }

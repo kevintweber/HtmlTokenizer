@@ -3,8 +3,9 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\Text;
+use PHPUnit\Framework\TestCase;
 
-class TextTest extends \PHPUnit_Framework_TestCase
+class TextTest extends TestCase
 {
     /**
      * @dataProvider parseDataProvider

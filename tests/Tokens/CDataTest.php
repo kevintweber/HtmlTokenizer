@@ -3,18 +3,19 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\CData;
+use PHPUnit\Framework\TestCase;
 
-class CDataTest extends \PHPUnit_Framework_TestCase
+class CDataTest extends TestCase
 {
     /**
      * @dataProvider parseDataProvider
      */
     public function testParse($html, $expectedValue, $expectedRemainingHtml)
     {
-        $cData = new CData();
+        $cData = new CData(null, false);
         $remainingHtml = $cData->parse($html);
-        $this->assertEquals($expectedValue, $cData->getValue());
-        $this->assertEquals($expectedRemainingHtml, $remainingHtml);
+        $this->assertSame($expectedValue, $cData->getValue());
+        $this->assertSame($expectedRemainingHtml, $remainingHtml);
     }
 
     public function parseDataProvider()
@@ -37,7 +38,7 @@ class CDataTest extends \PHPUnit_Framework_TestCase
             ),
             'parse error' => array(
                 '<![CDATA[      asdf',
-                null,
+                '',
                 ''
             )
         );

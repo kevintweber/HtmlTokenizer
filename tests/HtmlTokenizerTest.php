@@ -3,19 +3,17 @@
 namespace Kevintweber\HtmlTokenizer\Tests;
 
 use Kevintweber\HtmlTokenizer\HtmlTokenizer;
+use PHPUnit\Framework\TestCase;
 
-class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
+class HtmlTokenizerTest extends TestCase
 {
     /**
      * @dataProvider parseDataProvider
      */
-    public function testParse($html, array $expectedTokenArray, $debug = false)
+    public function testParse(string $html, array $expectedTokenArray)
     {
         $htmlTokenizer = new HtmlTokenizer();
         $tokens = $htmlTokenizer->parse($html);
-        if ($debug) {
-            var_dump($html, $tokens->toArray());
-        }
 
         $this->assertEquals(
             $expectedTokenArray,
@@ -32,17 +30,6 @@ class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
                     array(
                         'type' => 'text',
                         'value' => 'asdf',
-                        'line' => 0,
-                        'position' => 0
-                    )
-                )
-            ),
-            'token matching error' => array(
-                'asdf  <',
-                array(
-                    array(
-                        'type' => 'text',
-                        'value' => 'asdf ',
                         'line' => 0,
                         'position' => 0
                     )
@@ -73,6 +60,67 @@ class HtmlTokenizerTest extends \PHPUnit_Framework_TestCase
                                 'position' => 36
                             )
                         )
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * @dataProvider parseWithErrorsDataProvider
+     * @expectedException Kevintweber\HtmlTokenizer\Exceptions\TokenMatchingException
+     */
+    public function testParseWithErrors(string $html)
+    {
+        $htmlTokenizer = new HtmlTokenizer();
+        $htmlTokenizer->parse($html);
+    }
+
+    public function parseWithErrorsDataProvider()
+    {
+        return array(
+            'token matching error' => array(
+                'asdf  <'
+            )
+        );
+    }
+
+    /**
+     * @dataProvider parseWithSilentErrorsDataProvider
+     */
+    public function testParseWithSilentErrors(string $html, array $expectedTokenArray)
+    {
+        $htmlTokenizer = new HtmlTokenizer(false);
+        $tokens = $htmlTokenizer->parse($html);
+
+        $this->assertEquals(
+            $expectedTokenArray,
+            $tokens->toArray()
+        );
+    }
+
+    public function parseWithSilentErrorsDataProvider()
+    {
+        return array(
+            'token matching error' => array(
+                'asdf  <',
+                array(
+                    array(
+                        'type' => 'text',
+                        'value' => 'asdf ',
+                        'line' => 0,
+                        'position' => 0
+                    )
+                )
+            ),
+            'empty element error' => array(
+                'asdf < > asdf',
+                array(
+                    array(
+                        'type' => 'text',
+                        'value' => 'asdf ',
+                        'line' => 0,
+                        'position' => 0
                     )
                 )
             )

@@ -16,21 +16,21 @@ interface Token
      *
      * @return int
      */
-    public function getDepth();
+    public function getDepth() : int;
 
     /**
      * Will return the token line number.
      *
      * @return int
      */
-    public function getLine();
+    public function getLine() : int;
 
     /**
      * Will return the token line position.
      *
      * @return int
      */
-    public function getPosition();
+    public function getPosition() : int;
 
     /**
      * Will return true of the parent should be closed automatically.
@@ -39,7 +39,7 @@ interface Token
      *
      * @return boolean
      */
-    public function isClosingElementImplied($html);
+    public function isClosingElementImplied(string $html) : bool;
 
     /**
      * Will parse this token.
@@ -48,7 +48,7 @@ interface Token
      *
      * @return string Remaining HTML.
      */
-    public function parse($html);
+    public function parse(string $html) : string;
 
     /**
      * Will return the parent token or null if none.
@@ -62,19 +62,26 @@ interface Token
      *
      * @return string
      */
-    public function getType();
+    public function getType() : string;
 
-    public function isCDATA();
-    public function isComment();
-    public function isDocType();
-    public function isElement();
-    public function isPhp();
-    public function isText();
+    /**
+     * Will return the contents of the token.
+     *
+     * @return string
+     */
+    public function getValue() : string;
+
+    public function isCDATA() : bool;
+    public function isComment() : bool;
+    public function isDocType() : bool;
+    public function isElement() : bool;
+    public function isPhp() : bool;
+    public function isText() : bool;
 
     /**
      * Will convert this token to an array structure.
      *
      * @return array
      */
-    public function toArray();
+    public function toArray() : array;
 }

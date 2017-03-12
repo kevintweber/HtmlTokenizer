@@ -195,7 +195,8 @@ Currently, this package will tokenize HTML5 and XHTML.
 
 It tries to handle errors according to the standard.  The tokenizer can handle
 some (but not all) malformed HTML.  You can set the tokenizer to fail silently
-(default functionality) or throw an exception when it encounters an error.
+or throw an exception when it encounters an error. (The default setting is to
+throw an exception.)
 
 If you come across valid HTML this package cannot parse, please submit an issue.
 

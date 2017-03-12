@@ -4,6 +4,20 @@ All Notable changes to `html-tokenizer` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [0.4] 2017-03-12
+### Added
+- Every element has a "value".  The value is the contents of the element.
+  Ex: Comment type has a value of the comment text.  An element has a value
+  of the html contained within the opening and closing tags.
+- More tests
+### Changed
+- This package now requires PHP 7.0 or greater.  If compatibility with
+  PHP 5.5 or 5.6 is required then use version 0.3.1.
+- Moved tests over the PHPUnit 6.0 class heirarchy. Requires PHPUnit >= 5.7.0
+  or PHPUnit >= 6.0 to run the tests.
+### Removed
+- Setters in AbstractToken class.
+
 ## [0.3.1] 2017-03-12
 ### Changed
 - Modified php requirement to better handle PHP version >= 7.0

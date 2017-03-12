@@ -5,8 +5,9 @@ namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 use Kevintweber\HtmlTokenizer\Tokens\Comment;
 use Kevintweber\HtmlTokenizer\Tokens\Text;
 use Kevintweber\HtmlTokenizer\Tokens\TokenCollection;
+use PHPUnit\Framework\TestCase;
 
-class TokenCollectionTest extends \PHPUnit_Framework_TestCase
+class TokenCollectionTest extends TestCase
 {
     public function testConstructorAndDefaults()
     {

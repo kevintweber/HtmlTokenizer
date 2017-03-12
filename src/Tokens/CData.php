@@ -7,24 +7,19 @@ use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class CData extends AbstractToken
 {
-    /** @var string */
-    private $value;
-
-    public function __construct(Token $parent = null, $throwOnError = false)
+    public function __construct(Token $parent = null, bool $throwOnError = true)
     {
         parent::__construct(Token::CDATA, $parent, $throwOnError);
-
-        $this->value = null;
     }
 
-    public function parse($html)
+    public function parse(string $html) : string
     {
         $html = ltrim($html);
 
         // Get token position.
         $positionArray = HtmlTokenizer::getPosition($html);
-        $this->setLine($positionArray['line']);
-        $this->setPosition($positionArray['position']);
+        $this->line = $positionArray['line'];
+        $this->position = $positionArray['position'];
 
         // Parse token.
         $posOfEndOfCData = mb_strpos($html, ']]>');
@@ -41,17 +36,7 @@ class CData extends AbstractToken
         return mb_substr($html, $posOfEndOfCData + 3);
     }
 
-    /**
-     * Getter for 'value'.
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function toArray()
+    public function toArray() : array
     {
         return array(
             'type' => 'cdata',

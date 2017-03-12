@@ -6,28 +6,23 @@ use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 
 class Php extends AbstractToken
 {
-    /** @var string */
-    private $value;
-
-    public function __construct(Token $parent = null, $throwOnError = false)
+    public function __construct(Token $parent = null, bool $throwOnError = true)
     {
         parent::__construct(Token::PHP, $parent, $throwOnError);
-
-        $this->value = null;
     }
 
-    public function parse($html)
+    public function parse(string $html) : string
     {
         $html = ltrim($html);
 
         // Get token position.
         $positionArray = HtmlTokenizer::getPosition($html);
-        $this->setLine($positionArray['line']);
-        $this->setPosition($positionArray['position']);
+        $this->line = $positionArray['line'];
+        $this->position = $positionArray['position'];
 
         // Parse token.
         $startPos = 3;
-        if (mb_substr($html, 0, 5) == '<?php') {
+        if (mb_substr(mb_strtolower($html), 0, 5) === '<?php') {
             $startPos = 6;
         }
 
@@ -43,17 +38,7 @@ class Php extends AbstractToken
         return mb_substr($html, $posOfEndOfPhp + 2);
     }
 
-    /**
-     * Getter for 'value'.
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function toArray()
+    public function toArray() : array
     {
         return array(
             'type' => 'php',

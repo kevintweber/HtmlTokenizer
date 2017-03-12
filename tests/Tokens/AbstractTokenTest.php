@@ -3,8 +3,9 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\Token;
+use PHPUnit\Framework\TestCase;
 
-class AbstractTokenTest extends \PHPUnit_Framework_TestCase
+class AbstractTokenTest extends TestCase
 {
     public function testConstructorAndDefaults()
     {
@@ -25,7 +26,7 @@ class AbstractTokenTest extends \PHPUnit_Framework_TestCase
         $newAbstractTokenMock = $this->getMockForAbstractClass(
             'Kevintweber\\HtmlTokenizer\\Tokens\\AbstractToken',
             array(Token::ELEMENT, $abstractTokenMock)
-        );
+         );
         $this->assertEquals(1, $newAbstractTokenMock->getDepth());
         $this->assertEquals($abstractTokenMock, $newAbstractTokenMock->getParent());
     }

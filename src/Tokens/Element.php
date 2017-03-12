@@ -16,7 +16,7 @@ class Element extends AbstractToken
     /** @var string */
     private $name;
 
-    public function __construct(Token $parent = null, $throwOnError = false)
+    public function __construct(Token $parent = null, bool $throwOnError = true)
     {
         parent::__construct(Token::ELEMENT, $parent, $throwOnError);
 
@@ -32,7 +32,7 @@ class Element extends AbstractToken
      *
      * @return boolean
      */
-    public function isClosingElementImplied($html)
+    public function isClosingElementImplied(string $html) : bool
     {
         $parent = $this->getParent();
         if ($parent === null || !($parent instanceof self)) {
@@ -85,17 +85,17 @@ class Element extends AbstractToken
         }
 
         // LI
-        if ($parentName == 'li' && $name == 'li') {
+        if ($parentName === 'li' && $name === 'li') {
             return true;
         }
 
         // DT and DD
-        if (($parentName == 'dt' || $parentName == 'dd') && ($name == 'dt' || $name == 'dd')) {
+        if (($parentName === 'dt' || $parentName === 'dd') && ($name === 'dt' || $name === 'dd')) {
             return true;
         }
 
         // RP and RT
-        if (($parentName == 'rp' || $parentName == 'rt') && ($name == 'rp' || $name == 'rt')) {
+        if (($parentName === 'rp' || $parentName === 'rt') && ($name === 'rp' || $name === 'rt')) {
             return true;
         }
 
@@ -109,14 +109,14 @@ class Element extends AbstractToken
      *
      * @return string Remaining HTML.
      */
-    public function parse($html)
+    public function parse(string $html) : string
     {
         $html = ltrim($html);
 
         // Get token position.
         $positionArray = HtmlTokenizer::getPosition($html);
-        $this->setLine($positionArray['line']);
-        $this->setPosition($positionArray['position']);
+        $this->line = $positionArray['line'];
+        $this->position = $positionArray['position'];
 
         // Parse name.
         $this->name = $this->parseElementName($html);
@@ -141,7 +141,7 @@ class Element extends AbstractToken
         $posOfSelfClosingBracket = mb_strpos($remainingHtml, '/>');
         $remainingHtml = mb_substr($remainingHtml, $posOfClosingBracket + 1);
         if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket == $posOfClosingBracket - 1) {
-            // Self-closing element.
+            // Self-closing element. (Note: $this->valuue is unchanged.)
             return $remainingHtml;
         }
 
@@ -177,7 +177,7 @@ class Element extends AbstractToken
      *
      * @return string Remaining HTML.
      */
-    private function parseAttribute($html)
+    private function parseAttribute(string $html) : string
     {
         $remainingHtml = ltrim($html);
 
@@ -249,24 +249,30 @@ class Element extends AbstractToken
      *
      * @return string Remaining HTML.
      */
-    private function parseContents($html)
+    private function parseContents(string $html) : string
     {
         if (trim($html) == '') {
             return '';
         }
 
+        // Determine value.
+        $this->value = $html;
+        if (preg_match("/(.*)<\/\s*" . $this->name . "\s*>/iU", $html, $valueMatches) === 1) {
+            $this->value = $valueMatches[1];
+        }
+
         // Don't parse contents of "iframe" element.
-        if ($this->name == 'iframe') {
+        if ($this->name === 'iframe') {
             return $this->parseNoContents('iframe', $html);
         }
 
         // Only TEXT inside a "script" element.
-        if ($this->name == 'script') {
+        if ($this->name === 'script') {
             return $this->parseForeignContents('script', $html);
         }
 
         // Only TEXT inside a "style" element.
-        if ($this->name == 'style') {
+        if ($this->name === 'style') {
             return $this->parseForeignContents('style', $html);
         }
 
@@ -279,7 +285,7 @@ class Element extends AbstractToken
                 $this->getThrowOnError()
             );
 
-            if ($token === false || $token->isClosingElementImplied($remainingHtml)) {
+            if (!$token instanceof Token || $token->isClosingElementImplied($remainingHtml)) {
                 return $remainingHtml;
             }
 
@@ -309,8 +315,9 @@ class Element extends AbstractToken
      *
      * @return string The element name.
      */
-    private function parseElementName($html)
+    private function parseElementName(string $html) : string
     {
+        $html = trim($html);
         $elementMatchSuccessful = preg_match(
             "/^(<(([a-z0-9\-]+:)?[a-z0-9\-]+))/i",
             $html,
@@ -318,7 +325,7 @@ class Element extends AbstractToken
         );
         if ($elementMatchSuccessful !== 1) {
             if ($this->getThrowOnError()) {
-                throw new ParseException('Invalid element name.');
+                throw new ParseException('Invalid element name. Truncated html = ' . mb_substr($html, 0, 20));
             }
 
             return '';
@@ -335,7 +342,7 @@ class Element extends AbstractToken
      *
      * @return string The remaining HTML.
      */
-    private function parseForeignContents($tag, $html)
+    private function parseForeignContents(string $tag, string $html) : string
     {
         $remainingHtml = ltrim($html);
 
@@ -349,11 +356,11 @@ class Element extends AbstractToken
             $endOfScriptMatches
         );
         if ($matchingResult === 0) {
-            $value = trim($remainingHtml);
+            $this->value = trim($remainingHtml);
             $remainingHtml = '';
         } else {
             $closingTag = $endOfScriptMatches[1];
-            $value = trim(
+            $this->value = trim(
                 mb_substr($remainingHtml, 0, mb_strpos($remainingHtml, $closingTag))
             );
             $remainingHtml = mb_substr(
@@ -363,13 +370,13 @@ class Element extends AbstractToken
         }
 
         // Handle no contents.
-        if ($value == '') {
+        if ($this->value == '') {
             return $remainingHtml;
         }
 
-        $text = new Text($this, $this->getThrowOnError(), $value);
-        $text->setLine($positionArray['line']);
-        $text->setPosition($positionArray['position']);
+        $text = new Text($this, $this->getThrowOnError(), $this->value);
+        $text->line = $positionArray['line'];
+        $text->position = $positionArray['position'];
         $this->children[] = $text;
 
         return $remainingHtml;
@@ -385,7 +392,7 @@ class Element extends AbstractToken
      *
      * @return string The remaining HTML.
      */
-    private function parseNoContents($tag, $html)
+    private function parseNoContents(string $tag, string $html) : string
     {
         $remainingHtml = ltrim($html);
         $matchingResult = preg_match(
@@ -398,6 +405,7 @@ class Element extends AbstractToken
         }
 
         $closingTag = $endOfScriptMatches[1];
+        $this->value = mb_substr($remainingHtml, 0, mb_strpos($html, $closingTag));
 
         return mb_substr(
             mb_strstr($remainingHtml, $closingTag),
@@ -410,7 +418,7 @@ class Element extends AbstractToken
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes() : array
     {
         return $this->attributes;
     }
@@ -418,7 +426,7 @@ class Element extends AbstractToken
     /**
      * @return boolean
      */
-    public function hasAttributes()
+    public function hasAttributes() : bool
     {
         return !empty($this->attributes);
     }
@@ -428,7 +436,7 @@ class Element extends AbstractToken
      *
      * @return array
      */
-    public function getChildren()
+    public function getChildren() : array
     {
         return $this->children;
     }
@@ -436,7 +444,7 @@ class Element extends AbstractToken
     /**
      * @return boolean
      */
-    public function hasChildren()
+    public function hasChildren() : bool
     {
         return !empty($this->children);
     }
@@ -446,12 +454,12 @@ class Element extends AbstractToken
      *
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
-    public function toArray()
+    public function toArray() : array
     {
         $result = array(
             'type' => 'element',

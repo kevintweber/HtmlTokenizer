@@ -3,8 +3,9 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens;
+use PHPUnit\Framework\TestCase;
 
-class TokenFactoryTest extends \PHPUnit_Framework_TestCase
+class TokenFactoryTest extends TestCase
 {
     /**
      * @dataProvider buildFromHtmlDataProvider
@@ -51,7 +52,7 @@ class TokenFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testNoTypeFound()
     {
-        $this->assertFalse(Tokens\TokenFactory::buildFromHtml('< asdfasdf'));
+        $this->assertNull(Tokens\TokenFactory::buildFromHtml('< asdfasdf', null, false));
     }
 
     /**
@@ -59,6 +60,6 @@ class TokenFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionInBuildFromHtml()
     {
-        Tokens\TokenFactory::buildFromHtml('< asdfasdf', null, true);
+        Tokens\TokenFactory::buildFromHtml('< asdfasdf');
     }
 }

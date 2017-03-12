@@ -6,22 +6,19 @@ use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 
 class Text extends AbstractToken
 {
-    /** @var string */
-    private $value;
-
-    public function __construct(Token $parent = null, $throwOnError = false, $forcedValue = null)
+    public function __construct(Token $parent = null, bool $throwOnError = true, string $forcedValue = '')
     {
         parent::__construct(Token::TEXT, $parent, $throwOnError);
 
         $this->value = $forcedValue;
     }
 
-    public function parse($html)
+    public function parse(string $html) : string
     {
         // Get token position.
         $positionArray = HtmlTokenizer::getPosition($html);
-        $this->setLine($positionArray['line']);
-        $this->setPosition($positionArray['position']);
+        $this->line = $positionArray['line'];
+        $this->position = $positionArray['position'];
 
         // Collapse whitespace before TEXT.
         $startingWhitespace = '';
@@ -55,17 +52,7 @@ class Text extends AbstractToken
         return mb_substr($html, $posOfNextElement);
     }
 
-    /**
-     * Getter for 'value'.
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function toArray()
+    public function toArray() : array
     {
         return array(
             'type' => 'text',

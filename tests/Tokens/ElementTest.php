@@ -3,16 +3,19 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\Element;
+use PHPUnit\Framework\TestCase;
 
-class ElementTest extends \PHPUnit_Framework_TestCase
+class ElementTest extends TestCase
 {
     /**
      * @dataProvider isClosingElementImpliedDataProvider
      */
-    public function testIsClosingElementImplied($html, $parent = null, $expectedResult = true)
+    public function testIsClosingElementImplied(string $html,
+                                                $parent = null,
+                                                bool $expectedResult = true)
     {
-        $element = new Element($parent);
-        $this->assertEquals($expectedResult, $element->isClosingElementImplied($html));
+        $element = new Element($parent, false);
+        $this->assertSame($expectedResult, $element->isClosingElementImplied($html));
     }
 
     public function isClosingElementImpliedDataProvider()
@@ -107,12 +110,16 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider parseDataProvider
      */
-    public function testParse($html, $expectedName, $expectedRemainingHtml)
+    public function testParse(string $html,
+                              string $expectedName,
+                              string $expectedValue,
+                              string $expectedRemainingHtml)
     {
-        $element = new Element();
+        $element = new Element(null, false);
         $remainingHtml = $element->parse($html);
-        $this->assertEquals($expectedName, $element->getName(), 'Testing name.');
-        $this->assertEquals($expectedRemainingHtml, $remainingHtml, 'Testing remaining HTML.');
+        $this->assertSame($expectedName, $element->getName(), 'Testing name.');
+        $this->assertSame($expectedValue, $element->getValue(), 'Testing value.');
+        $this->assertSame($expectedRemainingHtml, $remainingHtml, 'Testing remaining HTML.');
     }
 
     public function parseDataProvider()
@@ -121,72 +128,104 @@ class ElementTest extends \PHPUnit_Framework_TestCase
             'simple closed' => array(
                 '<asdf/>',
                 'asdf',
+                '',
                 ''
             ),
             'simple closed with whitespace' => array(
                 '<asdf     />',
                 'asdf',
+                '',
                 ''
             ),
             'closed with 1 attribute' => array(
                 '<asdf foo="bar"/>',
                 'asdf',
+                '',
                 ''
             ),
             'closed with empty attribute' => array(
                 '<asdf foo/>',
                 'asdf',
+                '',
                 ''
             ),
             'closed with pseudo-empty attribute' => array(
                 '<asdf disabled="disabled"/>',
                 'asdf',
+                '',
                 ''
             ),
             'closed with explicit empty attribute' => array(
                 '<asdf foo=""/>',
                 'asdf',
+                '',
                 ''
             ),
             'closed with 1 attr and whitespace' => array(
                 '<asdf foo="bar" />',
                 'asdf',
+                '',
                 ''
             ),
             'simple open' => array(
                 '<asdf></asdf>',
                 'asdf',
+                '',
                 ''
             ),
             'simple open with whitespace' => array(
                 '<asdf    >foo</asdf>',
                 'asdf',
+                'foo',
                 ''
             ),
             'open with 1 attribute' => array(
                 '<asdf foo="bar">bat</asdf>',
                 'asdf',
+                'bat',
                 ''
             ),
             'open with 1 attr and whitespace' => array(
-                '<asdf foo="bar" >   bat    </asdf>',
+                '<asdf foo="bar" >   bat    </asdf> asdf asdf',
                 'asdf',
-                ''
+                '   bat    ',
+                ' asdf asdf'
             ),
             'parse error' => array(
                 '<asdf',
                 'asdf',
+                '',
                 ''
             ),
             'php' => array(
                 '<asdf><?php echo "asdf"; ?></asdf>',
                 'asdf',
+                '<?php echo "asdf"; ?>',
                 ''
             ),
             'multibyte characters' => array(
                 '<asdf>לֶף־בֵּית</asdf>',
                 'asdf',
+                'לֶף־בֵּית',
                 ''
+            ),
+            'iframe' => array(
+                '<iframe><html><head></head><body></body></html></iframe> asdf',
+                'iframe',
+                '<html><head></head><body></body></html>',
+                ' asdf'
+            ),
+            'script' => array(
+                '<script>asdfasdf asdf</script> asdf',
+                'script',
+                'asdfasdf asdf',
+                ' asdf'
+            ),
+            'multiple tags' => array(
+                '<asdf>qwer</asdf><asdf>zxcv</asdf>',
+                'asdf',
+                'qwer',
+                '<asdf>zxcv</asdf>'
             )
         );
     }
@@ -205,10 +244,10 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionInParseElementName()
     {
-        $element = new Element();
+        $element = new Element(null, false);
         $this->assertEquals('', $element->parse('<?php'));
 
-        $element = new Element(null, true);
+        $element = new Element();
         $element->parse('<?php');
     }
 
@@ -217,23 +256,20 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionInParseAttribute()
     {
-        $element = new Element();
+        $element = new Element(null, false);
         $this->assertEquals('', $element->parse('<asdf foo=\'bar" />'));
 
-        $element = new Element(null, true);
+        $element = new Element();
         $element->parse('<asdf foo=\'bar" />');
     }
 
     /**
      * @dataProvider toArrayDataProvider
      */
-    public function testToArray($html, $expectedArray, $debug = false)
+    public function testToArray($html, $expectedArray)
     {
-        $element = new Element();
+        $element = new Element(null, false);
         $element->parse($html);
-        if ($debug) {
-            var_dump($html, $element->toArray());
-        }
 
         $this->assertEquals($expectedArray, $element->toArray());
     }

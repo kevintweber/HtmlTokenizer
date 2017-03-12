@@ -3,18 +3,19 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Tokens;
 
 use Kevintweber\HtmlTokenizer\Tokens\DocType;
+use PHPUnit\Framework\TestCase;
 
-class DocTypeTest extends \PHPUnit_Framework_TestCase
+class DocTypeTest extends TestCase
 {
     /**
      * @dataProvider parseDataProvider
      */
     public function testParse($html, $expectedValue, $expectedRemainingHtml)
     {
-        $docType = new DocType();
+        $docType = new DocType(null, false);
         $remainingHtml = $docType->parse($html);
-        $this->assertEquals($expectedValue, $docType->getValue());
-        $this->assertEquals($expectedRemainingHtml, $remainingHtml);
+        $this->assertSame($expectedValue, $docType->getValue());
+        $this->assertSame($expectedRemainingHtml, $remainingHtml);
     }
 
     public function parseDataProvider()
@@ -42,7 +43,7 @@ class DocTypeTest extends \PHPUnit_Framework_TestCase
             ),
             'parse error' => array(
                 '<!DOCTYPE ASDF',
-                null,
+                '',
                 ''
             )
         );

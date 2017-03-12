@@ -19,7 +19,7 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
         $this->tokens = array();
     }
 
-    public function toArray()
+    public function toArray() : array
     {
         $result = array();
         foreach ($this->tokens as $token) {
@@ -71,12 +71,12 @@ class TokenCollection implements \ArrayAccess, \IteratorAggregate
         unset($this->tokens[$offset]);
     }
 
-    public function count()
+    public function count() : int
     {
         return count($this->tokens);
     }
 
-    public function isEmpty()
+    public function isEmpty() : bool
     {
         return empty($this->tokens);
     }

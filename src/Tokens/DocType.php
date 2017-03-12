@@ -7,24 +7,19 @@ use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class DocType extends AbstractToken
 {
-    /** @var string */
-    private $value;
-
-    public function __construct(Token $parent = null, $throwOnError = false)
+    public function __construct(Token $parent = null, bool $throwOnError = true)
     {
         parent::__construct(Token::DOCTYPE, $parent, $throwOnError);
-
-        $this->value = null;
     }
 
-    public function parse($html)
+    public function parse(string $html) : string
     {
         $html = ltrim($html);
 
         // Get token position.
         $positionArray = HtmlTokenizer::getPosition($html);
-        $this->setLine($positionArray['line']);
-        $this->setPosition($positionArray['position']);
+        $this->line = $positionArray['line'];
+        $this->position = $positionArray['position'];
 
         // Parse token.
         $posOfEndOfDocType = mb_strpos($html, '>');
@@ -41,17 +36,7 @@ class DocType extends AbstractToken
         return mb_substr($html, $posOfEndOfDocType + 1);
     }
 
-    /**
-     * Getter for 'value'.
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function toArray()
+    public function toArray() : array
     {
         return array(
             'type' => 'doctype',

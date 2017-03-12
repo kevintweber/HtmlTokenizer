@@ -3,8 +3,9 @@
 namespace Kevintweber\HtmlTokenizer\Tests\Html;
 
 use Kevintweber\HtmlTokenizer\HtmlTokenizer;
+use PHPUnit\Framework\TestCase;
 
-class BootstrapComTest extends \PHPUnit_Framework_TestCase
+class BootstrapComTest extends TestCase
 {
     /**
      * I really want to test a real world webpage.
