@@ -346,9 +346,6 @@ class Element extends AbstractToken
     {
         $remainingHtml = ltrim($html);
 
-        // Get token position.
-        $positionArray = HtmlTokenizer::getPosition($remainingHtml);
-
         // Find all contents.
         $matchingResult = preg_match(
             "/(<\/\s*" . $tag . "\s*>)/i",
