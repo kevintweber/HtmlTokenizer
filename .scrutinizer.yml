@@ -18,10 +18,12 @@ checks:
         fix_doc_comments: true
 
 build:
+    environment:
+        php: '7.0.6'
     tests:
         override:
             -
-                command: 'phpunit --coverage-clover=some-file'
+                command: 'vendor/bin/phpunit --coverage-clover=some-file'
                 coverage:
                     file: 'some-file'
                     format: 'php-clover'
