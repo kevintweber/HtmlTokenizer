@@ -40,7 +40,7 @@ class Text extends AbstractToken
 
         // Find full length of TEXT.
         $text = mb_substr($html, 0, $posOfNextElement);
-        if (trim($text) == '') {
+        if (trim($text) === '') {
             $this->value = ' ';
 
             return mb_substr($html, $posOfNextElement);
@@ -67,4 +67,3 @@ class Text extends AbstractToken
         );
     }
 }
-

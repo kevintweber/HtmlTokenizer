@@ -27,6 +27,12 @@ abstract class AbstractToken implements Token
 
     /**
      * Constructor
+     *
+     * @param string     $type
+     * @param Token|null $parent
+     * @param bool       $throwOnError
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $type, Token $parent = null, bool $throwOnError = false)
     {
@@ -83,7 +89,7 @@ abstract class AbstractToken implements Token
      *
      * @return boolean
      */
-    protected function getThrowOnError()
+    protected function getThrowOnError() : bool
     {
         return $this->throwOnError;
     }

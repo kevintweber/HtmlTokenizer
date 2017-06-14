@@ -3,7 +3,7 @@
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
 /**
- * A TokenCollection is a group of tokens designed to act similiar to
+ * A TokenCollection is a group of tokens designed to act similar to
  * an array.
  */
 class TokenCollection implements \ArrayAccess, \IteratorAggregate

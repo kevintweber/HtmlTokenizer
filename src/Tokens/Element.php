@@ -220,7 +220,7 @@ class Element extends AbstractToken
             $this->attributes[trim($name)] = $value;
 
             // Determine remaining html.
-            if ($value == '') {
+            if ($value === '') {
                 $remainingHtml = ltrim(mb_substr(ltrim($html), mb_strlen($name) + 3));
             } else {
                 $remainingHtml = ltrim($html);
@@ -251,7 +251,7 @@ class Element extends AbstractToken
      */
     private function parseContents(string $html) : string
     {
-        if (trim($html) == '') {
+        if (trim($html) === '') {
             return '';
         }
 
@@ -297,7 +297,7 @@ class Element extends AbstractToken
         if (!empty($this->children)) {
             $lastChildArray = array_slice($this->children, -1);
             $lastChild = array_pop($lastChildArray);
-            if ($lastChild->isText() && trim($lastChild->getValue()) == '') {
+            if ($lastChild->isText() && trim($lastChild->getValue()) === '') {
                 array_pop($this->children);
             }
         }
@@ -367,7 +367,7 @@ class Element extends AbstractToken
         }
 
         // Handle no contents.
-        if ($this->value == '') {
+        if ($this->value === '') {
             return $remainingHtml;
         }
 

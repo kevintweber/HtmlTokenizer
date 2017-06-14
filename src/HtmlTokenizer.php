@@ -16,6 +16,8 @@ class HtmlTokenizer
 
     /**
      * Constructor
+     *
+     * @param bool $throwOnError
      */
     public function __construct(bool $throwOnError = true)
     {
@@ -28,6 +30,7 @@ class HtmlTokenizer
      * @param $html string The HTML to tokenize.
      *
      * @return TokenCollection
+     * @throws \Kevintweber\HtmlTokenizer\Exceptions\TokenMatchingException
      */
     public function parse(string $html) : TokenCollection
     {
