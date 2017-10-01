@@ -2,7 +2,6 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
-use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class DocType extends AbstractToken
@@ -15,11 +14,7 @@ class DocType extends AbstractToken
     public function parse(string $html) : string
     {
         $html = ltrim($html);
-
-        // Get token position.
-        $positionArray = HtmlTokenizer::getPosition($html);
-        $this->line = $positionArray['line'];
-        $this->position = $positionArray['position'];
+        $this->setTokenPosition($html);
 
         // Parse token.
         $posOfEndOfDocType = mb_strpos($html, '>');

@@ -36,7 +36,7 @@ class HtmlTokenizer
     {
         self::$allHtml = $html;
         $tokens = new TokenCollection();
-        $remainingHtml = trim((string) $html);
+        $remainingHtml = trim($html);
         while (mb_strlen($remainingHtml) > 0) {
             $token = TokenFactory::buildFromHtml(
                 $remainingHtml,

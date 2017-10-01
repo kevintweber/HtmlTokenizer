@@ -2,8 +2,6 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
-use Kevintweber\HtmlTokenizer\HtmlTokenizer;
-
 class Php extends AbstractToken
 {
     public function __construct(Token $parent = null, bool $throwOnError = true)
@@ -14,11 +12,7 @@ class Php extends AbstractToken
     public function parse(string $html) : string
     {
         $html = ltrim($html);
-
-        // Get token position.
-        $positionArray = HtmlTokenizer::getPosition($html);
-        $this->line = $positionArray['line'];
-        $this->position = $positionArray['position'];
+        $this->setTokenPosition($html);
 
         // Parse token.
         $startPos = 3;

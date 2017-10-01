@@ -2,6 +2,8 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
+use Kevintweber\HtmlTokenizer\HtmlTokenizer;
+
 abstract class AbstractToken implements Token
 {
     /** @var int */
@@ -152,5 +154,12 @@ abstract class AbstractToken implements Token
             || $type === Token::ELEMENT
             || $type === Token::PHP
             || $type === Token::TEXT;
+    }
+
+    protected function setTokenPosition(string $html)
+    {
+        $positionArray = HtmlTokenizer::getPosition($html);
+        $this->line = $positionArray['line'];
+        $this->position = $positionArray['position'];
     }
 }

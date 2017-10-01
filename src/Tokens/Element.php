@@ -2,7 +2,6 @@
 
 namespace Kevintweber\HtmlTokenizer\Tokens;
 
-use Kevintweber\HtmlTokenizer\HtmlTokenizer;
 use Kevintweber\HtmlTokenizer\Exceptions\ParseException;
 
 class Element extends AbstractToken
@@ -80,7 +79,7 @@ class Element extends AbstractToken
             'table',
             'ul'
         );
-        if ($parentName === 'p' && array_search($name, $elementsNotChildrenOfP) !== false) {
+        if ($parentName === 'p' && in_array($name, $elementsNotChildrenOfP)) {
             return true;
         }
 
@@ -112,62 +111,66 @@ class Element extends AbstractToken
     public function parse(string $html) : string
     {
         $html = ltrim($html);
+        $this->setTokenPosition($html);
 
-        // Get token position.
-        $positionArray = HtmlTokenizer::getPosition($html);
-        $this->line = $positionArray['line'];
-        $this->position = $positionArray['position'];
+        try {
+            $this->name = $this->parseElementName($html);
+            $remainingHtml = $this->parseAttributes($html);
+            $posOfClosingBracket = $this->getPositionOfElementEndTag($remainingHtml);
 
-        // Parse name.
-        $this->name = $this->parseElementName($html);
+            // Is self-closing?
+            $posOfSelfClosingBracket = mb_strpos($remainingHtml, '/>');
+            $remainingHtml = mb_substr($remainingHtml, $posOfClosingBracket + 1);
+            if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket === $posOfClosingBracket - 1) {
+                // Self-closing element. (Note: $this->valuue is unchanged.)
+                return $remainingHtml;
+            }
 
-        // Parse attributes.
+            // Lets close those closed-only elements that are left open.
+            $closedOnlyElements = array(
+                'area',
+                'base',
+                'br',
+                'col',
+                'embed',
+                'hr',
+                'img',
+                'input',
+                'link',
+                'meta',
+                'param',
+                'source',
+                'track',
+                'wbr'
+            );
+            if (in_array($this->name, $closedOnlyElements)) {
+                return $remainingHtml;
+            }
+
+            // Open element.
+            return $this->parseContents($remainingHtml);
+        } catch (ParseException $e) {
+            if ($this->getThrowOnError()) {
+                throw $e;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $html
+     *
+     * @return string
+     */
+    private function parseAttributes(string $html) : string
+    {
         $remainingHtml = mb_substr($html, mb_strlen($this->name) + 1);
         while (mb_strpos($remainingHtml, '>') !== false && preg_match("/^\s*[\/]?>/", $remainingHtml) === 0) {
             $remainingHtml = $this->parseAttribute($remainingHtml);
         }
 
-        // Find position of end of tag.
-        $posOfClosingBracket = mb_strpos($remainingHtml, '>');
-        if ($posOfClosingBracket === false) {
-            if ($this->getThrowOnError()) {
-                throw new ParseException('Invalid element: missing closing bracket.');
-            }
-
-            return '';
-        }
-
-        // Is self-closing?
-        $posOfSelfClosingBracket = mb_strpos($remainingHtml, '/>');
-        $remainingHtml = mb_substr($remainingHtml, $posOfClosingBracket + 1);
-        if ($posOfSelfClosingBracket !== false && $posOfSelfClosingBracket == $posOfClosingBracket - 1) {
-            // Self-closing element. (Note: $this->valuue is unchanged.)
-            return $remainingHtml;
-        }
-
-        // Lets close those closed-only elements that are left open.
-        $closedOnlyElements = array(
-            'area',
-            'base',
-            'br',
-            'col',
-            'embed',
-            'hr',
-            'img',
-            'input',
-            'link',
-            'meta',
-            'param',
-            'source',
-            'track',
-            'wbr'
-        );
-        if (array_search($this->name, $closedOnlyElements) !== false) {
-            return $remainingHtml;
-        }
-
-        // Open element.
-        return $this->parseContents($remainingHtml);
+        return $remainingHtml;
     }
 
     /**
@@ -181,63 +184,44 @@ class Element extends AbstractToken
     {
         $remainingHtml = ltrim($html);
 
-        // Will match the first entire name/value attribute pair.
-        preg_match(
-            "/((([a-z0-9\-_]+:)?[a-z0-9\-_]+)(\s*=\s*)?)/i",
-            $remainingHtml,
-            $attributeMatches
-        );
+        try {
+            // Will match the first entire name/value attribute pair.
+            preg_match(
+                "/((([a-z0-9\-_]+:)?[a-z0-9\-_]+)(\s*=\s*)?)/i",
+                $remainingHtml,
+                $attributeMatches
+            );
 
-        $name = $attributeMatches[2];
-        $remainingHtml = mb_substr(mb_strstr($remainingHtml, $name), mb_strlen($name));
-        if (preg_match("/^\s*=\s*/", $remainingHtml) === 0) {
-            // Valueless attribute.
-            $this->attributes[trim($name)] = true;
-        } else {
-            $remainingHtml = ltrim($remainingHtml, ' =');
-            if ($remainingHtml[0] === "'" || $remainingHtml[0] === '"') {
-                // Quote enclosed attribute value.
-                $valueMatchSuccessful = preg_match(
-                    "/" . $remainingHtml[0] . "(.*?(?<!\\\))" . $remainingHtml[0] . "/s",
-                    $remainingHtml,
-                    $valueMatches
-                );
-                if ($valueMatchSuccessful !== 1) {
-                    if ($this->getThrowOnError()) {
-                        throw new ParseException('Invalid value encapsulation.');
-                    }
+            $attributeName = $attributeMatches[2];
+            $remainingHtml = mb_substr(mb_strstr($remainingHtml, $attributeName), mb_strlen($attributeName));
+            if ($this->isAttributeValueless($remainingHtml)) {
+                $this->attributes[trim($attributeName)] = true;
 
-                    return '';
-                }
-
-                $value = $valueMatches[1];
-            } else {
-                // No quotes enclosing the attribute value.
-                preg_match("/(\s*([^>\s]*(?<!\/)))/", $remainingHtml, $valueMatches);
-                $value = $valueMatches[2];
+                return $remainingHtml;
             }
 
-            $this->attributes[trim($name)] = $value;
-
-            // Determine remaining html.
-            if ($value === '') {
-                $remainingHtml = ltrim(mb_substr(ltrim($html), mb_strlen($name) + 3));
-            } else {
-                $remainingHtml = ltrim($html);
-
-                // Remove attribute name.
-                $remainingHtml = mb_substr($remainingHtml, mb_strlen($name));
-                $posOfAttributeValue = mb_strpos($remainingHtml, $value);
-                $remainingHtml = ltrim(
-                    mb_substr(
-                        $remainingHtml,
-                        $posOfAttributeValue + mb_strlen($value)
-                    )
-                );
+            return $this->parseAttributeValue($html, $remainingHtml, $attributeName);
+        } catch (ParseException $e) {
+            if ($this->getThrowOnError()) {
+                throw $e;
             }
-
-            $remainingHtml = ltrim($remainingHtml, '\'"/ ');
         }
+
+        return '';
+    }
+
+    private function parseAttributeValue(string $html, string $remainingHtml, string $attributeName) : string
+    {
+        $remainingHtml = ltrim($remainingHtml, ' =');
+        if ($this->isAttributeValueQuoteEnclosed($remainingHtml)) {
+            $attributeValue = $this->extractQuoteEnclosedAttributeValue($remainingHtml);
+        } else {
+            // No quotes enclosing the attribute value.
+            $attributeValue = $this->extractQuotelessAttributeValue($remainingHtml);
+        }
+
+        $this->attributes[trim($attributeName)] = $attributeValue;
+        $remainingHtml = $this->parseAttributeDetermineRemainingHtml($html, $attributeName, $attributeValue);
 
         return $remainingHtml;
     }
@@ -278,7 +262,7 @@ class Element extends AbstractToken
 
         // Parse contents one token at a time.
         $remainingHtml = $html;
-        while (preg_match("/^<\/\s*" . $this->name . "\s*>/is", $remainingHtml) === 0) {
+        while ($this->isAnotherTokenPresent($remainingHtml)) {
             $token = TokenFactory::buildFromHtml(
                 $remainingHtml,
                 $this,
@@ -293,14 +277,7 @@ class Element extends AbstractToken
             $this->children[] = $token;
         }
 
-        // Remove last token if contains only whitespace.
-        if (!empty($this->children)) {
-            $lastChildArray = array_slice($this->children, -1);
-            $lastChild = array_pop($lastChildArray);
-            if ($lastChild->isText() && trim($lastChild->getValue()) === '') {
-                array_pop($this->children);
-            }
-        }
+        $this->removeLastTokenIfContainsOnlyWhitespace();
 
         // Remove remaining closing tag.
         $posOfClosingBracket = mb_strpos($remainingHtml, '>');
@@ -347,24 +324,11 @@ class Element extends AbstractToken
         $remainingHtml = ltrim($html);
 
         // Find all contents.
-        $matchingResult = preg_match(
-            "/(<\/\s*" . $tag . "\s*>)/i",
+        $remainingHtml = $this->determineRemainingHtmlOfForeignContents(
+            $tag,
             $html,
-            $endOfScriptMatches
+            $remainingHtml
         );
-        if ($matchingResult === 0) {
-            $this->value = trim($remainingHtml);
-            $remainingHtml = '';
-        } else {
-            $closingTag = $endOfScriptMatches[1];
-            $this->value = trim(
-                mb_substr($remainingHtml, 0, mb_strpos($remainingHtml, $closingTag))
-            );
-            $remainingHtml = mb_substr(
-                mb_strstr($remainingHtml, $closingTag),
-                mb_strlen($closingTag)
-            );
-        }
 
         // Handle no contents.
         if ($this->value === '') {
@@ -478,5 +442,117 @@ class Element extends AbstractToken
         }
 
         return $result;
+    }
+
+    private function determineRemainingHtmlByRemovingAttributeName(string $html, string $name, string $value) : string
+    {
+        $remainingHtml = ltrim($html);
+
+        $remainingHtml = mb_substr($remainingHtml, mb_strlen($name));
+        $posOfAttributeValue = mb_strpos($remainingHtml, $value);
+        $remainingHtml = ltrim(
+            mb_substr(
+                $remainingHtml,
+                $posOfAttributeValue + mb_strlen($value)
+            )
+        );
+
+        return $remainingHtml;
+    }
+
+    private function parseAttributeDetermineRemainingHtml(string $html, string $attributeName, string $value) : string
+    {
+        if ($value === '') {
+            $remainingHtml = ltrim(mb_substr(ltrim($html), mb_strlen($attributeName) + 3));
+        } else {
+            $remainingHtml = $this->determineRemainingHtmlByRemovingAttributeName($html, $attributeName, $value);
+        }
+
+        return ltrim($remainingHtml, '\'"/ ');
+    }
+
+    private function isAttributeValueless(string $remainingHtml) : bool
+    {
+        return preg_match("/^\s*=\s*/", $remainingHtml) === 0;
+    }
+
+    private function getPositionOfElementEndTag(string $remainingHtml) : int
+    {
+        $posOfClosingBracket = mb_strpos($remainingHtml, '>');
+        if ($posOfClosingBracket === false) {
+            throw new ParseException('Invalid element: missing closing bracket.');
+        }
+
+        return $posOfClosingBracket;
+    }
+
+    private function removeLastTokenIfContainsOnlyWhitespace()
+    {
+        if (!empty($this->children)) {
+            $lastChildArray = array_slice($this->children, -1);
+            $lastChild = array_pop($lastChildArray);
+            if ($lastChild->isText() && trim($lastChild->getValue()) === '') {
+                array_pop($this->children);
+            }
+        }
+    }
+
+    private function isAnotherTokenPresent($remainingHtml) : bool
+    {
+        return preg_match("/^<\/\s*" . $this->name . "\s*>/is", $remainingHtml) === 0;
+    }
+
+    private function extractQuoteEnclosedAttributeValue(string $remainingHtml) : string
+    {
+        $quoteCharacter = $remainingHtml[0];
+        $valueMatchSuccessful = preg_match(
+            '/' . $quoteCharacter . "(.*?(?<!\\\))" . $quoteCharacter . "/s",
+            $remainingHtml,
+            $valueMatches
+        );
+        if ($valueMatchSuccessful !== 1) {
+            throw new ParseException('Invalid quote enclosed attribute value encapsulation.');
+        }
+
+        return $valueMatches[1];
+    }
+
+    private function extractQuotelessAttributeValue(string $remainingHtml) : string
+    {
+        $valueMatchSuccessful = preg_match("/(\s*([^>\s]*(?<!\/)))/", $remainingHtml, $valueMatches);
+        if ($valueMatchSuccessful !== 1) {
+            throw new ParseException('Invalid quoteless attribute value encapsulation.');
+        }
+
+        return $valueMatches[2];
+    }
+
+    private function isAttributeValueQuoteEnclosed(string $remainingHtml) : bool
+    {
+        return $remainingHtml[0] === "'" || $remainingHtml[0] === '"';
+    }
+
+    private function determineRemainingHtmlOfForeignContents(string $tag, string $html, string $remainingHtml) : string
+    {
+        $matchingResult = preg_match(
+            "/(<\/\s*" . $tag . "\s*>)/i",
+            $html,
+            $endOfScriptMatches
+        );
+        if ($matchingResult === 0) {
+            $this->value = trim($remainingHtml);
+
+            return '';
+        }
+
+        $closingTag = $endOfScriptMatches[1];
+        $this->value = trim(
+            mb_substr($remainingHtml, 0, mb_strpos($remainingHtml, $closingTag))
+        );
+
+        return mb_substr(
+            mb_strstr($remainingHtml, $closingTag),
+            mb_strlen($closingTag)
+        );
     }
 }
